@@ -1224,6 +1224,575 @@ body {
   color: var(--sepia);
 }
 
+/* ============================================
+   KAR-15: DECISION POINT MODAL
+   Full-screen classified dossier overlay
+   ============================================ */
+
+.dp-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(10, 8, 4, 0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: dp-fade-in 0.3s ease;
+}
+
+@keyframes dp-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.dp-modal {
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #1a1408;
+  border: 1px solid #3a2f1e;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(139, 115, 85, 0.1);
+}
+
+/* --- Header --- */
+
+.dp-header {
+  padding: 1.5rem 2rem 1.25rem;
+  border-bottom: 1px solid #3a2f1e;
+  text-align: center;
+}
+
+.dp-classification {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red-stamp);
+  border: 2px solid var(--red-stamp);
+  display: inline-block;
+  padding: 0.2rem 0.8rem;
+  margin-bottom: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.dp-phase-title {
+  font-size: 1.2rem;
+  color: var(--paper);
+  font-family: Georgia, serif;
+  margin-bottom: 0.5rem;
+}
+
+.dp-pressure-context {
+  font-size: 0.8rem;
+  color: var(--sepia);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* --- Wire Deadline Timer --- */
+
+.wire-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.6rem 2rem;
+  background: #0d0a05;
+  border-bottom: 1px solid #3a2f1e;
+}
+
+.wire-timer-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.6;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.wire-timer-clock {
+  font-size: 1.4rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--paper);
+  letter-spacing: 0.1em;
+  transition: color 0.3s ease;
+}
+
+.wire-timer-urgent {
+  color: var(--urgent);
+  animation: dp-pulse 1s ease-in-out infinite;
+}
+
+@keyframes dp-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.wire-timer-pause {
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  background: none;
+  border: 1px solid #3a2f1e;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+  font-family: 'Courier New', Courier, monospace;
+  transition: all 0.15s ease;
+}
+
+.wire-timer-pause:hover {
+  border-color: var(--sepia);
+  color: var(--paper);
+}
+
+/* --- Body --- */
+
+.dp-body {
+  padding: 1.5rem 2rem;
+}
+
+/* --- Briefing --- */
+
+.dp-briefing {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a2010;
+}
+
+.dp-briefing-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dp-briefing-text {
+  font-size: 0.95rem;
+  color: var(--paper);
+  line-height: 1.5;
+  font-family: Georgia, serif;
+}
+
+/* --- Option Cards --- */
+
+.dp-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.dp-option-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 1.1rem 1.25rem;
+  background: #241c0e;
+  border: 1px solid #3a2f1e;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: Georgia, serif;
+  position: relative;
+}
+
+.dp-option-card:hover {
+  background: #2a2010;
+  border-color: var(--sepia);
+}
+
+.dp-option-card:focus {
+  outline: none;
+  border-color: var(--sepia);
+  box-shadow: 0 0 0 1px var(--sepia), inset 0 0 8px rgba(139, 115, 85, 0.1);
+}
+
+.dp-option-focused,
+.dp-option-card:focus-visible {
+  border-color: var(--sepia);
+  box-shadow: 0 0 0 1px var(--sepia);
+}
+
+.dp-option-selected {
+  background: #2a2010;
+  border-color: var(--paper);
+  box-shadow: inset 3px 0 0 var(--paper);
+}
+
+.dp-option-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.dp-option-number {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dp-risk-badge {
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.risk-low {
+  color: #2a5a2a;
+  border-color: #2a5a2a;
+}
+
+.risk-medium {
+  color: #7a5a1a;
+  border-color: #7a5a1a;
+}
+
+.risk-high {
+  color: var(--red-stamp);
+  border-color: var(--red-stamp);
+}
+
+.dp-option-text {
+  font-size: 0.9rem;
+  color: var(--paper);
+  line-height: 1.45;
+  margin-bottom: 0.5rem;
+}
+
+.dp-option-basis {
+  font-size: 0.72rem;
+  color: var(--ink-faded);
+  line-height: 1.4;
+  font-style: italic;
+}
+
+.dp-basis-label {
+  font-style: normal;
+  font-size: 0.55rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.7;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* --- Chosen Summary (confidence phase) --- */
+
+.dp-chosen-summary {
+  margin-bottom: 1.25rem;
+  padding: 1rem 1.25rem;
+  background: #241c0e;
+  border-left: 3px solid var(--paper);
+}
+
+.dp-chosen-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  margin-bottom: 0.35rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dp-chosen-text {
+  font-size: 0.9rem;
+  color: var(--paper);
+  line-height: 1.4;
+}
+
+/* --- Confidence Stamps --- */
+
+.dp-confidence {
+  margin-bottom: 1.5rem;
+}
+
+.dp-confidence-prompt {
+  font-size: 0.85rem;
+  color: var(--paper-dark);
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.dp-confidence-options {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.dp-confidence-stamp {
+  flex: 1;
+  padding: 1rem 0.75rem;
+  background: #241c0e;
+  border: 2px solid #3a2f1e;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.15s ease;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dp-confidence-stamp:hover {
+  border-color: var(--sepia);
+  background: #2a2010;
+}
+
+.dp-stamp-selected {
+  border-color: var(--paper);
+  background: #2a2010;
+  box-shadow: inset 0 0 12px rgba(139, 115, 85, 0.15);
+}
+
+.dp-stamp-label {
+  display: block;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--paper);
+  font-weight: bold;
+  margin-bottom: 0.35rem;
+}
+
+.dp-stamp-desc {
+  display: block;
+  font-size: 0.6rem;
+  color: var(--ink-faded);
+  letter-spacing: 0.05em;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+/* --- Confirm Button --- */
+
+.dp-confirm-btn {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dp-confirm-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.dp-confirm-btn:not(:disabled):hover {
+  background: var(--paper-dark);
+}
+
+/* --- Debrief Panel --- */
+
+.dp-debrief {
+  padding: 1.5rem 2rem 2rem;
+}
+
+.dp-debrief-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.dp-debrief-stamp {
+  font-size: 0.65rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--red-stamp);
+  border: 2px solid var(--red-stamp);
+  padding: 0.3rem 1rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.dp-timeout-notice {
+  background: rgba(196, 30, 30, 0.1);
+  border: 1px solid var(--urgent);
+  color: var(--urgent);
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+.dp-debrief-section {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #2a2010;
+}
+
+.dp-debrief-section:last-of-type {
+  border-bottom: none;
+  margin-bottom: 1.5rem;
+}
+
+.dp-debrief-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dp-debrief-choice {
+  font-size: 0.9rem;
+  color: var(--paper);
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.dp-outcome-badge {
+  display: inline-block;
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.outcome-correct {
+  color: #2a5a2a;
+  border-color: #2a5a2a;
+  background: rgba(42, 90, 42, 0.08);
+}
+
+.outcome-plausible {
+  color: #7a5a1a;
+  border-color: #7a5a1a;
+  background: rgba(122, 90, 26, 0.08);
+}
+
+.outcome-wrong {
+  color: var(--urgent);
+  border-color: var(--urgent);
+  background: rgba(196, 30, 30, 0.08);
+}
+
+.dp-debrief-note {
+  font-size: 0.85rem;
+  color: var(--paper-dark);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.dp-consequences-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dp-consequences-list li {
+  font-size: 0.82rem;
+  color: var(--paper-dark);
+  line-height: 1.5;
+  padding: 0.25rem 0 0.25rem 1rem;
+  position: relative;
+}
+
+.dp-consequences-list li::before {
+  content: '\2014'; /* em dash */
+  position: absolute;
+  left: 0;
+  color: var(--sepia);
+  opacity: 0.5;
+}
+
+/* --- Alternate History --- */
+
+.dp-alternate {
+  margin-bottom: 0.75rem;
+  padding-left: 0.75rem;
+  border-left: 2px solid #2a2010;
+}
+
+.dp-alternate-option {
+  font-size: 0.8rem;
+  color: var(--paper-dark);
+  line-height: 1.4;
+  margin-bottom: 0.25rem;
+  opacity: 0.8;
+}
+
+.dp-alternate-note {
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* --- Score Display --- */
+
+.dp-score-display {
+  margin-bottom: 0.5rem;
+}
+
+.dp-score-points {
+  font-size: 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--paper);
+  font-weight: bold;
+}
+
+.dp-score-max {
+  font-size: 0.9rem;
+  color: var(--ink-faded);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.dp-score-breakdown {
+  margin-top: 0.25rem;
+}
+
+.dp-score-flavor {
+  font-size: 0.78rem;
+  color: var(--sepia);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* --- Proceed Button --- */
+
+.dp-proceed-btn {
+  display: block;
+  width: 100%;
+  padding: 0.85rem;
+  background: var(--paper);
+  color: var(--ink);
+  border: none;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.dp-proceed-btn:hover {
+  background: var(--paper-dark);
+}
+
 @media (max-width: 768px) {
   .desk-main {
     grid-template-columns: 1fr;

@@ -47,10 +47,15 @@ export const julyCrisis1914: Scenario = {
         id: 'dec-phase1',
         prompt:
           "Vienna confirms the Archduke's assassination. How do you assess Britain's immediate strategic posture?",
+        pressureContext:
+          'London, 30 June 1914 — The Cabinet awaits your initial assessment. Vienna is watching who speaks first.',
         options: [
           {
             id: 'opt-1a',
             text: 'A localised Austro-Balkan dispute. Monitor developments but do not intervene.',
+            intelligenceBasis:
+              'Austria-Hungary has handled Balkan crises before without escalation to general war.',
+            riskLevel: 'medium',
             outcome: 'plausible',
             consequences: [
               'Britain remains disengaged through the critical July weeks',
@@ -62,6 +67,9 @@ export const julyCrisis1914: Scenario = {
           {
             id: 'opt-1b',
             text: 'A potential continental crisis. Open immediate diplomatic channels with Berlin, Vienna, and St. Petersburg.',
+            intelligenceBasis:
+              'The alliance system means any Austro-Serbian conflict risks drawing in Russia, France, and Germany.',
+            riskLevel: 'low',
             outcome: 'correct',
             consequences: [
               'Britain positions itself as a credible mediator',
@@ -73,6 +81,9 @@ export const julyCrisis1914: Scenario = {
           {
             id: 'opt-1c',
             text: 'An internal Austro-Hungarian matter. Formally communicate British disinterest.',
+            intelligenceBasis:
+              'Britain has no treaty obligations in the Balkans and no strategic interest in the dispute.',
+            riskLevel: 'high',
             outcome: 'wrong',
             consequences: [
               'Germany reads British neutrality as a green light',
@@ -123,13 +134,18 @@ export const julyCrisis1914: Scenario = {
         id: 'dec-phase2',
         prompt:
           "Austria's ultimatum expires in 48 hours. Serbia has accepted nine of ten demands. What is Britain's diplomatic posture?",
+        pressureContext:
+          'Whitehall, 25 July 1914 — The ultimatum clock is running. Berlin, Vienna, Paris, and St. Petersburg are all waiting on your signal.',
         options: [
           {
             id: 'opt-2a',
             text: 'Issue a formal warning to Vienna: military action against Serbia risks a general European war that Britain could not stand aside from.',
+            intelligenceBasis:
+              'Intelligence confirms Germany has issued a "blank cheque" to Austria. Ambiguity now emboldens escalation.',
+            riskLevel: 'medium',
             outcome: 'correct',
             consequences: [
-              "Germany receives the first signal that British neutrality is not guaranteed",
+              'Germany receives the first signal that British neutrality is not guaranteed',
               'Diplomatic pressure on Vienna increases marginally',
             ],
             debriefNote:
@@ -138,9 +154,12 @@ export const julyCrisis1914: Scenario = {
           {
             id: 'opt-2b',
             text: "Maintain strict neutrality. Britain has no formal obligations in an Austro-Serbian dispute.",
+            intelligenceBasis:
+              'No treaty binds Britain to Serbia. The 1839 Belgian guarantee is not yet triggered.',
+            riskLevel: 'high',
             outcome: 'wrong',
             consequences: [
-              "Germany reinforced in its belief that Britain will not intervene",
+              'Germany reinforced in its belief that Britain will not intervene',
               'Deterrence fails completely',
             ],
             debriefNote:
@@ -149,6 +168,9 @@ export const julyCrisis1914: Scenario = {
           {
             id: 'opt-2c',
             text: 'Propose a four-power conference of Britain, France, Germany, and Italy to mediate.',
+            intelligenceBasis:
+              'Concert of Europe precedent from 1913 Balkan Wars — multilateral diplomacy defused a similar crisis.',
+            riskLevel: 'low',
             outcome: 'plausible',
             consequences: [
               'Grey actually proposed exactly this on 26 July',
@@ -185,10 +207,15 @@ export const julyCrisis1914: Scenario = {
         id: 'dec-phase3',
         prompt:
           'Germany has demanded free passage through neutral Belgium. King Albert has refused and appealed to Britain. What does Britain do?',
+        pressureContext:
+          'London, 3 August 1914 — The lamps are going out all over Europe. Parliament demands your recommendation before midnight.',
         options: [
           {
             id: 'opt-3a',
             text: "Declare that Britain will honour its 1839 treaty obligation. Violation of Belgian neutrality means war with Germany.",
+            intelligenceBasis:
+              'The 1839 Treaty of London guarantees Belgian neutrality. Violation is a casus belli.',
+            riskLevel: 'high',
             outcome: 'correct',
             consequences: [
               'Britain enters the war with moral authority and full Cabinet support',
@@ -200,6 +227,9 @@ export const julyCrisis1914: Scenario = {
           {
             id: 'opt-3b',
             text: 'Issue a final ultimatum to Germany but limit British involvement to naval operations only.',
+            intelligenceBasis:
+              'Britain\'s strength is the Royal Navy. A naval blockade avoids the carnage of continental land war.',
+            riskLevel: 'medium',
             outcome: 'plausible',
             consequences: [
               'Britain patrols the Channel and North Sea',
@@ -211,6 +241,9 @@ export const julyCrisis1914: Scenario = {
           {
             id: 'opt-3c',
             text: 'Remain neutral. The 1839 guarantee does not legally compel British military action.',
+            intelligenceBasis:
+              'The guarantee is collective, not individual. Britain could argue it is not solely bound.',
+            riskLevel: 'high',
             outcome: 'wrong',
             consequences: [
               'Germany overruns France within six weeks',

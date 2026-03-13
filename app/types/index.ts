@@ -6,6 +6,10 @@ export type DecisionOutcome = 'correct' | 'plausible' | 'wrong'
 
 export type DocumentReliability = 'verified' | 'suspect' | 'rumor'
 
+export type ConfidenceLevel = 'certain' | 'probable' | 'unclear'
+
+export type RiskLevel = 'low' | 'medium' | 'high'
+
 export interface HistoricalDocument {
   id: string
   type: DocumentType
@@ -22,6 +26,8 @@ export interface HistoricalDocument {
 export interface DecisionOption {
   id: string
   text: string
+  intelligenceBasis: string // 1-line justification for this option
+  riskLevel: RiskLevel
   outcome: DecisionOutcome
   consequences: string[]
   debriefNote: string
@@ -30,7 +36,8 @@ export interface DecisionOption {
 export interface DecisionNode {
   id: string
   prompt: string
-  timeLimit?: number // seconds, optional
+  pressureContext: string // 1-sentence atmospheric line: date, stakes, who's waiting
+  timeLimit?: number // seconds, optional — defaults to 90 for wire deadline
   options: DecisionOption[]
   unlockDocumentIds?: string[] // Documents unlocked after this decision
 }
@@ -55,12 +62,23 @@ export interface Scenario {
   curriculumTags: string[] // AP History, Common Core standards
 }
 
+// KAR-15: Decision score with full confidence metadata
+export interface DecisionScore {
+  phaseId: string
+  optionSelected: string
+  confidenceLevel: ConfidenceLevel
+  timeRemaining: number
+  outcomeClassification: DecisionOutcome
+  scorePoints: number
+}
+
 export interface PlayerDecision {
   phaseId: string
   decisionId: string
   chosenOptionId: string
   timeSpent: number // seconds
   outcome: DecisionOutcome
+  confidenceLevel: ConfidenceLevel
 }
 
 export interface GameSession {
@@ -70,6 +88,7 @@ export interface GameSession {
   startedAt: string
   completedAt?: string
   decisions: PlayerDecision[]
+  scores: DecisionScore[]
   currentPhaseIndex: number
   status: 'in_progress' | 'completed' | 'abandoned'
 }

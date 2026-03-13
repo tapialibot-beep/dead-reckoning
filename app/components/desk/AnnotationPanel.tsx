@@ -6,30 +6,20 @@ export default function AnnotationPanel() {
   const scenario = useGameStore((s) => s.scenario)
   const session = useGameStore((s) => s.session)
   const currentPhaseIndex = useGameStore((s) => s.currentPhaseIndex)
-  const recordDecision = useGameStore((s) => s.recordDecision)
+  const openDecisionModal = useGameStore((s) => s.openDecisionModal)
   const advancePhase = useGameStore((s) => s.advancePhase)
+  const decisionModalPhase = useGameStore((s) => s.decisionModalPhase)
 
   const currentPhase = scenario?.phases[currentPhaseIndex]
-  const decision = currentPhase?.decision
   const decisions = session?.decisions ?? []
+  const scores = session?.scores ?? []
 
   const hasDecidedThisPhase = decisions.some(
     (d) => d.phaseId === currentPhase?.id
   )
 
-  const handleChoose = (optionId: string) => {
-    if (!currentPhase || !decision) return
-    const option = decision.options.find((o) => o.id === optionId)
-    if (!option) return
-
-    recordDecision({
-      phaseId: currentPhase.id,
-      decisionId: decision.id,
-      chosenOptionId: optionId,
-      timeSpent: currentPhase.timeLimit - useGameStore.getState().timeRemaining,
-      outcome: option.outcome,
-    })
-  }
+  const currentScore = scores.find((s) => s.phaseId === currentPhase?.id)
+  const isLastPhase = currentPhaseIndex >= (scenario?.phases.length ?? 0) - 1
 
   return (
     <div className="desk-panel desk-annotations">
@@ -50,12 +40,13 @@ export default function AnnotationPanel() {
                 const option = phase?.decision.options.find(
                   (o) => o.id === d.chosenOptionId
                 )
+                const score = scores.find((s) => s.phaseId === d.phaseId)
                 return (
                   <div key={i} className="doc-card">
                     <div className="doc-card-type">Phase {i + 1} Decision</div>
                     <div className="doc-card-title">{option?.text ?? 'Unknown'}</div>
                     <div className="doc-card-date">
-                      {d.outcome} &middot; {d.timeSpent}s elapsed
+                      {d.outcome} &middot; {d.confidenceLevel} &middot; {score?.scorePoints ?? 0} pts
                     </div>
                   </div>
                 )
@@ -66,33 +57,41 @@ export default function AnnotationPanel() {
 
         <div className="annotation-section">
           <h4 className="annotation-heading">Decision</h4>
-          {!decision || hasDecidedThisPhase ? (
+          {hasDecidedThisPhase ? (
             <div className="annotation-placeholder">
-              {hasDecidedThisPhase ? (
-                <>
-                  <p>Decision recorded.</p>
-                  {currentPhaseIndex < (scenario?.phases.length ?? 0) - 1 && (
-                    <button className="decision-option" onClick={advancePhase}>
-                      Proceed to next phase &rarr;
-                    </button>
-                  )}
-                </>
-              ) : (
-                <p>No decision pending.</p>
+              <p>Decision recorded.</p>
+              {currentScore && (
+                <p style={{ fontSize: '0.75rem', marginTop: '0.35rem', opacity: 0.7 }}>
+                  Score: {currentScore.scorePoints}/100
+                </p>
               )}
+              {!isLastPhase && (
+                <button className="decision-option" onClick={advancePhase}>
+                  Proceed to next phase &rarr;
+                </button>
+              )}
+              {isLastPhase && session?.status === 'completed' && (
+                <p style={{ fontSize: '0.8rem', marginTop: '0.5rem', color: 'var(--sepia)' }}>
+                  Scenario complete.
+                </p>
+              )}
+            </div>
+          ) : decisionModalPhase !== 'closed' ? (
+            <div className="annotation-placeholder">
+              <p>Decision briefing in progress...</p>
             </div>
           ) : (
             <div>
-              <div className="decision-prompt">{decision.prompt}</div>
-              {decision.options.map((option) => (
-                <button
-                  key={option.id}
-                  className="decision-option"
-                  onClick={() => handleChoose(option.id)}
-                >
-                  {option.text}
-                </button>
-              ))}
+              <div className="decision-prompt">
+                {currentPhase?.decision.prompt ?? 'No decision pending.'}
+              </div>
+              <button
+                className="decision-option"
+                onClick={openDecisionModal}
+                style={{ fontWeight: 'bold', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+              >
+                OPEN DECISION BRIEF
+              </button>
             </div>
           )}
         </div>
