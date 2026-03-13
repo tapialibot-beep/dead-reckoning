@@ -1,7 +1,7 @@
 'use client'
 
 import { useGameStore } from '@/app/store/gameStore'
-import { Telegram, Newspaper } from '@/app/components/documents'
+import { Telegram, Newspaper, MapDocument } from '@/app/components/documents'
 
 export default function DocumentViewer() {
   const selectedDocument = useGameStore((s) => s.selectedDocument)
@@ -34,7 +34,20 @@ export default function DocumentViewer() {
       )
     }
 
-    // Generic fallback for letter, map, report
+    if (selectedDocument.type === 'map') {
+      return (
+        <MapDocument
+          title={selectedDocument.title}
+          date={selectedDocument.date}
+          region={selectedDocument.source ?? 'THEATER UNKNOWN'}
+          annotations={selectedDocument.content}
+          notes={selectedDocument.sender}
+          reliability={selectedDocument.reliability ?? 'verified'}
+        />
+      )
+    }
+
+    // Generic fallback for letter, report
     return (
       <div className="document-display aged">
         <div className="doc-type-badge">{selectedDocument.type}</div>
