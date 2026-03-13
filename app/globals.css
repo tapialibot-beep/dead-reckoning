@@ -36,3 +36,285 @@ body {
 .aged {
   filter: sepia(0.15) contrast(0.95);
 }
+
+/* ============================================
+   DESK LAYOUT — 1940s Government Office
+   ============================================ */
+
+.desk-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: var(--desk-bg);
+  overflow: hidden;
+}
+
+/* --- Top Bar --- */
+.desk-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.25rem;
+  background: #1a1408;
+  border-bottom: 1px solid #3a2f1e;
+  flex-shrink: 0;
+}
+
+.topbar-role,
+.topbar-objective,
+.topbar-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topbar-label {
+  font-size: 0.625rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.7;
+}
+
+.topbar-value {
+  font-size: 0.8rem;
+  color: var(--paper-dark);
+  font-style: italic;
+}
+
+.topbar-status .topbar-value {
+  font-style: normal;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  border: 1px solid #3a2f1e;
+  padding: 0.15rem 0.5rem;
+}
+
+/* --- Main 3-Column Area --- */
+.desk-main {
+  display: grid;
+  grid-template-columns: 25% 1fr 30%;
+  flex: 1;
+  min-height: 0;
+  gap: 1px;
+  background: #0d0a05;
+}
+
+/* --- Panel Base --- */
+.desk-panel {
+  display: flex;
+  flex-direction: column;
+  background: #241c0e;
+  overflow: hidden;
+}
+
+.panel-header {
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #3a2f1e;
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.6;
+}
+
+.panel-body {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+/* --- Document Feed (Left) --- */
+.desk-feed {
+  border-right: 1px solid #3a2f1e;
+}
+
+.feed-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--ink-faded);
+  opacity: 0.5;
+}
+
+.feed-empty p {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.feed-hint {
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* --- Document Viewer (Center) --- */
+.desk-viewer {
+  background: #1e170b;
+}
+
+.viewer-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.viewer-empty {
+  text-align: center;
+}
+
+.viewer-desk-surface {
+  padding: 2rem;
+  color: var(--ink-faded);
+  opacity: 0.4;
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+/* --- Annotation Panel (Right) --- */
+.desk-annotations {
+  border-left: 1px solid #3a2f1e;
+}
+
+.annotation-section {
+  margin-bottom: 1.25rem;
+}
+
+.annotation-heading {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.5;
+  margin: 0 0 0.5rem 0;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #2a2010;
+}
+
+.annotation-placeholder {
+  color: var(--ink-faded);
+  opacity: 0.4;
+  font-style: italic;
+  font-size: 0.8rem;
+}
+
+.annotation-placeholder p {
+  margin: 0;
+}
+
+/* --- Timeline (Bottom Bar) --- */
+.desk-timeline {
+  padding: 0.4rem 1.25rem;
+  background: #1a1408;
+  border-top: 1px solid #3a2f1e;
+  flex-shrink: 0;
+}
+
+.timeline-track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.timeline-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.timeline-bar {
+  flex: 1;
+  height: 3px;
+  background: #2a2010;
+  border-radius: 1px;
+  position: relative;
+}
+
+.timeline-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--sepia);
+  border-radius: 1px;
+  transition: width 0.3s ease;
+}
+
+.timeline-clock {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--paper-dark);
+  opacity: 0.6;
+  font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+}
+
+/* --- Tablet Responsive (768px) --- */
+@media (max-width: 1024px) {
+  .desk-topbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .desk-main {
+    grid-template-columns: 30% 1fr;
+    grid-template-rows: 1fr 35%;
+  }
+
+  .desk-feed {
+    grid-row: 1 / -1;
+  }
+
+  .desk-viewer {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .desk-annotations {
+    grid-column: 2;
+    grid-row: 2;
+    border-left: 1px solid #3a2f1e;
+    border-top: 1px solid #3a2f1e;
+  }
+}
+
+@media (max-width: 768px) {
+  .desk-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+
+  .desk-feed {
+    grid-row: auto;
+    border-right: none;
+    border-bottom: 1px solid #3a2f1e;
+    max-height: 25vh;
+  }
+
+  .desk-viewer {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .desk-annotations {
+    grid-column: 1;
+    grid-row: auto;
+    border-left: none;
+    border-top: 1px solid #3a2f1e;
+    max-height: 25vh;
+  }
+}
