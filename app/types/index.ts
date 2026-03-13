@@ -4,6 +4,8 @@ export type DocumentType = 'telegram' | 'newspaper' | 'letter' | 'map' | 'report
 
 export type DecisionOutcome = 'correct' | 'plausible' | 'wrong'
 
+export type DocumentReliability = 'verified' | 'suspect' | 'rumor'
+
 export interface HistoricalDocument {
   id: string
   type: DocumentType
@@ -13,6 +15,7 @@ export interface HistoricalDocument {
   sender?: string
   recipient?: string
   source?: string // e.g. "The Times, 4 August 1914"
+  reliability?: DocumentReliability
   isUnlocked: boolean
 }
 

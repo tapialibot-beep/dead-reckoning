@@ -357,6 +357,145 @@ body {
   font-style: italic;
 }
 
+/* ============================================
+   TELEGRAM DOCUMENT
+   ============================================ */
+
+.telegram {
+  position: relative;
+  background-color: var(--telegraph-bg);
+  border: 1px solid #c8b89a;
+  padding: 2rem 2.25rem;
+  transform: rotate(-1.2deg);
+  font-family: 'Courier New', Courier, monospace;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.4), 1px 1px 0 #a89878;
+  overflow: hidden;
+}
+
+/* Faint horizontal ruled lines */
+.telegram-form-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.telegram-line {
+  height: 1.75rem;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.12);
+}
+
+.telegram-content {
+  position: relative;
+  z-index: 1;
+}
+
+.telegram-header {
+  text-align: center;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.85rem;
+}
+
+.telegram-agency {
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.25em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.telegram-subheader {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-faded);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+}
+
+.telegram-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 0.85rem;
+}
+
+.telegram-field {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.75rem;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.3);
+  padding-bottom: 0.25rem;
+}
+
+.telegram-label {
+  color: var(--ink-faded);
+  font-weight: bold;
+  min-width: 3.5rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+}
+
+.telegram-value {
+  color: var(--ink);
+  letter-spacing: 0.06em;
+}
+
+/* Double-rule divider — period-accurate */
+.telegram-rule {
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  height: 3px;
+  margin: 0.75rem 0 1rem;
+}
+
+.telegram-body {
+  font-size: 0.88rem;
+  line-height: 1.9;
+  color: var(--ink);
+  letter-spacing: 0.04em;
+  word-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.telegram-footer {
+  margin-top: 1.25rem;
+  text-align: right;
+}
+
+.telegram-reliability {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+.telegram-reliability--verified {
+  color: #2a5a2a;
+  border-color: #2a5a2a;
+  background: rgba(42, 90, 42, 0.08);
+}
+
+.telegram-reliability--suspect {
+  color: #7a5a1a;
+  border-color: #7a5a1a;
+  background: rgba(122, 90, 26, 0.08);
+}
+
+.telegram-reliability--rumor {
+  color: var(--urgent);
+  border-color: var(--urgent);
+  background: rgba(196, 30, 30, 0.08);
+}
+
 /* --- Document Display (Viewer) --- */
 .document-display {
   background: var(--paper);
