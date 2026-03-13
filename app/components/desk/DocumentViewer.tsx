@@ -1,7 +1,7 @@
 'use client'
 
 import { useGameStore } from '@/app/store/gameStore'
-import { Telegram, Newspaper, MapDocument } from '@/app/components/documents'
+import { Telegram, Newspaper, MapDocument, Letter, Report } from '@/app/components/documents'
 
 export default function DocumentViewer() {
   const selectedDocument = useGameStore((s) => s.selectedDocument)
@@ -47,7 +47,34 @@ export default function DocumentViewer() {
       )
     }
 
-    // Generic fallback for letter, report
+    if (selectedDocument.type === 'letter') {
+      return (
+        <Letter
+          sender={selectedDocument.sender ?? 'AUTHOR UNKNOWN'}
+          recipient={selectedDocument.recipient ?? 'RECIPIENT UNKNOWN'}
+          date={selectedDocument.date}
+          body={selectedDocument.content}
+          source={selectedDocument.source}
+          reliability={selectedDocument.reliability ?? 'verified'}
+        />
+      )
+    }
+
+    if (selectedDocument.type === 'report') {
+      return (
+        <Report
+          title={selectedDocument.title}
+          date={selectedDocument.date}
+          from={selectedDocument.sender ?? 'UNKNOWN OFFICE'}
+          to={selectedDocument.recipient}
+          classification={selectedDocument.source}
+          body={selectedDocument.content}
+          reliability={selectedDocument.reliability ?? 'verified'}
+        />
+      )
+    }
+
+    // Generic fallback for any future types
     return (
       <div className="document-display aged">
         <div className="doc-type-badge">{selectedDocument.type}</div>

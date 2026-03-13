@@ -934,6 +934,258 @@ body {
   background: rgba(196, 30, 30, 0.08);
 }
 
+/* ============================================
+   LETTER DOCUMENT
+   ============================================ */
+
+.letter {
+  background-color: #f8f4ec;
+  border: 1px solid #d4c9a8;
+  padding: 2rem 2.5rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  max-width: 560px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(212, 201, 168, 0.3);
+  transform: rotate(-0.6deg);
+}
+
+.letter-header {
+  margin-bottom: 1rem;
+}
+
+.letter-letterhead {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  margin-bottom: 0.25rem;
+}
+
+.letter-date {
+  font-size: 0.8rem;
+  color: var(--ink-faded);
+  font-style: italic;
+}
+
+.letter-rule {
+  border-top: 1px solid rgba(139, 115, 85, 0.3);
+  margin: 0.75rem 0 1rem;
+}
+
+.letter-addressee {
+  font-size: 0.85rem;
+  color: var(--ink);
+  margin-bottom: 1.25rem;
+}
+
+.letter-addressee-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-faded);
+  font-weight: bold;
+}
+
+.letter-body {
+  font-size: 0.88rem;
+  line-height: 1.8;
+  color: var(--ink);
+}
+
+.letter-body p {
+  text-indent: 1.5em;
+  margin: 0 0 0.65rem;
+}
+
+.letter-body p:first-child {
+  text-indent: 0;
+}
+
+.letter-body p:last-child {
+  margin-bottom: 0;
+}
+
+.letter-closing {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+.letter-signature {
+  font-size: 1rem;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.letter-footer {
+  margin-top: 1.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(139, 115, 85, 0.2);
+  text-align: right;
+}
+
+.letter-reliability {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.letter-reliability--verified {
+  color: #2a5a2a;
+  border-color: #2a5a2a;
+  background: rgba(42, 90, 42, 0.08);
+}
+
+.letter-reliability--suspect {
+  color: #7a5a1a;
+  border-color: #7a5a1a;
+  background: rgba(122, 90, 26, 0.08);
+}
+
+.letter-reliability--rumor {
+  color: var(--urgent);
+  border-color: var(--urgent);
+  background: rgba(196, 30, 30, 0.08);
+}
+
+/* ============================================
+   REPORT DOCUMENT
+   ============================================ */
+
+.report {
+  background-color: var(--paper);
+  border: 1px solid #b8a882;
+  padding: 1.75rem 2rem;
+  font-family: 'Courier New', Courier, monospace;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  box-shadow: 2px 4px 14px rgba(0, 0, 0, 0.4), 1px 1px 0 #a89878;
+  transform: rotate(0.3deg);
+}
+
+.report-classification {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--red-stamp);
+  border: 2px solid var(--red-stamp);
+  display: inline-block;
+  padding: 0.15rem 0.75rem;
+  margin-bottom: 0.85rem;
+  font-weight: bold;
+}
+
+.report-header {
+  margin-bottom: 0.5rem;
+}
+
+.report-title {
+  font-size: 0.95rem;
+  font-weight: bold;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 0.5rem;
+}
+
+.report-rule-thick {
+  border-top: 2px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  height: 3px;
+  margin: 0.5rem 0 0.65rem;
+}
+
+.report-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.report-meta-row {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+}
+
+.report-meta-label {
+  color: var(--ink-faded);
+  font-weight: bold;
+  min-width: 3rem;
+  letter-spacing: 0.1em;
+}
+
+.report-meta-value {
+  color: var(--ink);
+  letter-spacing: 0.04em;
+}
+
+.report-rule-thin {
+  border-top: 1px solid var(--ink);
+  margin: 0.75rem 0 1rem;
+}
+
+.report-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.report-paragraph {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+.report-para-number {
+  color: var(--ink-faded);
+  font-weight: bold;
+  text-align: right;
+}
+
+.report-para-text {
+  color: var(--ink);
+}
+
+.report-footer {
+  margin-top: 1.25rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(139, 115, 85, 0.3);
+  text-align: right;
+}
+
+.report-reliability {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid;
+  text-transform: uppercase;
+}
+
+.report-reliability--verified {
+  color: #2a5a2a;
+  border-color: #2a5a2a;
+  background: rgba(42, 90, 42, 0.08);
+}
+
+.report-reliability--suspect {
+  color: #7a5a1a;
+  border-color: #7a5a1a;
+  background: rgba(122, 90, 26, 0.08);
+}
+
+.report-reliability--rumor {
+  color: var(--urgent);
+  border-color: var(--urgent);
+  background: rgba(196, 30, 30, 0.08);
+}
+
 /* --- Decision Panel --- */
 .decision-prompt {
   font-size: 0.9rem;
