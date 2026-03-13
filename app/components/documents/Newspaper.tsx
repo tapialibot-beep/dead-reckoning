@@ -42,7 +42,11 @@ export function Newspaper({
           <div className="newspaper-byline">From {byline}</div>
         )}
         <div className="newspaper-rule-thin" />
-        <div className="newspaper-body">{body}</div>
+        <div className="newspaper-body">
+          {body.split('\n\n').map((para, i) => (
+            <p key={i}>{para}</p>
+          ))}
+        </div>
       </div>
 
       <div className="newspaper-footer">

@@ -28,7 +28,7 @@ export default function DocumentViewer() {
           dateline={selectedDocument.date}
           byline={selectedDocument.sender}
           body={selectedDocument.content}
-          source={selectedDocument.source ?? ''}
+          source={selectedDocument.source ?? 'UNKNOWN PUBLICATION'}
           reliability={selectedDocument.reliability ?? 'verified'}
         />
       )
