@@ -1,3 +1,5 @@
+'use client'
+
 import TopBar from './TopBar'
 import DocumentFeed from './DocumentFeed'
 import DocumentViewer from './DocumentViewer'

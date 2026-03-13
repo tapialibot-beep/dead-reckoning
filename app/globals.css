@@ -95,7 +95,7 @@ body {
 /* --- Main 3-Column Area --- */
 .desk-main {
   display: grid;
-  grid-template-columns: 25% 1fr 30%;
+  grid-template-columns: 25% 50% 25%;
   flex: 1;
   min-height: 0;
   gap: 1px;
@@ -290,6 +290,164 @@ body {
     border-left: 1px solid #3a2f1e;
     border-top: 1px solid #3a2f1e;
   }
+}
+
+/* --- Landing Page --- */
+.landing-bg {
+  background: var(--desk-bg);
+}
+
+.text-sepia {
+  color: var(--sepia);
+}
+
+.text-paper {
+  color: var(--paper);
+}
+
+.text-paper-dark {
+  color: var(--paper-dark);
+}
+
+.font-period {
+  font-family: Georgia, serif;
+}
+
+.btn-begin {
+  background: var(--paper);
+  color: var(--ink);
+  letter-spacing: 0.15em;
+}
+
+/* --- Document Card (Feed Items) --- */
+.doc-card {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #2a2010;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.doc-card:hover {
+  background: #2a2010;
+}
+
+.doc-card.selected {
+  background: #2a2010;
+  border-left: 2px solid var(--sepia);
+}
+
+.doc-card-type {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  opacity: 0.7;
+}
+
+.doc-card-title {
+  font-size: 0.85rem;
+  color: var(--paper-dark);
+  margin: 0.2rem 0;
+}
+
+.doc-card-date {
+  font-size: 0.7rem;
+  color: var(--ink-faded);
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* --- Document Display (Viewer) --- */
+.document-display {
+  background: var(--paper);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 0 30px rgba(139,115,85,0.1);
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 300px;
+}
+
+.document-display .doc-type-badge {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  border: 1px solid var(--sepia);
+  padding: 0.15rem 0.5rem;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.document-display .doc-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+.document-display .doc-meta {
+  font-size: 0.75rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--paper-dark);
+}
+
+.document-display .doc-content {
+  font-size: 0.9rem;
+  color: var(--ink);
+  line-height: 1.65;
+  white-space: pre-wrap;
+}
+
+.document-display .doc-source {
+  margin-top: 1.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--paper-dark);
+  font-size: 0.7rem;
+  color: var(--ink-faded);
+  font-style: italic;
+  text-align: right;
+}
+
+/* --- Decision Panel --- */
+.decision-prompt {
+  font-size: 0.9rem;
+  color: var(--paper);
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.decision-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.5rem;
+  background: #2a2010;
+  border: 1px solid #3a2f1e;
+  color: var(--paper-dark);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.decision-option:hover {
+  background: #3a2f1e;
+  border-color: var(--sepia);
+  color: var(--paper);
+}
+
+/* --- Status Indicators --- */
+.status-active {
+  color: #5a8a5a;
+}
+
+.status-paused {
+  color: var(--sepia);
 }
 
 @media (max-width: 768px) {
