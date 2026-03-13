@@ -10,7 +10,7 @@ export interface TelegramProps {
 
 export function Telegram({ to, from, date, body, reliability }: TelegramProps) {
   const formatBody = (text: string) =>
-    text.replace(/\./g, ' STOP').toUpperCase()
+    text.replace(/\.(?=\s|$)/g, ' STOP').toUpperCase()
 
   const reliabilityLabel = {
     verified: '\u2746 VERIFIED INTELLIGENCE',

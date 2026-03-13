@@ -1,7 +1,7 @@
 'use client'
 
 import { useGameStore } from '@/app/store/gameStore'
-import { Telegram } from '@/app/components/documents'
+import { Telegram, Newspaper } from '@/app/components/documents'
 
 export default function DocumentViewer() {
   const selectedDocument = useGameStore((s) => s.selectedDocument)
@@ -21,7 +21,20 @@ export default function DocumentViewer() {
       )
     }
 
-    // Generic fallback for other document types (newspaper, letter, etc.)
+    if (selectedDocument.type === 'newspaper') {
+      return (
+        <Newspaper
+          headline={selectedDocument.title}
+          dateline={selectedDocument.date}
+          byline={selectedDocument.sender}
+          body={selectedDocument.content}
+          source={selectedDocument.source ?? ''}
+          reliability={selectedDocument.reliability ?? 'verified'}
+        />
+      )
+    }
+
+    // Generic fallback for letter, map, report
     return (
       <div className="document-display aged">
         <div className="doc-type-badge">{selectedDocument.type}</div>
