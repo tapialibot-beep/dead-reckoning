@@ -190,17 +190,14 @@ function DebriefPanel() {
   const [activeTab, setActiveTab] = useState<DebriefTab>('flash')
   const lastReadTabRef = useRef<DebriefTab | null>(null)
 
-  if (!scenario || !currentNodeId) return null
-
-  const currentNode = scenario.nodes[currentNodeId]
+  const currentNode = scenario && currentNodeId ? (scenario.nodes[currentNodeId] ?? null) : null
   const isResolution = currentNode?.type === 'resolution'
 
-  const previousCrisisNodeId = [...visitedNodeIds]
-    .slice(0, -1)
-    .reverse()
-    .find(id => scenario.nodes[id]?.type === 'crisis')
+  const previousCrisisNodeId = scenario
+    ? [...visitedNodeIds].slice(0, -1).reverse().find(id => scenario.nodes[id]?.type === 'crisis')
+    : undefined
 
-  const crisisNode = previousCrisisNodeId ? scenario.nodes[previousCrisisNodeId] : null
+  const crisisNode = previousCrisisNodeId && scenario ? (scenario.nodes[previousCrisisNodeId] ?? null) : null
   const chosenOption = crisisNode?.options?.find(o => o.id === selectedOptionId)
   const latestScore = scores[scores.length - 1]
 
@@ -242,6 +239,8 @@ function DebriefPanel() {
       return () => clearTimeout(timer)
     }
   }, [activeTab, currentNode, isResolution, chosenOption, unchosenOptions, latestScore, speak])
+
+  if (!scenario || !currentNodeId) return null
 
   return (
     <div className="dp-debrief">
@@ -399,7 +398,7 @@ export default function DecisionPointModal() {
   const selectConfidenceLevel = useGameStore((s) => s.selectConfidenceLevel)
   const confirmDecision = useGameStore((s) => s.confirmDecision)
   const closeDebrief = useGameStore((s) => s.closeDebrief)
-  const { speak, stop } = useMilitaryTTS()
+  const { speak } = useMilitaryTTS()
 
   const containerRef = useRef<HTMLDivElement>(null)
   const focusedIndexRef = useRef(0)
