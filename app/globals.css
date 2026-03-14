@@ -114,6 +114,9 @@ body {
   padding: 0.6rem 1rem;
   border-bottom: 1px solid #3a2f1e;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .panel-title {
@@ -1363,14 +1366,44 @@ body {
   border-bottom: 1px solid #2a2010;
 }
 
+.dp-briefing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
 .dp-briefing-label {
   font-size: 0.55rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--sepia);
   opacity: 0.6;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0;
   font-family: 'Courier New', Courier, monospace;
+}
+
+/* READ BRIEFING / READ DISPATCH buttons */
+.dp-read-btn {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  background: transparent;
+  border: 1px solid var(--sepia);
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s;
+}
+
+.dp-read-btn:hover {
+  opacity: 1;
+}
+
+.viewer-read-btn {
+  margin-left: auto;
 }
 
 .dp-briefing-text {

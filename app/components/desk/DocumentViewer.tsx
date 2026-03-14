@@ -2,9 +2,11 @@
 
 import { useGameStore } from '@/app/store/gameStore'
 import { Telegram, Newspaper, MapDocument, Letter, Report } from '@/app/components/documents'
+import { useMilitaryTTS } from '@/app/hooks/useMilitaryTTS'
 
 export default function DocumentViewer() {
   const selectedDocument = useGameStore((s) => s.selectedDocument)
+  const { speak, stop } = useMilitaryTTS()
 
   const renderDocument = () => {
     if (!selectedDocument) return null
@@ -92,10 +94,26 @@ export default function DocumentViewer() {
     )
   }
 
+  const readDocument = () => {
+    if (!selectedDocument) return
+    const parts = [
+      selectedDocument.title,
+      selectedDocument.sender && `From: ${selectedDocument.sender}`,
+      selectedDocument.recipient && `To: ${selectedDocument.recipient}`,
+      selectedDocument.content,
+    ].filter(Boolean)
+    speak(parts.join('. '))
+  }
+
   return (
     <div className="desk-panel desk-viewer">
       <div className="panel-header">
         <span className="panel-title">DOCUMENT VIEWER</span>
+        {selectedDocument && (
+          <button className="dp-read-btn viewer-read-btn" onClick={readDocument} onMouseLeave={stop} aria-label="Read document aloud">
+            ▶ READ DISPATCH
+          </button>
+        )}
       </div>
       <div className="panel-body viewer-body">
         {!selectedDocument ? (

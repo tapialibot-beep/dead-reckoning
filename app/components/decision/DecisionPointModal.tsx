@@ -72,10 +72,7 @@ function OptionCard({
   onSelect: () => void
 }) {
   const [expanded, setExpanded] = useState(false)
-  const { speak, stop } = useMilitaryTTS()
   const codeLabel = option.codeLabel ?? CODE_LABELS[index] ?? `OPTION ${String.fromCharCode(65 + index)}`
-
-  const readText = `${codeLabel}. ${option.text}`
 
   return (
     <div
@@ -84,10 +81,6 @@ function OptionCard({
       aria-checked={isSelected}
       tabIndex={isFocused ? 0 : -1}
       data-index={index}
-      onMouseEnter={() => speak(readText)}
-      onFocus={() => speak(readText)}
-      onMouseLeave={stop}
-      onBlur={stop}
     >
       <button
         className="dp-option-select-area"
@@ -171,6 +164,19 @@ const TAB_LABELS: { id: DebriefTab; label: string }[] = [
   { id: 'score',       label: 'SCORE' },
 ]
 
+const OUTCOME_LABELS: Record<string, { label: string; className: string }> = {
+  correct:   { label: 'HISTORICALLY ACCURATE',  className: 'outcome-correct' },
+  plausible: { label: 'HISTORICALLY PLAUSIBLE', className: 'outcome-plausible' },
+  wrong:     { label: 'HISTORICALLY INACCURATE', className: 'outcome-wrong' },
+}
+
+const OUTCOME_CATEGORY_LABELS: Record<string, string> = {
+  historical:   'HISTORICAL OUTCOME',
+  divergent:    'DIVERGENT HISTORY',
+  avoided:      'WAR AVOIDED',
+  catastrophic: 'CATASTROPHIC FAILURE',
+}
+
 function DebriefPanel() {
   const scenario = useGameStore((s) => s.scenario)
   const currentNodeId = useGameStore((s) => s.currentNodeId)
@@ -179,9 +185,10 @@ function DebriefPanel() {
   const scores = useGameStore((s) => s.scores)
   const closeDebrief = useGameStore((s) => s.closeDebrief)
   const sessionStatus = useGameStore((s) => s.sessionStatus)
-  const { speak, stop } = useMilitaryTTS()
+  const { speak } = useMilitaryTTS()
 
   const [activeTab, setActiveTab] = useState<DebriefTab>('flash')
+  const lastReadTabRef = useRef<DebriefTab | null>(null)
 
   if (!scenario || !currentNodeId) return null
 
@@ -197,21 +204,44 @@ function DebriefPanel() {
   const chosenOption = crisisNode?.options?.find(o => o.id === selectedOptionId)
   const latestScore = scores[scores.length - 1]
 
-  const outcomeLabels: Record<string, { label: string; className: string }> = {
-    correct:   { label: 'HISTORICALLY ACCURATE',  className: 'outcome-correct' },
-    plausible: { label: 'HISTORICALLY PLAUSIBLE', className: 'outcome-plausible' },
-    wrong:     { label: 'HISTORICALLY INACCURATE', className: 'outcome-wrong' },
-  }
-
   const timedOut = latestScore?.timeRemaining === 0 && latestScore?.scorePoints === 0
   const unchosenOptions = crisisNode?.options?.filter(o => o.id !== selectedOptionId) ?? []
 
-  const outcomeCategoryLabels: Record<string, string> = {
-    historical:   'HISTORICAL OUTCOME',
-    divergent:    'DIVERGENT HISTORY',
-    avoided:      'WAR AVOIDED',
-    catastrophic: 'CATASTROPHIC FAILURE',
-  }
+  // Auto-read debrief tab content on switch (and on first mount)
+  useEffect(() => {
+    if (activeTab === lastReadTabRef.current) return
+    lastReadTabRef.current = activeTab
+
+    let text = ''
+    switch (activeTab) {
+      case 'flash':
+        if (currentNode) text = currentNode.description
+        if (isResolution && currentNode?.outcome) {
+          text += `. ${currentNode.outcome.title}. ${currentNode.outcome.summary}`
+        }
+        if (chosenOption?.consequences?.length) {
+          text += `. Consequences: ${chosenOption.consequences.join('. ')}`
+        }
+        break
+      case 'assessment':
+        if (chosenOption) {
+          text = `Your assessment: ${chosenOption.text}. ${OUTCOME_LABELS[chosenOption.outcome]?.label ?? ''}. ${chosenOption.debriefNote}`
+        }
+        break
+      case 'alt-history':
+        if (unchosenOptions.length > 0) {
+          text = unchosenOptions.map(opt => `${opt.text}. ${opt.debriefNote}`).join('. ')
+        }
+        break
+      case 'score':
+        if (latestScore) text = `Score: ${latestScore.scorePoints} out of 100`
+        break
+    }
+    if (text) {
+      const timer = setTimeout(() => speak(text), 300)
+      return () => clearTimeout(timer)
+    }
+  }, [activeTab, currentNode, isResolution, chosenOption, unchosenOptions, latestScore, speak])
 
   return (
     <div className="dp-debrief">
@@ -234,8 +264,6 @@ function DebriefPanel() {
             role="tab"
             aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
-            onMouseEnter={() => speak(tab.label)}
-            onMouseLeave={stop}
           >
             {tab.label}
           </button>
@@ -254,7 +282,7 @@ function DebriefPanel() {
           {isResolution && currentNode?.outcome && (
             <div className="dp-debrief-section">
               <div className="dp-debrief-label">
-                {outcomeCategoryLabels[currentNode.outcome.category] ?? 'OUTCOME'}
+                {OUTCOME_CATEGORY_LABELS[currentNode.outcome.category] ?? 'OUTCOME'}
               </div>
               <div className="dp-debrief-choice">{currentNode.outcome.title}</div>
               <div className="dp-debrief-note">{currentNode.outcome.summary}</div>
@@ -283,8 +311,8 @@ function DebriefPanel() {
             <div className="dp-debrief-section">
               <div className="dp-debrief-label">YOUR ASSESSMENT</div>
               <div className="dp-debrief-choice">{chosenOption.text}</div>
-              <div className={`dp-outcome-badge ${outcomeLabels[chosenOption.outcome]?.className ?? ''}`}>
-                {outcomeLabels[chosenOption.outcome]?.label}
+              <div className={`dp-outcome-badge ${OUTCOME_LABELS[chosenOption.outcome]?.className ?? ''}`}>
+                {OUTCOME_LABELS[chosenOption.outcome]?.label}
               </div>
               <div className="dp-debrief-note">{chosenOption.debriefNote}</div>
             </div>
@@ -352,8 +380,6 @@ function DebriefPanel() {
       <button
         className="dp-proceed-btn"
         onClick={closeDebrief}
-        onMouseEnter={() => speak(sessionStatus === 'completed' ? 'End of scenario' : 'Proceed')}
-        onMouseLeave={stop}
       >
         {sessionStatus === 'completed' ? 'END OF SCENARIO' : 'PROCEED'} &rarr;
       </button>
@@ -377,6 +403,7 @@ export default function DecisionPointModal() {
 
   const containerRef = useRef<HTMLDivElement>(null)
   const focusedIndexRef = useRef(0)
+  const autoReadNodeRef = useRef<string | null>(null)
 
   const currentNode = currentNodeId ? scenario?.nodes[currentNodeId] : null
 
@@ -428,6 +455,17 @@ export default function DecisionPointModal() {
     }
   }, [modalPhase])
 
+  // Auto-read briefing once per node when decision modal opens
+  useEffect(() => {
+    if (modalPhase !== 'choosing' || !currentNodeId || !currentNode) return
+    if (autoReadNodeRef.current === currentNodeId) return
+    autoReadNodeRef.current = currentNodeId
+    const text = [currentNode.description, currentNode.prompt].filter(Boolean).join('. ')
+    if (!text) return
+    const timer = setTimeout(() => speak(text), 500)
+    return () => clearTimeout(timer)
+  }, [modalPhase, currentNodeId, currentNode, speak])
+
   if (modalPhase === 'closed' || !scenario) return null
 
   return (
@@ -455,7 +493,16 @@ export default function DecisionPointModal() {
         {modalPhase === 'choosing' && currentNode?.options && (
           <div className="dp-body">
             <div className="dp-briefing">
-              <div className="dp-briefing-label">BRIEFING</div>
+              <div className="dp-briefing-header">
+                <div className="dp-briefing-label">BRIEFING</div>
+                <button
+                  className="dp-read-btn"
+                  onClick={() => speak(`${currentNode.description}. ${currentNode.prompt}`)}
+                  aria-label="Read briefing aloud"
+                >
+                  ▶ READ BRIEFING
+                </button>
+              </div>
               <div className="dp-briefing-text">{currentNode.prompt}</div>
             </div>
             <div className="dp-options" role="radiogroup" aria-label="Decision options">
@@ -487,8 +534,6 @@ export default function DecisionPointModal() {
               className="dp-confirm-btn"
               onClick={confirmDecision}
               disabled={!selectedConfidence}
-              onMouseEnter={() => speak('Stamp and send assessment')}
-              onMouseLeave={stop}
             >
               STAMP &amp; SEND ASSESSMENT
             </button>
