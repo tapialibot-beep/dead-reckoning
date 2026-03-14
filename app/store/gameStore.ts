@@ -4,8 +4,8 @@ import type {
   ScenarioNode,
   HistoricalDocument,
   ConfidenceLevel,
+  DecisionOutcome,
 } from '../types/scenario'
-import type { DecisionOutcome } from '../types'
 
 // ---------------------------------------------------------------------------
 // Scoring matrix — confidence × outcome

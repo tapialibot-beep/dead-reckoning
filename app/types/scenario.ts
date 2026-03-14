@@ -1,11 +1,10 @@
-// Dead Reckoning v2.0 — Branching scenario types
-// Phase 1 (KAR-25): Types only, nothing imports these yet.
-// Coexists with legacy types in ./index.ts until Phase 4 cutover.
+// Dead Reckoning v2.0 — Canonical scenario types (Phase 4 cutover)
 
-import type { DocumentType, DocumentReliability, DecisionOutcome } from './index'
+// --- Base types ---
 
-// Re-export shared base types for convenience
-export type { DocumentType, DocumentReliability, DecisionOutcome }
+export type DocumentType = 'telegram' | 'newspaper' | 'letter' | 'map' | 'report'
+export type DocumentReliability = 'verified' | 'suspect' | 'rumor'
+export type DecisionOutcome = 'correct' | 'plausible' | 'wrong'
 
 // --- New union types ---
 
