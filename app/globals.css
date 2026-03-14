@@ -1793,6 +1793,158 @@ body {
   background: var(--paper-dark);
 }
 
+/* ============================================
+   KAR-37 — TTS + Military Brevity UI
+   ============================================ */
+
+/* --- Urgency stamps (timer bar) --- */
+
+.wire-urgency-stamp {
+  font-size: 0.5rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.45rem;
+  border: 1px solid;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+}
+
+.wire-urgency-routine   { color: var(--sepia); border-color: var(--sepia); opacity: 0.5; }
+.wire-urgency-priority  { color: #c8a820; border-color: #c8a820; }
+.wire-urgency-immediate { color: #c87020; border-color: #c87020; }
+.wire-urgency-flash     { color: var(--urgent); border-color: var(--urgent); animation: dp-pulse 0.7s ease-in-out infinite; }
+
+/* --- Option cards v2 — code label + BLUF clamp --- */
+
+/* Card is now a div (not a button) so reset button defaults */
+.dp-option-card {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #241c0e;
+  border: 1px solid #3a2f1e;
+  transition: all 0.15s ease;
+  font-family: Georgia, serif;
+  position: relative;
+  padding: 0;
+}
+
+.dp-option-select-area {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 1.1rem 1.25rem 0.5rem;
+  font-family: Georgia, serif;
+}
+
+.dp-option-code-label {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: 0.4rem;
+  opacity: 0.8;
+}
+
+/* BLUF — 2-line clamp by default; .dp-option-text (no modifier) = expanded */
+.dp-option-clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.dp-option-expand {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-top: 1px solid #2a2010;
+  padding: 0.35rem 1.25rem;
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  text-align: left;
+  transition: color 0.15s ease;
+  opacity: 0.6;
+}
+
+.dp-option-expand:hover {
+  color: var(--paper);
+  opacity: 1;
+}
+
+/* --- NATO confidence stamp number --- */
+
+.dp-stamp-nato-number {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin-bottom: 0.2rem;
+  opacity: 0.5;
+}
+
+/* --- Debrief tabs --- */
+
+.dp-tab-strip {
+  display: flex;
+  border-bottom: 1px solid #3a2f1e;
+  margin-bottom: 1.25rem;
+  gap: 0;
+}
+
+.dp-tab {
+  flex: 1;
+  padding: 0.55rem 0.25rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  font-size: 0.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  opacity: 0.5;
+  text-align: center;
+}
+
+.dp-tab:hover {
+  opacity: 0.8;
+  color: var(--paper-dark);
+}
+
+.dp-tab-active {
+  color: var(--paper);
+  border-bottom-color: var(--paper);
+  opacity: 1;
+}
+
+.dp-tab-panel {
+  animation: dp-fade-in 0.2s ease;
+}
+
+/* --- Faded note modifier --- */
+
+.dp-note-faded {
+  opacity: 0.45;
+}
+
+/* ============================================
+   Mobile responsive
+   ============================================ */
+
 @media (max-width: 768px) {
   .desk-main {
     grid-template-columns: 1fr;
@@ -1817,5 +1969,13 @@ body {
     border-left: none;
     border-top: 1px solid #3a2f1e;
     max-height: 25vh;
+  }
+
+  .dp-confidence-options {
+    flex-direction: column;
+  }
+
+  .dp-tab-strip {
+    overflow-x: auto;
   }
 }
