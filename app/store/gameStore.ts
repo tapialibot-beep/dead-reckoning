@@ -1,57 +1,93 @@
 import { create } from 'zustand'
-import {
-  ConfidenceLevel,
-  DecisionScore,
-  GameSession,
-  HistoricalDocument,
-  PlayerDecision,
+import type {
   Scenario,
-  DecisionOutcome,
-} from '../types'
+  ScenarioNode,
+  HistoricalDocument,
+  ConfidenceLevel,
+} from '../types/scenario'
+import type { DecisionOutcome } from '../types'
 
-// KAR-15: Scoring matrix — confidence × outcome
+// ---------------------------------------------------------------------------
+// Scoring matrix — confidence × outcome
+// ---------------------------------------------------------------------------
+
 const SCORE_MATRIX: Record<DecisionOutcome, Record<ConfidenceLevel, number>> = {
-  correct: { certain: 100, probable: 80, unclear: 60 },
-  plausible: { certain: 30, probable: 50, unclear: 45 },
-  wrong: { certain: 0, probable: 15, unclear: 25 },
+  correct:   { high: 100, medium: 80, low: 60 },
+  plausible: { high: 30,  medium: 50, low: 45 },
+  wrong:     { high: 0,   medium: 15, low: 25 },
 }
 
-export function calculateScore(
-  outcome: DecisionOutcome,
-  confidence: ConfidenceLevel
-): number {
+export function calculateScore(outcome: DecisionOutcome, confidence: ConfidenceLevel): number {
   return SCORE_MATRIX[outcome][confidence]
 }
 
-// KAR-15: Decision Point modal phases
-type DecisionModalPhase =
-  | 'closed'        // No modal
-  | 'choosing'      // Selecting an option
-  | 'confidence'    // Rating confidence after selection
-  | 'debrief'       // Showing outcome reveal
+// ---------------------------------------------------------------------------
+// Local session types
+// ---------------------------------------------------------------------------
+
+export interface NodePlayerDecision {
+  nodeId: string
+  chosenOptionId: string
+  confidence: ConfidenceLevel
+  outcome: DecisionOutcome
+  timeSpent: number // seconds
+}
+
+export interface NodeDecisionScore {
+  nodeId: string
+  optionSelected: string
+  confidenceLevel: ConfidenceLevel
+  timeRemaining: number
+  outcomeClassification: DecisionOutcome
+  scorePoints: number
+}
+
+// ---------------------------------------------------------------------------
+// Modal phase
+// ---------------------------------------------------------------------------
+
+type DecisionModalPhase = 'closed' | 'choosing' | 'confidence' | 'debrief'
+
+// ---------------------------------------------------------------------------
+// State interface
+// ---------------------------------------------------------------------------
 
 interface GameState {
-  // Current game state
+  // Scenario + node traversal
   scenario: Scenario | null
-  session: GameSession | null
-  currentPhaseIndex: number
+  currentNodeId: string | null
+  visitedNodeIds: string[]
+  currentPressure: number
+  unlockedDocumentIds: string[]
+
+  // Documents
   visibleDocuments: HistoricalDocument[]
   selectedDocument: HistoricalDocument | null
+
+  // Session
+  sessionId: string | null
+  playerId: string | null
+  sessionStatus: 'idle' | 'in_progress' | 'completed' | 'abandoned'
+  startedAt: string | null
+  completedAt: string | null
+  decisions: NodePlayerDecision[]
+  scores: NodeDecisionScore[]
+
+  // Timing
   timeRemaining: number
   isPaused: boolean
 
-  // KAR-15: Decision Point modal state
+  // Modal
   decisionModalPhase: DecisionModalPhase
   selectedOptionId: string | null
   selectedConfidence: ConfidenceLevel | null
-  wireDeadlineTimer: number // seconds remaining on 90s wire deadline
+  wireDeadlineTimer: number
   wireTimerActive: boolean
 
   // Actions
   startGame: (scenario: Scenario, playerId: string) => void
+  navigateToNode: (nodeId: string) => void
   selectDocument: (doc: HistoricalDocument | null) => void
-  recordDecision: (decision: PlayerDecision) => void
-  advancePhase: () => void
   unlockDocuments: (documentIds: string[]) => void
   setTimeRemaining: (seconds: number) => void
   pauseGame: () => void
@@ -59,7 +95,7 @@ interface GameState {
   endGame: () => void
   resetGame: () => void
 
-  // KAR-15: Decision Point actions
+  // Modal actions
   openDecisionModal: () => void
   selectOption: (optionId: string) => void
   selectConfidenceLevel: (level: ConfidenceLevel) => void
@@ -70,126 +106,137 @@ interface GameState {
   resumeWireDeadline: () => void
 }
 
-export const useGameStore = create<GameState>((set, get) => ({
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function buildVisibleDocuments(
+  scenario: Scenario,
+  nodeId: string,
+  unlockedIds: string[]
+): HistoricalDocument[] {
+  const node = scenario.nodes[nodeId]
+  if (!node) return []
+  const allIds = new Set([...node.initialDocumentIds, ...unlockedIds])
+  return scenario.documentLibrary.filter(doc => allIds.has(doc.id))
+}
+
+// ---------------------------------------------------------------------------
+// Initial state
+// ---------------------------------------------------------------------------
+
+const INITIAL_STATE = {
   scenario: null,
-  session: null,
-  currentPhaseIndex: 0,
-  visibleDocuments: [],
+  currentNodeId: null,
+  visitedNodeIds: [] as string[],
+  currentPressure: 50,
+  unlockedDocumentIds: [] as string[],
+  visibleDocuments: [] as HistoricalDocument[],
   selectedDocument: null,
+  sessionId: null,
+  playerId: null,
+  sessionStatus: 'idle' as const,
+  startedAt: null,
+  completedAt: null,
+  decisions: [] as NodePlayerDecision[],
+  scores: [] as NodeDecisionScore[],
   timeRemaining: 0,
   isPaused: false,
-
-  // KAR-15 initial state
-  decisionModalPhase: 'closed',
+  decisionModalPhase: 'closed' as DecisionModalPhase,
   selectedOptionId: null,
   selectedConfidence: null,
   wireDeadlineTimer: 90,
   wireTimerActive: false,
+}
+
+// ---------------------------------------------------------------------------
+// Store
+// ---------------------------------------------------------------------------
+
+export const useGameStore = create<GameState>((set, get) => ({
+  ...INITIAL_STATE,
 
   startGame: (scenario, playerId) => {
-    const session: GameSession = {
-      id: crypto.randomUUID(),
-      scenarioId: scenario.id,
-      playerId,
-      startedAt: new Date().toISOString(),
-      decisions: [],
-      scores: [],
-      currentPhaseIndex: 0,
-      status: 'in_progress',
-    }
-    const firstPhase = scenario.phases[0]
+    const startNodeId = scenario.startNodeId
+    const initialPressure = scenario.initialPressure ?? 50
     set({
       scenario,
-      session,
-      currentPhaseIndex: 0,
-      visibleDocuments: firstPhase.documents.filter(d => d.isUnlocked),
+      currentNodeId: startNodeId,
+      visitedNodeIds: [startNodeId],
+      currentPressure: initialPressure,
+      unlockedDocumentIds: [],
+      visibleDocuments: buildVisibleDocuments(scenario, startNodeId, []),
       selectedDocument: null,
-      timeRemaining: firstPhase.timeLimit,
+      sessionId: crypto.randomUUID(),
+      playerId,
+      sessionStatus: 'in_progress',
+      startedAt: new Date().toISOString(),
+      completedAt: null,
+      decisions: [],
+      scores: [],
+      timeRemaining: scenario.nodes[startNodeId]?.timeLimit ?? 0,
       isPaused: false,
       decisionModalPhase: 'closed',
       selectedOptionId: null,
       selectedConfidence: null,
+      wireDeadlineTimer: 90,
+      wireTimerActive: false,
+    })
+  },
+
+  navigateToNode: (nodeId) => {
+    const { scenario, unlockedDocumentIds, visitedNodeIds, currentPressure } = get()
+    if (!scenario) return
+    const node = scenario.nodes[nodeId]
+    if (!node) return
+
+    const newPressure =
+      node.type === 'consequence' && node.pressureDelta !== undefined
+        ? Math.max(0, Math.min(100, currentPressure + node.pressureDelta))
+        : currentPressure
+
+    const isComplete = node.type === 'resolution'
+
+    set({
+      currentNodeId: nodeId,
+      visitedNodeIds: [...visitedNodeIds, nodeId],
+      currentPressure: newPressure,
+      visibleDocuments: buildVisibleDocuments(scenario, nodeId, unlockedDocumentIds),
+      selectedDocument: null,
+      timeRemaining: node.timeLimit ?? 0,
+      ...(isComplete
+        ? { sessionStatus: 'completed', completedAt: new Date().toISOString() }
+        : {}),
     })
   },
 
   selectDocument: (doc) => set({ selectedDocument: doc }),
 
-  recordDecision: (decision) => {
-    const { session } = get()
-    if (!session) return
-    set({
-      session: {
-        ...session,
-        decisions: [...session.decisions, decision],
-      },
-    })
-  },
-
-  advancePhase: () => {
-    const { scenario, currentPhaseIndex } = get()
-    if (!scenario) return
-    const nextIndex = currentPhaseIndex + 1
-    if (nextIndex >= scenario.phases.length) {
-      set(state => ({
-        session: state.session
-          ? { ...state.session, status: 'completed', completedAt: new Date().toISOString() }
-          : null,
-      }))
-      return
-    }
-    const nextPhase = scenario.phases[nextIndex]
-    set({
-      currentPhaseIndex: nextIndex,
-      visibleDocuments: nextPhase.documents.filter(d => d.isUnlocked),
-      selectedDocument: null,
-      timeRemaining: nextPhase.timeLimit,
-      decisionModalPhase: 'closed',
-      selectedOptionId: null,
-      selectedConfidence: null,
-    })
-  },
-
   unlockDocuments: (documentIds) => {
-    set(state => ({
-      visibleDocuments: state.visibleDocuments.map(doc =>
-        documentIds.includes(doc.id) ? { ...doc, isUnlocked: true } : doc
-      ),
-    }))
+    const { scenario, currentNodeId, unlockedDocumentIds } = get()
+    if (!scenario || !currentNodeId) return
+    const merged = [...new Set([...unlockedDocumentIds, ...documentIds])]
+    set({
+      unlockedDocumentIds: merged,
+      visibleDocuments: buildVisibleDocuments(scenario, currentNodeId, merged),
+    })
   },
 
   setTimeRemaining: (seconds) => set({ timeRemaining: seconds }),
-
   pauseGame: () => set({ isPaused: true }),
   resumeGame: () => set({ isPaused: false }),
 
-  endGame: () => {
-    set(state => ({
-      session: state.session
-        ? { ...state.session, status: 'abandoned', completedAt: new Date().toISOString() }
-        : null,
-    }))
-  },
+  endGame: () =>
+    set({ sessionStatus: 'abandoned', completedAt: new Date().toISOString() }),
 
-  resetGame: () => set({
-    scenario: null,
-    session: null,
-    currentPhaseIndex: 0,
-    visibleDocuments: [],
-    selectedDocument: null,
-    timeRemaining: 0,
-    isPaused: false,
-    decisionModalPhase: 'closed',
-    selectedOptionId: null,
-    selectedConfidence: null,
-    wireDeadlineTimer: 90,
-    wireTimerActive: false,
-  }),
+  resetGame: () => set(INITIAL_STATE),
 
-  // KAR-15: Decision Point modal actions
+  // --- Modal ---
+
   openDecisionModal: () => {
-    const { scenario, currentPhaseIndex } = get()
-    const phase = scenario?.phases[currentPhaseIndex]
-    const timeLimit = phase?.decision.timeLimit ?? 90
+    const { scenario, currentNodeId } = get()
+    const node = scenario?.nodes[currentNodeId ?? '']
+    const timeLimit = node?.timeLimit ?? 90
     set({
       decisionModalPhase: 'choosing',
       selectedOptionId: null,
@@ -199,43 +246,37 @@ export const useGameStore = create<GameState>((set, get) => ({
     })
   },
 
-  selectOption: (optionId) => {
-    set({
-      selectedOptionId: optionId,
-      decisionModalPhase: 'confidence',
-    })
-  },
+  selectOption: (optionId) =>
+    set({ selectedOptionId: optionId, decisionModalPhase: 'confidence' }),
 
-  selectConfidenceLevel: (level) => {
-    set({ selectedConfidence: level })
-  },
+  selectConfidenceLevel: (level) => set({ selectedConfidence: level }),
 
   confirmDecision: () => {
     const {
-      scenario, currentPhaseIndex, session,
-      selectedOptionId, selectedConfidence, wireDeadlineTimer,
+      scenario, currentNodeId, selectedOptionId, selectedConfidence,
+      wireDeadlineTimer, decisions, scores, unlockedDocumentIds, visitedNodeIds, currentPressure,
     } = get()
-    if (!scenario || !session || !selectedOptionId || !selectedConfidence) return
+    if (!scenario || !currentNodeId || !selectedOptionId || !selectedConfidence) return
 
-    const phase = scenario.phases[currentPhaseIndex]
-    const decision = phase.decision
-    const option = decision.options.find(o => o.id === selectedOptionId)
+    const node = scenario.nodes[currentNodeId]
+    if (node?.type !== 'crisis' || !node.options) return
+
+    const option = node.options.find(o => o.id === selectedOptionId)
     if (!option) return
 
-    const timeLimit = decision.timeLimit ?? 90
+    const timeLimit = node.timeLimit ?? 90
     const points = calculateScore(option.outcome, selectedConfidence)
 
-    const playerDecision: PlayerDecision = {
-      phaseId: phase.id,
-      decisionId: decision.id,
+    const playerDecision: NodePlayerDecision = {
+      nodeId: currentNodeId,
       chosenOptionId: selectedOptionId,
-      timeSpent: timeLimit - wireDeadlineTimer,
+      confidence: selectedConfidence,
       outcome: option.outcome,
-      confidenceLevel: selectedConfidence,
+      timeSpent: timeLimit - wireDeadlineTimer,
     }
 
-    const score: DecisionScore = {
-      phaseId: phase.id,
+    const score: NodeDecisionScore = {
+      nodeId: currentNodeId,
       optionSelected: selectedOptionId,
       confidenceLevel: selectedConfidence,
       timeRemaining: wireDeadlineTimer,
@@ -243,22 +284,48 @@ export const useGameStore = create<GameState>((set, get) => ({
       scorePoints: points,
     }
 
+    const newUnlocked = option.unlockDocumentIds
+      ? [...new Set([...unlockedDocumentIds, ...option.unlockDocumentIds])]
+      : unlockedDocumentIds
+
+    // Navigate to consequence/resolution node
+    const nextNodeId = option.nextNodeId
+    const nextNode = scenario.nodes[nextNodeId]
+    const newPressure =
+      nextNode?.type === 'consequence' && nextNode.pressureDelta !== undefined
+        ? Math.max(0, Math.min(100, currentPressure + nextNode.pressureDelta))
+        : currentPressure
+
+    const isComplete = nextNode?.type === 'resolution'
+
     set({
-      session: {
-        ...session,
-        decisions: [...session.decisions, playerDecision],
-        scores: [...session.scores, score],
-      },
+      decisions: [...decisions, playerDecision],
+      scores: [...scores, score],
+      unlockedDocumentIds: newUnlocked,
+      currentNodeId: nextNodeId,
+      visitedNodeIds: [...visitedNodeIds, nextNodeId],
+      currentPressure: newPressure,
+      visibleDocuments: buildVisibleDocuments(scenario, nextNodeId, newUnlocked),
       decisionModalPhase: 'debrief',
       wireTimerActive: false,
+      ...(isComplete
+        ? { sessionStatus: 'completed', completedAt: new Date().toISOString() }
+        : {}),
     })
   },
 
   closeDebrief: () => {
-    set({
-      decisionModalPhase: 'closed',
-      wireTimerActive: false,
-    })
+    const { scenario, currentNodeId } = get()
+    set({ decisionModalPhase: 'closed', wireTimerActive: false })
+
+    if (!scenario || !currentNodeId) return
+    const currentNode = scenario.nodes[currentNodeId]
+
+    // If we're at a consequence node, navigate forward automatically
+    if (currentNode?.type === 'consequence' && currentNode.nextNodeId) {
+      get().navigateToNode(currentNode.nextNodeId)
+    }
+    // Resolution nodes: session already marked complete — nothing more to navigate
   },
 
   tickWireDeadline: () => {
@@ -266,44 +333,68 @@ export const useGameStore = create<GameState>((set, get) => ({
     if (!wireTimerActive || decisionModalPhase === 'debrief' || decisionModalPhase === 'closed') return
 
     if (wireDeadlineTimer <= 1) {
-      // Time expired — auto-select worst outcome with "no recommendation filed"
-      const { scenario, currentPhaseIndex, session } = get()
-      if (!scenario || !session) return
+      const {
+        scenario, currentNodeId, decisions, scores,
+        unlockedDocumentIds, visitedNodeIds, currentPressure,
+      } = get()
+      if (!scenario || !currentNodeId) return
 
-      const phase = scenario.phases[currentPhaseIndex]
-      const decision = phase.decision
-      // Find the wrong option, or last option as fallback
-      const worstOption = decision.options.find(o => o.outcome === 'wrong') ?? decision.options[decision.options.length - 1]
+      const node = scenario.nodes[currentNodeId]
+      if (!node?.options) return
 
-      const playerDecision: PlayerDecision = {
-        phaseId: phase.id,
-        decisionId: decision.id,
+      const worstOption =
+        node.options.find(o => o.outcome === 'wrong') ??
+        node.options[node.options.length - 1]
+
+      const confidence: ConfidenceLevel = 'low'
+      const timeLimit = node.timeLimit ?? 90
+
+      const playerDecision: NodePlayerDecision = {
+        nodeId: currentNodeId,
         chosenOptionId: worstOption.id,
-        timeSpent: decision.timeLimit ?? 90,
+        confidence,
         outcome: worstOption.outcome,
-        confidenceLevel: 'unclear',
+        timeSpent: timeLimit,
       }
 
-      const score: DecisionScore = {
-        phaseId: phase.id,
+      const score: NodeDecisionScore = {
+        nodeId: currentNodeId,
         optionSelected: worstOption.id,
-        confidenceLevel: 'unclear',
+        confidenceLevel: confidence,
         timeRemaining: 0,
         outcomeClassification: worstOption.outcome,
-        scorePoints: 0, // No recommendation filed = zero points
+        scorePoints: 0,
       }
 
+      const newUnlocked = worstOption.unlockDocumentIds
+        ? [...new Set([...unlockedDocumentIds, ...worstOption.unlockDocumentIds])]
+        : unlockedDocumentIds
+
+      const nextNodeId = worstOption.nextNodeId
+      const nextNode = scenario.nodes[nextNodeId]
+      const newPressure =
+        nextNode?.type === 'consequence' && nextNode.pressureDelta !== undefined
+          ? Math.max(0, Math.min(100, currentPressure + nextNode.pressureDelta))
+          : currentPressure
+
+      const isComplete = nextNode?.type === 'resolution'
+
       set({
-        session: {
-          ...session,
-          decisions: [...session.decisions, playerDecision],
-          scores: [...session.scores, score],
-        },
+        decisions: [...decisions, playerDecision],
+        scores: [...scores, score],
+        unlockedDocumentIds: newUnlocked,
+        currentNodeId: nextNodeId,
+        visitedNodeIds: [...visitedNodeIds, nextNodeId],
+        currentPressure: newPressure,
+        visibleDocuments: buildVisibleDocuments(scenario, nextNodeId, newUnlocked),
         wireDeadlineTimer: 0,
         wireTimerActive: false,
         decisionModalPhase: 'debrief',
         selectedOptionId: worstOption.id,
-        selectedConfidence: 'unclear',
+        selectedConfidence: confidence,
+        ...(isComplete
+          ? { sessionStatus: 'completed', completedAt: new Date().toISOString() }
+          : {}),
       })
       return
     }

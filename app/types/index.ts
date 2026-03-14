@@ -51,7 +51,8 @@ export interface ScenarioPhase {
   timeLimit: number // seconds for the phase
 }
 
-export interface Scenario {
+/** @deprecated Use Scenario from ./scenario (v2 types). Removed in Phase 4. */
+export interface LegacyScenario {
   id: string
   title: string
   period: string // e.g. "July 1914"
@@ -61,6 +62,9 @@ export interface Scenario {
   phases: ScenarioPhase[]
   curriculumTags: string[] // AP History, Common Core standards
 }
+
+// Re-export so app/scenarios/july-crisis-1914.ts doesn't break until Phase 4 cleanup
+export type Scenario = LegacyScenario
 
 // KAR-15: Decision score with full confidence metadata
 export interface DecisionScore {

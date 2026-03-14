@@ -4,22 +4,16 @@ import { useGameStore } from '@/app/store/gameStore'
 
 export default function AnnotationPanel() {
   const scenario = useGameStore((s) => s.scenario)
-  const session = useGameStore((s) => s.session)
-  const currentPhaseIndex = useGameStore((s) => s.currentPhaseIndex)
+  const currentNodeId = useGameStore((s) => s.currentNodeId)
+  const sessionStatus = useGameStore((s) => s.sessionStatus)
+  const decisions = useGameStore((s) => s.decisions)
+  const scores = useGameStore((s) => s.scores)
   const openDecisionModal = useGameStore((s) => s.openDecisionModal)
-  const advancePhase = useGameStore((s) => s.advancePhase)
+  const navigateToNode = useGameStore((s) => s.navigateToNode)
   const decisionModalPhase = useGameStore((s) => s.decisionModalPhase)
 
-  const currentPhase = scenario?.phases[currentPhaseIndex]
-  const decisions = session?.decisions ?? []
-  const scores = session?.scores ?? []
-
-  const hasDecidedThisPhase = decisions.some(
-    (d) => d.phaseId === currentPhase?.id
-  )
-
-  const currentScore = scores.find((s) => s.phaseId === currentPhase?.id)
-  const isLastPhase = currentPhaseIndex >= (scenario?.phases.length ?? 0) - 1
+  const currentNode = currentNodeId ? scenario?.nodes[currentNodeId] : null
+  const hasDecidedAtCurrentNode = decisions.some(d => d.nodeId === currentNodeId)
 
   return (
     <div className="desk-panel desk-annotations">
@@ -36,17 +30,15 @@ export default function AnnotationPanel() {
           ) : (
             <div className="annotation-notes">
               {decisions.map((d, i) => {
-                const phase = scenario?.phases.find((p) => p.id === d.phaseId)
-                const option = phase?.decision.options.find(
-                  (o) => o.id === d.chosenOptionId
-                )
-                const score = scores.find((s) => s.phaseId === d.phaseId)
+                const node = scenario?.nodes[d.nodeId]
+                const option = node?.options?.find(o => o.id === d.chosenOptionId)
+                const score = scores.find(s => s.nodeId === d.nodeId)
                 return (
                   <div key={i} className="doc-card">
-                    <div className="doc-card-type">Phase {i + 1} Decision</div>
+                    <div className="doc-card-type">Decision {i + 1}</div>
                     <div className="doc-card-title">{option?.text ?? 'Unknown'}</div>
                     <div className="doc-card-date">
-                      {d.outcome} &middot; {d.confidenceLevel} &middot; {score?.scorePoints ?? 0} pts
+                      {d.outcome} &middot; {d.confidence} &middot; {score?.scorePoints ?? 0} pts
                     </div>
                   </div>
                 )
@@ -57,33 +49,22 @@ export default function AnnotationPanel() {
 
         <div className="annotation-section">
           <h4 className="annotation-heading">Decision</h4>
-          {hasDecidedThisPhase ? (
+          {sessionStatus === 'completed' ? (
+            <div className="annotation-placeholder">
+              <p>Scenario complete.</p>
+            </div>
+          ) : hasDecidedAtCurrentNode ? (
             <div className="annotation-placeholder">
               <p>Decision recorded.</p>
-              {currentScore && (
-                <p style={{ fontSize: '0.75rem', marginTop: '0.35rem', opacity: 0.7 }}>
-                  Score: {currentScore.scorePoints}/100
-                </p>
-              )}
-              {!isLastPhase && (
-                <button className="decision-option" onClick={advancePhase}>
-                  Proceed to next phase &rarr;
-                </button>
-              )}
-              {isLastPhase && session?.status === 'completed' && (
-                <p style={{ fontSize: '0.8rem', marginTop: '0.5rem', color: 'var(--sepia)' }}>
-                  Scenario complete.
-                </p>
-              )}
             </div>
           ) : decisionModalPhase !== 'closed' ? (
             <div className="annotation-placeholder">
               <p>Decision briefing in progress...</p>
             </div>
-          ) : (
+          ) : currentNode?.type === 'crisis' ? (
             <div>
               <div className="decision-prompt">
-                {currentPhase?.decision.prompt ?? 'No decision pending.'}
+                {currentNode.prompt ?? 'No decision pending.'}
               </div>
               <button
                 className="decision-option"
@@ -92,6 +73,21 @@ export default function AnnotationPanel() {
               >
                 OPEN DECISION BRIEF
               </button>
+            </div>
+          ) : currentNode?.type === 'consequence' && currentNode.nextNodeId ? (
+            <div>
+              <div className="decision-prompt">{currentNode.description}</div>
+              <button
+                className="decision-option"
+                onClick={() => navigateToNode(currentNode.nextNodeId!)}
+                style={{ fontWeight: 'bold', letterSpacing: '0.1em', textTransform: 'uppercase' }}
+              >
+                CONTINUE &rarr;
+              </button>
+            </div>
+          ) : (
+            <div className="annotation-placeholder">
+              <p>&mdash;</p>
             </div>
           )}
         </div>
