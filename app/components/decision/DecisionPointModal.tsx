@@ -73,7 +73,7 @@ function OptionCard({
 }) {
   const [expanded, setExpanded] = useState(false)
   const { speak, stop } = useMilitaryTTS()
-  const codeLabel = CODE_LABELS[index] ?? `OPTION ${String.fromCharCode(65 + index)}`
+  const codeLabel = option.codeLabel ?? CODE_LABELS[index] ?? `OPTION ${String.fromCharCode(65 + index)}`
 
   const readText = `${codeLabel}. ${option.text}`
 

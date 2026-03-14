@@ -50,6 +50,7 @@ export interface DecisionOption {
   debriefNote: string
   unlockDocumentIds?: string[]
   confidencePrompt?: string
+  codeLabel?: string            // e.g. "EXECUTE" — overrides position-based default in UI
 }
 
 export interface Outcome {
