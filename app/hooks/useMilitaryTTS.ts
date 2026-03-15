@@ -9,6 +9,8 @@ const TTS_DEFAULTS = {
   volume: 0.95,
 }
 
+const VOICE_STORAGE_KEY = 'dr_voice_name'
+
 // Prioritized male voices across Chrome/Edge/Safari/Firefox — desktop and mobile
 const MALE_VOICE_NAMES = [
   'Google UK English Male',   // Chrome desktop
@@ -22,9 +24,35 @@ const MALE_VOICE_NAMES = [
   'Google US English',        // Android Chrome (tends male)
 ]
 
+export function getAvailableVoices(): SpeechSynthesisVoice[] {
+  if (typeof window === 'undefined') return []
+  return window.speechSynthesis.getVoices().filter(v => v.lang.startsWith('en'))
+}
+
+export function getSelectedVoiceName(): string | null {
+  if (typeof window === 'undefined') return null
+  return localStorage.getItem(VOICE_STORAGE_KEY)
+}
+
+export function setSelectedVoiceName(name: string | null): void {
+  if (typeof window === 'undefined') return
+  if (name === null) {
+    localStorage.removeItem(VOICE_STORAGE_KEY)
+  } else {
+    localStorage.setItem(VOICE_STORAGE_KEY, name)
+  }
+}
+
 function getVoice(): { voice: SpeechSynthesisVoice | null; forcedFallback: boolean } {
   if (typeof window === 'undefined') return { voice: null, forcedFallback: false }
   const voices = window.speechSynthesis.getVoices()
+
+  // 0. User-selected voice takes priority
+  const savedName = localStorage.getItem(VOICE_STORAGE_KEY)
+  if (savedName) {
+    const saved = voices.find(v => v.name === savedName)
+    if (saved) return { voice: saved, forcedFallback: false }
+  }
 
   // 1. Try known male voices by exact name
   for (const name of MALE_VOICE_NAMES) {

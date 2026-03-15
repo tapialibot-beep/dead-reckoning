@@ -92,6 +92,77 @@ body {
   padding: 0.15rem 0.5rem;
 }
 
+/* --- Voice Selector (TopBar) --- */
+.topbar-voice {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.voice-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: transparent;
+  border: 1px solid #3a2f1e;
+  color: var(--sepia);
+  font-family: inherit;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  cursor: pointer;
+}
+.voice-select-btn:hover {
+  border-color: var(--sepia);
+}
+
+.voice-caret {
+  font-size: 0.5rem;
+  opacity: 0.6;
+}
+
+.voice-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  background: #1a1408;
+  border: 1px solid #3a2f1e;
+  z-index: 100;
+  min-width: 220px;
+  max-height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.voice-option {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #2a1f0e;
+  color: var(--paper-dark);
+  font-family: inherit;
+  font-size: 0.7rem;
+  text-align: left;
+  padding: 0.4rem 0.75rem;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.voice-option:last-child {
+  border-bottom: none;
+}
+.voice-option:hover {
+  background: #2a1f0e;
+  color: var(--paper);
+}
+.voice-option-active {
+  color: var(--amber, #c8a84b);
+  font-weight: bold;
+}
+
 /* --- Main 3-Column Area --- */
 .desk-main {
   display: grid;

@@ -1,6 +1,7 @@
 'use client'
 
 import { useGameStore } from '@/app/store/gameStore'
+import VoiceSelector from './VoiceSelector'
 
 export default function TopBar() {
   const scenario = useGameStore((s) => s.scenario)
@@ -43,6 +44,7 @@ export default function TopBar() {
           {status}
         </span>
       </div>
+      <VoiceSelector />
     </div>
   )
 }
