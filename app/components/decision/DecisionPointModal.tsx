@@ -480,6 +480,11 @@ export default function DecisionPointModal() {
         {(modalPhase === 'choosing' || modalPhase === 'confidence') && currentNode && (
           <div className="dp-header">
             <div className="dp-classification">CLASSIFIED — DECISION REQUIRED</div>
+            {currentNode.imageUrl && (
+              <div className="dp-scene-image">
+                <img src={currentNode.imageUrl} alt={currentNode.name} />
+              </div>
+            )}
             <div className="dp-phase-title">{currentNode.name}</div>
             <div className="dp-pressure-context">{currentNode.description}</div>
           </div>

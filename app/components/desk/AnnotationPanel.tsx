@@ -76,6 +76,11 @@ export default function AnnotationPanel() {
             </div>
           ) : currentNode?.type === 'consequence' && currentNode.nextNodeId ? (
             <div>
+              {currentNode.imageUrl && (
+                <div className="dp-scene-image">
+                  <img src={currentNode.imageUrl} alt={currentNode.name} />
+                </div>
+              )}
               <div className="decision-prompt">{currentNode.description}</div>
               <button
                 className="decision-option"

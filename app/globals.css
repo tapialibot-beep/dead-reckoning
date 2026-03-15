@@ -1351,6 +1351,22 @@ body {
   font-weight: bold;
 }
 
+.dp-scene-image {
+  margin: 0.75rem 0;
+  overflow: hidden;
+  border: 1px solid #3a2f1e;
+  max-height: 200px;
+}
+
+.dp-scene-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 200px;
+  filter: sepia(0.2) contrast(0.9) brightness(0.85);
+}
+
 .dp-phase-title {
   font-size: 1.2rem;
   color: var(--paper);

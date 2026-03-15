@@ -68,6 +68,7 @@ export interface ScenarioNode {
   name: string
   description: string
   initialDocumentIds: string[]
+  imageUrl?: string             // scene image for this node
 
   // Crisis nodes only
   prompt?: string
