@@ -127,6 +127,16 @@ export interface ScenarioIndexEntry {
 
 export type ScenarioIndex = ScenarioIndexEntry[]
 
+// --- Room types (KAR-43 — class management) ---
+
+export interface Room {
+  code: string                        // 6-char uppercase alphanumeric
+  scenarioId: string
+  historicalMode: boolean
+  createdAt: string                   // ISO 8601
+  expiresAt: string                   // ISO 8601 (createdAt + 30 days)
+}
+
 // --- Game session types (Vercel KV — classroom view persistence) ---
 
 export interface PlayerNodeDecision {
@@ -142,6 +152,7 @@ export interface GameSessionRecord {
   scenarioId: string
   playerId: string
   teamName?: string             // team name entered at session start
+  roomCode?: string             // room code for class management (KAR-43)
   actorRole: string             // e.g. "Britain", "Serbia" (for actor unlocks)
   startedAt: string             // ISO 8601
   completedAt: string           // ISO 8601

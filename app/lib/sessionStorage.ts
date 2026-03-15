@@ -10,6 +10,7 @@ export interface StoreSnapshot {
   scenarioId: string
   playerId: string
   teamName?: string
+  roomCode?: string
   actorRole: string
   startedAt: string
   completedAt: string
@@ -56,6 +57,7 @@ export function buildSessionRecord(snap: StoreSnapshot): GameSessionRecord {
     scenarioId: snap.scenarioId,
     playerId: snap.playerId,
     teamName: snap.teamName,
+    roomCode: snap.roomCode,
     actorRole: snap.actorRole,
     startedAt: snap.startedAt,
     completedAt: snap.completedAt,

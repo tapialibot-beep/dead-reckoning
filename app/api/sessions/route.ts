@@ -5,6 +5,8 @@
  * KV structure:
  *   session:{id}                          → GameSessionRecord (full record)
  *   scenario:{scenarioId}:session_ids     → string[] (index for teacher classroom view)
+ *   room:{roomCode}:session_ids           → string[] (index for room dashboard) — KAR-43
+ *   room:{roomCode}:teams                 → string[] (team name uniqueness)    — KAR-43
  *
  * Requires env vars: KV_REST_API_URL, KV_REST_API_TOKEN (set in Vercel dashboard)
  */
@@ -32,6 +34,16 @@ export async function POST(request: Request) {
 
     // Append session ID to the scenario index for classroom view queries
     await kv.lpush(`scenario:${body.scenarioId}:session_ids`, body.id)
+
+    // KAR-43: If session has a room code, index it under the room
+    if (body.roomCode) {
+      await kv.lpush(`room:${body.roomCode}:session_ids`, body.id)
+
+      // Track team name for uniqueness
+      if (body.teamName) {
+        await kv.lpush(`room:${body.roomCode}:teams`, body.teamName)
+      }
+    }
 
     return NextResponse.json({ ok: true, id: body.id })
   } catch (err) {

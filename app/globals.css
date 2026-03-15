@@ -2561,3 +2561,420 @@ body {
   overflow-x: auto;
   margin: 0.5rem 0;
 }
+
+/* ============================================
+   KAR-43 — CLASSROOM / ROOM MANAGEMENT
+   ============================================ */
+
+/* --- Sub-tab strip (nested inside validator tab) --- */
+
+.tv-tab-strip-sub {
+  margin-top: -0.25rem;
+  border-top: none;
+}
+
+/* --- Classroom section --- */
+
+.tv-classroom-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tv-section-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  margin-bottom: 0.75rem;
+}
+
+.tv-section-desc {
+  font-size: 0.85rem;
+  color: var(--paper-dark);
+  line-height: 1.6;
+  margin: 0 0 1rem;
+  font-style: italic;
+}
+
+/* --- Room create form --- */
+
+.tv-room-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tv-form-label {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.tv-select {
+  background: #0d0a05;
+  border: 1px solid #3a2f1e;
+  color: var(--paper);
+  padding: 0.6rem 0.75rem;
+  font-family: Georgia, serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.tv-select:focus {
+  outline: none;
+  border-color: var(--sepia);
+}
+
+.tv-form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--paper-dark);
+  cursor: pointer;
+  letter-spacing: 0.05em;
+}
+
+.tv-form-checkbox input {
+  accent-color: var(--sepia);
+  cursor: pointer;
+}
+
+.tv-btn-disabled {
+  opacity: 0.3;
+  cursor: not-allowed !important;
+  pointer-events: none;
+}
+
+/* --- Created room display --- */
+
+.tv-room-created {
+  text-align: center;
+  padding: 1.5rem;
+  background: rgba(45, 106, 45, 0.06);
+  border: 1px solid #2d6a2d;
+  margin-top: 1rem;
+}
+
+.tv-room-code-display {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.5em;
+  color: var(--paper);
+  margin-bottom: 0.5rem;
+}
+
+.tv-room-code-hint {
+  font-size: 0.75rem;
+  color: var(--sepia);
+  font-style: italic;
+  margin: 0;
+}
+
+/* --- Room lookup --- */
+
+.tv-room-lookup {
+  padding-top: 1rem;
+  border-top: 1px solid #3a2f1e;
+}
+
+.tv-room-lookup-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.tv-lookup-input {
+  background: #0d0a05;
+  border: 1px solid #3a2f1e;
+  color: var(--paper);
+  padding: 0.6rem 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  width: 10rem;
+  text-align: center;
+}
+
+.tv-lookup-input:focus {
+  outline: none;
+  border-color: var(--sepia);
+}
+
+.tv-lookup-input::placeholder {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--sepia);
+  opacity: 0.5;
+}
+
+/* ============================================
+   TEACHER ROOM DASHBOARD (td- prefix)
+   ============================================ */
+
+.td-loading {
+  text-align: center;
+  padding: 4rem 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.td-back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  color: var(--sepia);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+
+.td-back-link:hover { opacity: 1; }
+
+/* --- Code share block --- */
+
+.td-code-share {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: rgba(139, 115, 85, 0.08);
+  border: 1px solid #3a2f1e;
+  margin-bottom: 1.5rem;
+}
+
+.td-code-label {
+  font-size: 0.5rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.td-code-big {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 0.5em;
+  color: var(--paper);
+}
+
+/* --- Refresh button --- */
+
+.td-refresh-btn {
+  margin-bottom: 1.5rem;
+}
+
+/* --- Empty state --- */
+
+.td-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--sepia);
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.td-empty strong {
+  color: var(--paper);
+  font-style: normal;
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.15em;
+}
+
+/* --- Sessions table --- */
+
+.td-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 2rem;
+}
+
+.td-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.td-table th {
+  font-size: 0.55rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 2px solid #3a2f1e;
+  white-space: nowrap;
+}
+
+.td-table td {
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #2a2010;
+  color: var(--paper-dark);
+  vertical-align: middle;
+}
+
+.td-table tr:hover td {
+  background: rgba(139, 115, 85, 0.05);
+}
+
+.td-team-name {
+  color: var(--paper);
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.td-status {
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  font-family: 'Courier New', Courier, monospace;
+  padding: 0.15rem 0.5rem;
+  white-space: nowrap;
+}
+
+.td-status-done {
+  color: #4a8a4a;
+  border: 1px solid #2d6a2d;
+}
+
+.td-status-active {
+  color: var(--sepia);
+  border: 1px solid var(--sepia);
+}
+
+.td-node {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.7rem;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.td-decisions {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.td-outcome-badge {
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--paper);
+  padding: 0.1rem 0.4rem;
+  white-space: nowrap;
+}
+
+.td-score {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  color: var(--paper);
+}
+
+.td-outcome-category {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--sepia);
+}
+
+/* --- Decision detail accordion --- */
+
+.td-detail-section {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #3a2f1e;
+}
+
+.td-team-detail {
+  margin-bottom: 0.75rem;
+  border: 1px solid #2a2010;
+}
+
+.td-team-summary {
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  color: var(--paper);
+  cursor: pointer;
+  background: rgba(139, 115, 85, 0.04);
+  list-style: none;
+  font-family: Georgia, serif;
+}
+
+.td-team-summary::-webkit-details-marker { display: none; }
+
+.td-team-summary::before {
+  content: '▸ ';
+  font-size: 0.7rem;
+  color: var(--sepia);
+}
+
+.td-team-detail[open] .td-team-summary::before {
+  content: '▾ ';
+}
+
+.td-team-summary:hover {
+  background: rgba(139, 115, 85, 0.08);
+}
+
+.td-team-decisions {
+  padding: 0.75rem 1rem;
+}
+
+.td-decision-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.35rem 0;
+  font-size: 0.7rem;
+  color: var(--paper-dark);
+  border-bottom: 1px solid #1a1408;
+  flex-wrap: wrap;
+}
+
+.td-decision-node {
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--sepia);
+  min-width: 8rem;
+}
+
+.td-decision-option {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+}
+
+.td-decision-confidence {
+  font-size: 0.65rem;
+  color: var(--sepia);
+}
+
+.td-decision-time {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.6rem;
+  color: var(--sepia);
+  opacity: 0.7;
+}
+
+.td-calibration {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #2a2010;
+  font-size: 0.65rem;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.05em;
+}

@@ -68,6 +68,7 @@ interface GameState {
   sessionId: string | null
   playerId: string | null
   teamName: string | null
+  roomCode: string | null
   sessionStatus: 'idle' | 'in_progress' | 'completed' | 'abandoned'
   startedAt: string | null
   completedAt: string | null
@@ -90,6 +91,7 @@ interface GameState {
 
   // Actions
   setTeamName: (name: string) => void
+  setRoomCode: (code: string | null) => void
   setHistoricalMode: (enabled: boolean) => void
   startGame: (scenario: Scenario, playerId: string, teamName?: string) => void
   navigateToNode: (nodeId: string) => void
@@ -142,6 +144,7 @@ const INITIAL_STATE = {
   sessionId: null,
   playerId: null,
   teamName: null,
+  roomCode: null,
   sessionStatus: 'idle' as const,
   startedAt: null,
   completedAt: null,
@@ -165,6 +168,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   ...INITIAL_STATE,
 
   setTeamName: (name) => set({ teamName: name }),
+  setRoomCode: (code) => set({ roomCode: code }),
   setHistoricalMode: (enabled) => set({ historicalMode: enabled }),
 
   startGame: (scenario, playerId, teamName) => {
