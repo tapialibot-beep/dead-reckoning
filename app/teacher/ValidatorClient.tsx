@@ -55,6 +55,74 @@ function ErrorRow({ err, type }: { err: ValidationError; type: 'hard' | 'warning
   )
 }
 
+// ─── Access Gate ───────────────────────────────────────────
+
+function AccessGate({ children }: { children: React.ReactNode }) {
+  const [code, setCode] = useState('')
+  const [granted, setGranted] = useState(false)
+  const [checking, setChecking] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    if (!code.trim()) return
+    setChecking(true)
+    setError(null)
+
+    try {
+      const res = await fetch('/api/access', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code.trim() }),
+      })
+      if (res.ok) {
+        setGranted(true)
+      } else {
+        setError('Invalid access code.')
+      }
+    } catch {
+      setError('Network error — try again.')
+    }
+    setChecking(false)
+  }
+
+  if (granted) return <>{children}</>
+
+  return (
+    <div className="tv-classroom-section">
+      <div className="tv-room-create">
+        <div className="tv-section-label">TEACHER ACCESS REQUIRED</div>
+        <p className="tv-section-desc">
+          Enter your access code to create and manage classroom rooms.
+        </p>
+        <form onSubmit={handleSubmit} className="tv-room-form">
+          <input
+            type="text"
+            value={code}
+            onChange={(e) => setCode(e.target.value)}
+            placeholder="ACCESS CODE"
+            autoFocus
+            className="tv-lookup-input"
+          />
+          {error && (
+            <div className="tv-parse-error">
+              <span className="tv-parse-error-label">ERROR</span>
+              <span>{error}</span>
+            </div>
+          )}
+          <button
+            type="submit"
+            className="tv-validate-btn"
+            disabled={!code.trim() || checking}
+          >
+            {checking ? 'CHECKING...' : 'AUTHENTICATE'}
+          </button>
+        </form>
+      </div>
+    </div>
+  )
+}
+
 // ─── Room Creator ──────────────────────────────────────────
 
 function RoomCreator({ scenarios }: { scenarios: ScenarioIndexEntry[] }) {
@@ -89,94 +157,96 @@ function RoomCreator({ scenarios }: { scenarios: ScenarioIndexEntry[] }) {
   }
 
   return (
-    <div className="tv-classroom-section">
-      {/* Create Room */}
-      <div className="tv-room-create">
-        <div className="tv-section-label">CREATE A CLASSROOM ROOM</div>
-        <p className="tv-section-desc">
-          Pick a scenario and create a room code. Share the code with your students —
-          they enter it on the team setup screen. You can track their progress from the room dashboard.
-        </p>
+    <AccessGate>
+      <div className="tv-classroom-section">
+        {/* Create Room */}
+        <div className="tv-room-create">
+          <div className="tv-section-label">CREATE A CLASSROOM ROOM</div>
+          <p className="tv-section-desc">
+            Pick a scenario and create a room code. Share the code with your students —
+            they enter it on the team setup screen. You can track their progress from the room dashboard.
+          </p>
 
-        <div className="tv-room-form">
-          <label className="tv-form-label">SCENARIO</label>
-          <select
-            value={selectedScenario}
-            onChange={(e) => setSelectedScenario(e.target.value)}
-            className="tv-select"
-          >
-            <option value="">— Select scenario —</option>
-            {scenarios.map(s => (
-              <option key={s.id} value={s.id}>
-                {s.title} ({s.period}) — {s.difficulty}
-              </option>
-            ))}
-          </select>
+          <div className="tv-room-form">
+            <label className="tv-form-label">SCENARIO</label>
+            <select
+              value={selectedScenario}
+              onChange={(e) => setSelectedScenario(e.target.value)}
+              className="tv-select"
+            >
+              <option value="">— Select scenario —</option>
+              {scenarios.map(s => (
+                <option key={s.id} value={s.id}>
+                  {s.title} ({s.period}) — {s.difficulty}
+                </option>
+              ))}
+            </select>
 
-          <label className="tv-form-checkbox">
-            <input
-              type="checkbox"
-              checked={historicalMode}
-              onChange={(e) => setHistoricalMode(e.target.checked)}
-            />
-            Historical Mode (decisions made automatically)
-          </label>
+            <label className="tv-form-checkbox">
+              <input
+                type="checkbox"
+                checked={historicalMode}
+                onChange={(e) => setHistoricalMode(e.target.checked)}
+              />
+              Historical Mode (decisions made automatically)
+            </label>
 
-          <button
-            className="tv-validate-btn"
-            onClick={handleCreateRoom}
-            disabled={!selectedScenario || creating}
-          >
-            {creating ? 'CREATING...' : 'CREATE ROOM'}
-          </button>
+            <button
+              className="tv-validate-btn"
+              onClick={handleCreateRoom}
+              disabled={!selectedScenario || creating}
+            >
+              {creating ? 'CREATING...' : 'CREATE ROOM'}
+            </button>
+          </div>
+
+          {error && (
+            <div className="tv-parse-error">
+              <span className="tv-parse-error-label">ERROR</span>
+              <span>{error}</span>
+            </div>
+          )}
+
+          {createdRoom && (
+            <div className="tv-room-created">
+              <div className="tv-room-code-display">{createdRoom.code}</div>
+              <p className="tv-room-code-hint">
+                Share this code with your students. Room expires in 30 days.
+              </p>
+              <a
+                href={`/teacher/room/${createdRoom.code}`}
+                className="tv-validate-btn"
+                style={{ display: 'inline-block', textAlign: 'center', textDecoration: 'none', marginTop: '0.75rem' }}
+              >
+                OPEN ROOM DASHBOARD
+              </a>
+            </div>
+          )}
         </div>
 
-        {error && (
-          <div className="tv-parse-error">
-            <span className="tv-parse-error-label">ERROR</span>
-            <span>{error}</span>
-          </div>
-        )}
-
-        {createdRoom && (
-          <div className="tv-room-created">
-            <div className="tv-room-code-display">{createdRoom.code}</div>
-            <p className="tv-room-code-hint">
-              Share this code with your students. Room expires in 30 days.
-            </p>
+        {/* Open existing room */}
+        <div className="tv-room-lookup">
+          <div className="tv-section-label">OPEN EXISTING ROOM</div>
+          <div className="tv-room-lookup-row">
+            <input
+              type="text"
+              value={lookupCode}
+              onChange={(e) => setLookupCode(e.target.value.toUpperCase())}
+              placeholder="ENTER ROOM CODE"
+              maxLength={6}
+              className="tv-lookup-input"
+            />
             <a
-              href={`/teacher/room/${createdRoom.code}`}
-              className="tv-validate-btn"
-              style={{ display: 'inline-block', textAlign: 'center', textDecoration: 'none', marginTop: '0.75rem' }}
+              href={lookupCode.length === 6 ? `/teacher/room/${lookupCode}` : '#'}
+              className={`tv-validate-btn ${lookupCode.length !== 6 ? 'tv-btn-disabled' : ''}`}
+              onClick={(e) => { if (lookupCode.length !== 6) e.preventDefault() }}
             >
-              OPEN ROOM DASHBOARD
+              OPEN
             </a>
           </div>
-        )}
-      </div>
-
-      {/* Open existing room */}
-      <div className="tv-room-lookup">
-        <div className="tv-section-label">OPEN EXISTING ROOM</div>
-        <div className="tv-room-lookup-row">
-          <input
-            type="text"
-            value={lookupCode}
-            onChange={(e) => setLookupCode(e.target.value.toUpperCase())}
-            placeholder="ENTER ROOM CODE"
-            maxLength={6}
-            className="tv-lookup-input"
-          />
-          <a
-            href={lookupCode.length === 6 ? `/teacher/room/${lookupCode}` : '#'}
-            className={`tv-validate-btn ${lookupCode.length !== 6 ? 'tv-btn-disabled' : ''}`}
-            onClick={(e) => { if (lookupCode.length !== 6) e.preventDefault() }}
-          >
-            OPEN
-          </a>
         </div>
       </div>
-    </div>
+    </AccessGate>
   )
 }
 

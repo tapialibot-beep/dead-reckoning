@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { DeskLayout } from '@/app/components/desk'
 import { DecisionPointModal } from '@/app/components/decision'
 import { useGameStore } from '@/app/store/gameStore'
@@ -22,6 +23,7 @@ export default function GamePage() {
   const currentNodeId = useGameStore((s) => s.currentNodeId)
   const currentPressure = useGameStore((s) => s.currentPressure)
   const roomCode = useGameStore((s) => s.roomCode)
+  const router = useRouter()
 
   // Track which sessions have already been persisted
   const persistedRef = useRef<Set<string>>(new Set())
@@ -47,16 +49,11 @@ export default function GamePage() {
           })
           .catch(err => console.error('Room scenario load error:', err))
       } else {
-        loadScenario('july-crisis-1914.json').then(result => {
-          if (result.ok) {
-            startGame(result.scenario, 'dev-player', teamName ?? undefined)
-          } else {
-            console.error('Failed to load scenario:', result.errors)
-          }
-        })
+        // No room code — redirect to team setup
+        router.replace('/team-setup')
       }
     }
-  }, [scenario, startGame, roomCode])
+  }, [scenario, startGame, roomCode, router])
 
   // Persist session to Vercel KV when run completes
   useEffect(() => {
