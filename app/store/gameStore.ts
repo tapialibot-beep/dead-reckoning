@@ -78,6 +78,9 @@ interface GameState {
   timeRemaining: number
   isPaused: boolean
 
+  // Historical mode
+  historicalMode: boolean
+
   // Modal
   decisionModalPhase: DecisionModalPhase
   selectedOptionId: string | null
@@ -87,6 +90,7 @@ interface GameState {
 
   // Actions
   setTeamName: (name: string) => void
+  setHistoricalMode: (enabled: boolean) => void
   startGame: (scenario: Scenario, playerId: string, teamName?: string) => void
   navigateToNode: (nodeId: string) => void
   selectDocument: (doc: HistoricalDocument | null) => void
@@ -145,6 +149,7 @@ const INITIAL_STATE = {
   scores: [] as NodeDecisionScore[],
   timeRemaining: 0,
   isPaused: false,
+  historicalMode: false,
   decisionModalPhase: 'closed' as DecisionModalPhase,
   selectedOptionId: null,
   selectedConfidence: null,
@@ -160,6 +165,7 @@ export const useGameStore = create<GameState>((set, get) => ({
   ...INITIAL_STATE,
 
   setTeamName: (name) => set({ teamName: name }),
+  setHistoricalMode: (enabled) => set({ historicalMode: enabled }),
 
   startGame: (scenario, playerId, teamName) => {
     const startNodeId = scenario.startNodeId
@@ -240,8 +246,68 @@ export const useGameStore = create<GameState>((set, get) => ({
   // --- Modal ---
 
   openDecisionModal: () => {
-    const { scenario, currentNodeId } = get()
+    const {
+      scenario, currentNodeId, historicalMode,
+      decisions, scores, unlockedDocumentIds, visitedNodeIds, currentPressure,
+    } = get()
     const node = scenario?.nodes[currentNodeId ?? '']
+
+    // Historical mode: auto-select the real actor's choice, skip to debrief
+    if (historicalMode && node?.type === 'crisis' && node.historicalChoice && node.options) {
+      const option = node.options.find(o => o.id === node.historicalChoice)
+      if (option && scenario && currentNodeId) {
+        const confidence: ConfidenceLevel = 'medium'
+        const points = calculateScore(option.outcome, confidence)
+
+        const playerDecision: NodePlayerDecision = {
+          nodeId: currentNodeId,
+          chosenOptionId: option.id,
+          confidence,
+          outcome: option.outcome,
+          timeSpent: 0,
+        }
+
+        const score: NodeDecisionScore = {
+          nodeId: currentNodeId,
+          optionSelected: option.id,
+          confidenceLevel: confidence,
+          timeRemaining: node.timeLimit ?? 90,
+          outcomeClassification: option.outcome,
+          scorePoints: points,
+        }
+
+        const newUnlocked = option.unlockDocumentIds
+          ? [...new Set([...unlockedDocumentIds, ...option.unlockDocumentIds])]
+          : unlockedDocumentIds
+
+        const nextNodeId = option.nextNodeId
+        const nextNode = scenario.nodes[nextNodeId]
+        const newPressure =
+          nextNode?.type === 'consequence' && nextNode.pressureDelta !== undefined
+            ? Math.max(0, Math.min(100, currentPressure + nextNode.pressureDelta))
+            : currentPressure
+
+        const isComplete = nextNode?.type === 'resolution'
+
+        set({
+          decisions: [...decisions, playerDecision],
+          scores: [...scores, score],
+          unlockedDocumentIds: newUnlocked,
+          currentNodeId: nextNodeId,
+          visitedNodeIds: [...visitedNodeIds, nextNodeId],
+          currentPressure: newPressure,
+          visibleDocuments: buildVisibleDocuments(scenario, nextNodeId, newUnlocked),
+          decisionModalPhase: 'debrief',
+          selectedOptionId: option.id,
+          selectedConfidence: confidence,
+          wireTimerActive: false,
+          ...(isComplete ? { sessionStatus: 'completed', completedAt: new Date().toISOString() } : {}),
+        })
+        return
+      }
+    }
+
+    // Normal mode
     const timeLimit = node?.timeLimit ?? 90
     set({
       decisionModalPhase: 'choosing',

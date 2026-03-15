@@ -11,6 +11,7 @@ export default function AnnotationPanel() {
   const openDecisionModal = useGameStore((s) => s.openDecisionModal)
   const navigateToNode = useGameStore((s) => s.navigateToNode)
   const decisionModalPhase = useGameStore((s) => s.decisionModalPhase)
+  const historicalMode = useGameStore((s) => s.historicalMode)
 
   const currentNode = currentNodeId ? scenario?.nodes[currentNodeId] : null
   const hasDecidedAtCurrentNode = decisions.some(d => d.nodeId === currentNodeId)
@@ -71,7 +72,7 @@ export default function AnnotationPanel() {
                 onClick={openDecisionModal}
                 style={{ fontWeight: 'bold', letterSpacing: '0.1em', textTransform: 'uppercase' }}
               >
-                OPEN DECISION BRIEF
+                {historicalMode ? 'VIEW HISTORICAL RECORD' : 'OPEN DECISION BRIEF'}
               </button>
             </div>
           ) : currentNode?.type === 'consequence' && currentNode.nextNodeId ? (

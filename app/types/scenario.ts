@@ -75,6 +75,7 @@ export interface ScenarioNode {
   timeLimit?: number            // seconds
   options?: DecisionOption[]    // 2–5
   scoring?: ScoringWeights
+  historicalChoice?: string     // option ID of what the real actor chose (used in historical mode)
 
   // Consequence nodes only
   nextNodeId?: string

@@ -157,11 +157,17 @@ function ConfidenceSelector({
 
 type DebriefTab = 'flash' | 'assessment' | 'alt-history' | 'score'
 
-const TAB_LABELS: { id: DebriefTab; label: string }[] = [
+const TAB_LABELS_NORMAL: { id: DebriefTab; label: string }[] = [
   { id: 'flash',       label: 'FLASH REPORT' },
   { id: 'assessment',  label: 'ASSESSMENT' },
   { id: 'alt-history', label: 'ALT HISTORY' },
   { id: 'score',       label: 'SCORE' },
+]
+
+const TAB_LABELS_HISTORICAL: { id: DebriefTab; label: string }[] = [
+  { id: 'flash',       label: 'FLASH REPORT' },
+  { id: 'assessment',  label: 'DECISION' },
+  { id: 'alt-history', label: 'ALT HISTORY' },
 ]
 
 const OUTCOME_LABELS: Record<string, { label: string; className: string }> = {
@@ -185,6 +191,7 @@ function DebriefPanel() {
   const scores = useGameStore((s) => s.scores)
   const closeDebrief = useGameStore((s) => s.closeDebrief)
   const sessionStatus = useGameStore((s) => s.sessionStatus)
+  const historicalMode = useGameStore((s) => s.historicalMode)
   const { speak } = useMilitaryTTS()
 
   const [activeTab, setActiveTab] = useState<DebriefTab>('flash')
@@ -240,12 +247,16 @@ function DebriefPanel() {
     }
   }, [activeTab, currentNode, isResolution, chosenOption, unchosenOptions, latestScore, speak])
 
+  const tabLabels = historicalMode ? TAB_LABELS_HISTORICAL : TAB_LABELS_NORMAL
+
   if (!scenario || !currentNodeId) return null
 
   return (
     <div className="dp-debrief">
       <div className="dp-debrief-header">
-        <span className="dp-debrief-stamp">OUTCOME CLASSIFIED</span>
+        <span className="dp-debrief-stamp">
+          {historicalMode ? 'HISTORICAL RECORD — DECLASSIFIED' : 'OUTCOME CLASSIFIED'}
+        </span>
       </div>
 
       {timedOut && (
@@ -256,7 +267,7 @@ function DebriefPanel() {
 
       {/* Tab strip */}
       <div className="dp-tab-strip" role="tablist">
-        {TAB_LABELS.map(tab => (
+        {tabLabels.map(tab => (
           <button
             key={tab.id}
             className={`dp-tab ${activeTab === tab.id ? 'dp-tab-active' : ''}`}
@@ -308,7 +319,7 @@ function DebriefPanel() {
         <div className="dp-tab-panel" role="tabpanel">
           {chosenOption ? (
             <div className="dp-debrief-section">
-              <div className="dp-debrief-label">YOUR ASSESSMENT</div>
+              <div className="dp-debrief-label">{historicalMode ? 'HISTORICAL DECISION' : 'YOUR ASSESSMENT'}</div>
               <div className="dp-debrief-choice">{chosenOption.text}</div>
               <div className={`dp-outcome-badge ${OUTCOME_LABELS[chosenOption.outcome]?.className ?? ''}`}>
                 {OUTCOME_LABELS[chosenOption.outcome]?.label}

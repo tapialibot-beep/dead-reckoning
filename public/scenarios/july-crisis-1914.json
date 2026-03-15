@@ -9,7 +9,14 @@
   "authoredDate": "2026-03-14",
   "author": "Dead Reckoning Team",
   "difficulty": "standard",
-  "tags": ["WWI", "July Crisis", "British diplomacy", "1914", "European history", "balance of power"],
+  "tags": [
+    "WWI",
+    "July Crisis",
+    "British diplomacy",
+    "1914",
+    "European history",
+    "balance of power"
+  ],
   "curriculumAlignments": [
     {
       "framework": "AP European History",
@@ -30,7 +37,6 @@
   "confidenceMechanicEnabled": true,
   "defaultConfidencePrompt": "How confident are you in this assessment?",
   "startNodeId": "opening-brief",
-
   "documentLibrary": [
     {
       "id": "tel-001",
@@ -104,7 +110,6 @@
       "reliability": "verified"
     }
   ],
-
   "nodes": {
     "opening-brief": {
       "id": "opening-brief",
@@ -112,24 +117,30 @@
       "name": "Sarajevo, 28 June 1914",
       "imageUrl": "/images/scenarios/july-crisis-1914/node1-sarajevo.png",
       "description": "A Sunday. The Foreign Office is quiet. Word reaches you by telegram: Archduke Franz Ferdinand, heir to the Austro-Hungarian throne, has been shot dead in Sarajevo. His wife Sophie died alongside him. The assassin is a Bosnian, Gavrilo Princip, with reported ties to Serbian nationalist movements.\n\nAustria will demand satisfaction. The question is what form that demand takes — and whether Europe can survive the answer.\n\nYou are Sir Edward Grey, British Foreign Secretary. In your hands, more than any other single official in any non-aligned power, rests the possibility of preventing a general European war.",
-      "initialDocumentIds": ["tel-001", "news-001"],
+      "initialDocumentIds": [
+        "tel-001",
+        "news-001"
+      ],
       "nextNodeId": "crisis-response-5jul",
       "autoAdvanceAfter": 10
     },
-
     "crisis-response-5jul": {
       "id": "crisis-response-5jul",
       "type": "crisis",
       "name": "The Response Question — 5 July 1914",
       "imageUrl": "/images/scenarios/july-crisis-1914/node2-response.png",
       "description": "A week has passed since the shots in Sarajevo. The initial shock has settled into calculation. Your ambassador in Berlin cables that Germany has given Austria-Hungary its unconditional support — a 'blank cheque' to deal with Serbia however Vienna sees fit. Vienna is preparing demands. St Petersburg is watching closely. Paris is watching you.\n\nBritain has no formal alliance obligations at this stage. But the great powers have always understood that Britain is never truly outside European affairs.",
-      "initialDocumentIds": ["tel-001", "news-001"],
+      "initialDocumentIds": [
+        "tel-001",
+        "news-001"
+      ],
       "prompt": "Vienna is receiving German backing to confront Serbia. How do you assess Britain's immediate strategic posture?",
       "timeLimit": 300,
+      "historicalChoice": "opt-1b",
       "scoring": {
         "nodeWeight": 1.0,
-        "accuracyWeight": 0.70,
-        "confidenceWeight": 0.30,
+        "accuracyWeight": 0.7,
+        "confidenceWeight": 0.3,
         "outcomePoints": {
           "correct": 100,
           "plausible": 60,
@@ -172,7 +183,6 @@
         }
       ]
     },
-
     "conseq-watching-brief": {
       "id": "conseq-watching-brief",
       "type": "consequence",
@@ -182,7 +192,6 @@
       "nextNodeId": "crisis-ultimatum-23jul",
       "pressureDelta": 10
     },
-
     "conseq-engaged-diplomacy": {
       "id": "conseq-engaged-diplomacy",
       "type": "consequence",
@@ -192,7 +201,6 @@
       "nextNodeId": "crisis-conference-proposal",
       "pressureDelta": -5
     },
-
     "conseq-declared-disinterest": {
       "id": "conseq-declared-disinterest",
       "type": "consequence",
@@ -202,7 +210,6 @@
       "nextNodeId": "resolution-german-hegemony-early",
       "pressureDelta": 40
     },
-
     "resolution-german-hegemony-early": {
       "id": "resolution-german-hegemony-early",
       "type": "resolution",
@@ -214,7 +221,7 @@
         "title": "The Green Light",
         "summary": "A formal declaration of British disinterest in the first week of the crisis removed the last meaningful constraint on German and Austrian decision-making. The blank cheque was cashed without hesitation. Europe went to war on terms that excluded British influence entirely.",
         "historicalNote": "Germany's July 1914 calculations depended critically on uncertainty about British intentions. Grey's deliberate ambiguity — frustrating to all parties at the time — preserved Britain's diplomatic leverage and kept Cabinet options open. A formal declaration of non-intervention would have tipped Germany's probability calculation decisively toward immediate action.",
-        "scoreMultiplier": 0.20,
+        "scoreMultiplier": 0.2,
         "curriculumHighlights": [
           "German 'blank cheque' to Austria-Hungary",
           "Role of British deterrence ambiguity",
@@ -222,16 +229,20 @@
         ]
       }
     },
-
     "crisis-ultimatum-23jul": {
       "id": "crisis-ultimatum-23jul",
       "type": "crisis",
       "name": "The Ultimatum — 23 July 1914",
       "imageUrl": "/images/scenarios/july-crisis-1914/node3-ultimatum.png",
       "description": "Austria's ultimatum to Serbia arrived overnight. You have read it three times. Your intelligence department calls it 'designed to be rejected': it demands that Austrian officials participate directly in Serbian judicial proceedings — a demand that would effectively suspend Serbian sovereignty.\n\nSerbia has accepted nine of ten demands. Vienna has declared the response insufficient and begun military preparations. Russian partial mobilisation is reported. The German ambassador in London is watching your face as he delivers Berlin's position: this is a bilateral dispute, and outside powers should stand aside.",
-      "initialDocumentIds": ["let-001", "rep-001", "news-002"],
+      "initialDocumentIds": [
+        "let-001",
+        "rep-001",
+        "news-002"
+      ],
       "prompt": "Austria's ultimatum has destroyed the last chance of a bilateral settlement. Europe is beginning to move. What is Britain's diplomatic posture?",
       "timeLimit": 300,
+      "historicalChoice": "opt-2b-a",
       "scoring": {
         "nodeWeight": 1.2,
         "accuracyWeight": 0.65,
@@ -276,18 +287,22 @@
           ],
           "debriefNote": "This was precisely the position Germany hoped to hear. British ambiguity had been a restraining factor; its removal accelerated German decision-making toward war."
         }
-      ]
+      ],
+      "historicalChoice": "opt-2b-a"
     },
-
     "crisis-conference-proposal": {
       "id": "crisis-conference-proposal",
       "type": "crisis",
       "name": "The Last Diplomatic Window — 26 July 1914",
       "imageUrl": "/images/scenarios/july-crisis-1914/node4-diplomacy.png",
       "description": "Your three weeks of active engagement have paid one dividend: you are in communication with all parties and your voice carries weight. Your ambassador in Berlin reports a narrow opening — Germany is not yet fully committed to Austrian military action, and Berlin's moderates are looking for a face-saving formula.\n\nA British proposal, properly framed, might give them something to work with. Austria has begun preliminary military movements, but full mobilisation has not been ordered. The window is narrow and closing.",
-      "initialDocumentIds": ["let-001", "rep-001"],
+      "initialDocumentIds": [
+        "let-001",
+        "rep-001"
+      ],
       "prompt": "A narrow diplomatic window exists. You have the standing to propose something. What does Britain put forward?",
       "timeLimit": 300,
+      "historicalChoice": "opt-2a-a",
       "scoring": {
         "nodeWeight": 1.2,
         "accuracyWeight": 0.65,
@@ -332,9 +347,9 @@
           ],
           "debriefNote": "Withdrawing to strict neutrality after engaging all parties would have been the worst of both worlds: it would have signalled weakness to Germany while leaving France and Russia with the impression that Britain was prepared to abandon them."
         }
-      ]
+      ],
+      "historicalChoice": "opt-2a-a"
     },
-
     "conseq-conference-proposed": {
       "id": "conseq-conference-proposed",
       "type": "consequence",
@@ -344,7 +359,6 @@
       "nextNodeId": "crisis-belgian-guarantee",
       "pressureDelta": -5
     },
-
     "conseq-warning-issued": {
       "id": "conseq-warning-issued",
       "type": "consequence",
@@ -354,7 +368,6 @@
       "nextNodeId": "crisis-belgian-guarantee",
       "pressureDelta": 5
     },
-
     "conseq-neutrality-ultimatum": {
       "id": "conseq-neutrality-ultimatum",
       "type": "consequence",
@@ -364,7 +377,6 @@
       "nextNodeId": "resolution-deterrence-failed",
       "pressureDelta": 35
     },
-
     "resolution-deterrence-failed": {
       "id": "resolution-deterrence-failed",
       "type": "resolution",
@@ -384,20 +396,22 @@
         ]
       }
     },
-
     "crisis-belgian-guarantee": {
       "id": "crisis-belgian-guarantee",
       "type": "crisis",
       "name": "The Guns of August — 4 August 1914",
       "imageUrl": "/images/scenarios/july-crisis-1914/node5-guns-of-august.png",
       "description": "Germany has declared war on Russia and France. Last night, a telegram arrived from King Albert of Belgium: Germany has demanded free passage for its armies through Belgian territory. Belgium refused. German forces crossed the Belgian frontier at dawn.\n\nThe 1839 Treaty of London — signed by Britain, France, Prussia, Russia, and Austria — guarantees Belgian neutrality. Your ultimatum to Germany expired at 11 PM. The Cabinet has met twice today.\n\nTwo ministers have already resigned rather than support a declaration of war. The rest are waiting for your lead.",
-      "initialDocumentIds": ["map-001", "tel-002"],
+      "initialDocumentIds": [
+        "map-001",
+        "tel-002"
+      ],
       "prompt": "Germany has violated Belgian neutrality. Britain's treaty obligation under the 1839 guarantee is before the Cabinet. What does Britain do?",
       "timeLimit": 300,
       "scoring": {
         "nodeWeight": 1.5,
-        "accuracyWeight": 0.60,
-        "confidenceWeight": 0.40,
+        "accuracyWeight": 0.6,
+        "confidenceWeight": 0.4,
         "outcomePoints": {
           "correct": 100,
           "plausible": 50,
@@ -438,9 +452,9 @@
           ],
           "debriefNote": "Asquith and Grey both concluded that a German-dominated Western Europe was an existential threat to British interests — regardless of the strict legal interpretation of the 1839 treaty. The legal argument for neutrality was real; the strategic argument against it was overwhelming."
         }
-      ]
+      ],
+      "historicalChoice": "opt-3a"
     },
-
     "conseq-war-declared": {
       "id": "conseq-war-declared",
       "type": "consequence",
@@ -450,7 +464,6 @@
       "nextNodeId": "resolution-britain-enters-war",
       "pressureDelta": 0
     },
-
     "conseq-naval-only": {
       "id": "conseq-naval-only",
       "type": "consequence",
@@ -460,7 +473,6 @@
       "nextNodeId": "resolution-naval-commitment",
       "pressureDelta": 15
     },
-
     "conseq-neutrality-august": {
       "id": "conseq-neutrality-august",
       "type": "consequence",
@@ -470,7 +482,6 @@
       "nextNodeId": "resolution-neutral-catastrophe",
       "pressureDelta": 40
     },
-
     "resolution-britain-enters-war": {
       "id": "resolution-britain-enters-war",
       "type": "resolution",
@@ -492,7 +503,6 @@
         ]
       }
     },
-
     "resolution-naval-commitment": {
       "id": "resolution-naval-commitment",
       "type": "resolution",
@@ -512,7 +522,6 @@
         ]
       }
     },
-
     "resolution-neutral-catastrophe": {
       "id": "resolution-neutral-catastrophe",
       "type": "resolution",
@@ -524,7 +533,7 @@
         "title": "Europe Without Britain",
         "summary": "Britain's refusal to honour the Belgian guarantee produced German dominance of Western Europe and the Channel coast — the strategic nightmare British policy had worked to prevent for three centuries. The legal argument for neutrality was defensible. The strategic and moral cost of acting on it was not.",
         "historicalNote": "Grey's fundamental conviction was that German hegemony over Western Europe was an existential threat to British interests, regardless of strict legal obligations. The Belgian invasion gave him the argument he needed to bring Cabinet and the country with him. Asquith later wrote that Britain neutral while Belgium fell would have been 'the deepest degradation' in British history.",
-        "scoreMultiplier": 0.10,
+        "scoreMultiplier": 0.1,
         "curriculumHighlights": [
           "British strategic interests and the balance of power",
           "German Septemberprogramm war aims",

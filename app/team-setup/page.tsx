@@ -6,7 +6,9 @@ import { useGameStore } from '@/app/store/gameStore'
 
 export default function TeamSetupPage() {
   const [teamName, setTeamNameLocal] = useState('')
+  const [historicalModeLocal, setHistoricalModeLocal] = useState(false)
   const setTeamName = useGameStore((s) => s.setTeamName)
+  const setHistoricalMode = useGameStore((s) => s.setHistoricalMode)
   const router = useRouter()
 
   function handleSubmit(e: FormEvent) {
@@ -14,6 +16,7 @@ export default function TeamSetupPage() {
     const trimmed = teamName.trim()
     if (!trimmed) return
     setTeamName(trimmed)
+    setHistoricalMode(historicalModeLocal)
     router.push('/game')
   }
 
@@ -40,6 +43,20 @@ export default function TeamSetupPage() {
             autoFocus
             className="w-full px-4 py-3 text-center text-lg bg-transparent border-b-2 border-sepia text-paper placeholder-sepia/50 focus:outline-none focus:border-paper transition-colors font-period"
           />
+          <label className="flex items-center gap-3 cursor-pointer text-sm tracking-widest uppercase text-sepia mt-2">
+            <input
+              type="checkbox"
+              checked={historicalModeLocal}
+              onChange={(e) => setHistoricalModeLocal(e.target.checked)}
+              className="w-4 h-4 accent-sepia cursor-pointer"
+            />
+            Historical Mode
+          </label>
+          {historicalModeLocal && (
+            <p className="text-xs text-sepia/70 mt-1 tracking-wide">
+              Decisions are made for you — follow the real historical actor&apos;s choices.
+            </p>
+          )}
           <button
             type="submit"
             disabled={!teamName.trim()}
