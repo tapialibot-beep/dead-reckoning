@@ -43,16 +43,17 @@ export default function VoiceSelector() {
     setSelected(name)
     setSelectedVoiceName(name || null)
     setOpen(false)
-    // Preview the selected voice
+    // Preview — iOS needs a small delay after cancel() before speak() works
     window.speechSynthesis.cancel()
-    const v = window.speechSynthesis.getVoices().find(v => v.name === name)
-    if (v || name === '') {
+    setTimeout(() => {
+      const voices = window.speechSynthesis.getVoices()
+      const v = name ? voices.find(v => v.name === name) : undefined
       const u = new SpeechSynthesisUtterance('Intelligence confirmed. Standing by.')
       u.pitch = 0.75
       u.rate = 0.88
       if (v) u.voice = v
       window.speechSynthesis.speak(u)
-    }
+    }, 100)
   }
 
   const displayName = selected
