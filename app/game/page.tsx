@@ -13,6 +13,7 @@ export default function GamePage() {
   const sessionStatus = useGameStore((s) => s.sessionStatus)
   const sessionId = useGameStore((s) => s.sessionId)
   const playerId = useGameStore((s) => s.playerId)
+  const teamName = useGameStore((s) => s.teamName)
   const startedAt = useGameStore((s) => s.startedAt)
   const completedAt = useGameStore((s) => s.completedAt)
   const visitedNodeIds = useGameStore((s) => s.visitedNodeIds)
@@ -28,7 +29,7 @@ export default function GamePage() {
     if (!scenario) {
       loadScenario('july-crisis-1914.json').then(result => {
         if (result.ok) {
-          startGame(result.scenario, 'dev-player')
+          startGame(result.scenario, 'dev-player', teamName ?? undefined)
         } else {
           console.error('Failed to load scenario:', result.errors)
         }
@@ -51,6 +52,7 @@ export default function GamePage() {
       sessionId,
       scenarioId: scenario.id,
       playerId,
+      teamName: teamName ?? undefined,
       actorRole: scenario.role,
       startedAt,
       completedAt,

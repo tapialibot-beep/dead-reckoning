@@ -14,7 +14,7 @@ export default function Home() {
           Navigate pivotal moments in history armed only with the information available at the time.
         </p>
         <Link
-          href="/game"
+          href="/team-setup"
           className="inline-block px-8 py-3 text-sm tracking-widest uppercase font-semibold transition-all hover:opacity-80 btn-begin"
         >
           Begin

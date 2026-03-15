@@ -140,6 +140,7 @@ export interface GameSessionRecord {
   id: string
   scenarioId: string
   playerId: string
+  teamName?: string             // team name entered at session start
   actorRole: string             // e.g. "Britain", "Serbia" (for actor unlocks)
   startedAt: string             // ISO 8601
   completedAt: string           // ISO 8601

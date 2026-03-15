@@ -67,6 +67,7 @@ interface GameState {
   // Session
   sessionId: string | null
   playerId: string | null
+  teamName: string | null
   sessionStatus: 'idle' | 'in_progress' | 'completed' | 'abandoned'
   startedAt: string | null
   completedAt: string | null
@@ -85,7 +86,8 @@ interface GameState {
   wireTimerActive: boolean
 
   // Actions
-  startGame: (scenario: Scenario, playerId: string) => void
+  setTeamName: (name: string) => void
+  startGame: (scenario: Scenario, playerId: string, teamName?: string) => void
   navigateToNode: (nodeId: string) => void
   selectDocument: (doc: HistoricalDocument | null) => void
   unlockDocuments: (documentIds: string[]) => void
@@ -135,6 +137,7 @@ const INITIAL_STATE = {
   selectedDocument: null,
   sessionId: null,
   playerId: null,
+  teamName: null,
   sessionStatus: 'idle' as const,
   startedAt: null,
   completedAt: null,
@@ -156,7 +159,9 @@ const INITIAL_STATE = {
 export const useGameStore = create<GameState>((set, get) => ({
   ...INITIAL_STATE,
 
-  startGame: (scenario, playerId) => {
+  setTeamName: (name) => set({ teamName: name }),
+
+  startGame: (scenario, playerId, teamName) => {
     const startNodeId = scenario.startNodeId
     const initialPressure = scenario.initialPressure ?? 50
     set({
@@ -169,6 +174,7 @@ export const useGameStore = create<GameState>((set, get) => ({
       selectedDocument: null,
       sessionId: crypto.randomUUID(),
       playerId,
+      teamName: teamName ?? null,
       sessionStatus: 'in_progress',
       startedAt: new Date().toISOString(),
       completedAt: null,
