@@ -408,6 +408,7 @@
       ],
       "prompt": "Germany has violated Belgian neutrality. Britain's treaty obligation under the 1839 guarantee is before the Cabinet. What does Britain do?",
       "timeLimit": 300,
+      "historicalChoice": "opt-3a",
       "scoring": {
         "nodeWeight": 1.5,
         "accuracyWeight": 0.6,
