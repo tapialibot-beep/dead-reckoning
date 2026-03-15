@@ -1,0 +1,513 @@
+{
+  "id": "french-revolution-1789",
+  "title": "The Last King",
+  "period": "1789–1791",
+  "location": "Palace of Versailles, Paris",
+  "role": "King Louis XVI of France",
+  "description": "France is bankrupt, its people hungry, and its old order fracturing. You have summoned the Estates-General for the first time in 175 years — and the Third Estate has arrived not to advise the Crown but to remake it. What began as a fiscal crisis has become a constitutional one. How a king of France responds to revolution will shape the world for centuries.",
+  "schemaVersion": "2.0",
+  "authoredDate": "2026-03-15",
+  "author": "Dead Reckoning Team",
+  "difficulty": "standard",
+  "tags": [
+    "French Revolution",
+    "Louis XVI",
+    "constitutional monarchy",
+    "1789",
+    "European history",
+    "Tennis Court Oath",
+    "Bastille",
+    "Varennes",
+    "Enlightenment"
+  ],
+  "curriculumAlignments": [
+    {
+      "framework": "AP European History",
+      "standardCode": "KC-2.1.V",
+      "description": "The French Revolution — causes, course, and consequences of political revolution"
+    },
+    {
+      "framework": "AP World History",
+      "standardCode": "KC-5.3.I",
+      "description": "Enlightenment thought and its influence on political revolutions"
+    },
+    {
+      "framework": "IB History",
+      "description": "Causes, practices, and effects of revolutions — France 1789–1799"
+    }
+  ],
+  "initialPressure": 40,
+  "confidenceMechanicEnabled": true,
+  "defaultConfidencePrompt": "How confident are you in this assessment?",
+  "startNodeId": "opening-brief",
+  "documentLibrary": [
+    {
+      "id": "sieves-001",
+      "type": "pamphlet",
+      "title": "What is the Third Estate? — Abbé Sieyès",
+      "date": "January 1789",
+      "content": "WHAT IS THE THIRD ESTATE? EVERYTHING.\nWHAT HAS IT BEEN IN THE POLITICAL ORDER UNTIL THE PRESENT? NOTHING.\nWHAT IS IT ASKING FOR? TO BECOME SOMETHING.\n\nWho is bold enough to maintain that the Third Estate does not contain within itself everything needful to form a complete nation? It is a strong and robust man with one arm still in chains. If the privileged order were abolished, the nation would be not less but more. Thus, what is the Third Estate? Everything; but an everything shackled and oppressed.\n\nWhat remains when the privileged order is removed? Something complete but in need of nothing but freedom to advance. The nobility and the clergy may be useful to the Third Estate in the current order, as a counter to arbitrary power; but they are not the nation. They are a state within the state, a privilege of birth, not a service to the public.\n\nThe Third Estate embraces, then, all that which belongs to the nation; and all that which is not the Third Estate cannot be regarded as being of the nation. What is the Third Estate? Everything.",
+      "sender": "Abbé Emmanuel-Joseph Sieyès",
+      "source": "Published January 1789, Paris — widely circulated",
+      "reliability": "verified"
+    },
+    {
+      "id": "oath-001",
+      "type": "proclamation",
+      "title": "The Tennis Court Oath — June 20, 1789",
+      "date": "20 June 1789",
+      "content": "THE NATIONAL ASSEMBLY\n\nConsidering that it has been called to establish the constitution of the kingdom, to effect the regeneration of public order, and to maintain the true principles of the monarchy; that nothing can prevent it from continuing its deliberations in whatever place it may be forced to establish itself; and, finally, that wherever its members are assembled, there is the National Assembly —\n\nDecrees that all members of this Assembly shall immediately take a solemn oath not to separate, and to reassemble wherever circumstances require, until the constitution of the kingdom is established and consolidated upon firm foundations; and that, the said oath being taken, all members and each one of them individually shall ratify this steadfast resolution by their signatures.\n\nWe swear never to separate ourselves from the National Assembly, and to reassemble wherever circumstances require, until the constitution of the kingdom is established.\n\n[Signed by 577 deputies. One deputy, Martin Dauch, refused to sign.]",
+      "sender": "The National Assembly — President Jean-Sylvain Bailly",
+      "source": "Archives Parlementaires — June 20, 1789",
+      "reliability": "verified"
+    },
+    {
+      "id": "artois-001",
+      "type": "letter",
+      "title": "Memorandum of the Princes of the Blood — June 1789",
+      "date": "12 June 1789",
+      "content": "SIRE —\n\nWe cannot remain silent before such a critical situation. We are convinced that the state is in peril. Your person, your authority, the monarchy, the very nobility of France are threatened. The Third Estate has declared itself a sovereign power. It has appointed itself the voice of the nation. It has invited the other estates to join it not as estates, but as individuals — dissolving the very order upon which France was founded.\n\nThe principles which gave birth to these proceedings are nothing less than an assault upon the rights of the Crown. If the Crown concedes to the declaration of the National Assembly, it concedes everything. The consequences of the Estates' capitulation to the Third Estate cannot be calculated.\n\nWe urge you, Sire, to act before this assembly roots itself in the public imagination as the legitimate authority of France. The troops are available. The moment is now. To delay is to invite worse.\n\nYour loving brothers — Louis-Stanislas-Xavier, Comte de Provence; Charles-Philippe, Comte d'Artois",
+      "sender": "The Princes of the Blood — Provence and Artois",
+      "recipient": "King Louis XVI",
+      "source": "Royal Archive — dated June 1789",
+      "reliability": "verified"
+    },
+    {
+      "id": "necker-001",
+      "type": "report",
+      "title": "Finance Minister's Memorandum — State of the Treasury",
+      "date": "5 May 1789",
+      "content": "YOUR MAJESTY —\n\nThe condition of the royal treasury requires frank disclosure. France's annual deficit stands at approximately 56 million livres. Interest payments on accumulated debt consume more than half of all royal revenue. The existing tax structure, from which the nobility and clergy are largely exempt, has reached its practical ceiling.\n\nThe Estates-General has been convened as the mechanism for fiscal reform. However, fiscal reform requires cooperation from the privileged orders — cooperation that, in my experience of two years as finance minister, they will not give willingly. The Third Estate is prepared to accept new taxation and sacrifice in exchange for constitutional reform and genuine representation.\n\nMy advice is frankly political as much as financial: genuine concessions on the voting question — by head, not by order — will generate the goodwill and legitimacy required for the tax reforms that alone can restore the kingdom's finances. Resistance will produce deadlock. Deadlock will produce a crisis that the treasury cannot survive.\n\nThe political and fiscal problems of France are now inseparable. Both require a single solution: a king who leads reform rather than resists it.\n\nJacques Necker, Directeur général des Finances",
+      "sender": "Jacques Necker",
+      "recipient": "King Louis XVI",
+      "source": "Necker Papers — Bibliothèque nationale de France",
+      "reliability": "verified"
+    },
+    {
+      "id": "bastille-001",
+      "type": "report",
+      "title": "Fall of the Bastille — Official Account",
+      "date": "15 July 1789",
+      "content": "THE BASTILLE IS TAKEN.\n\nYesterday afternoon, the 14th of July, a crowd variously estimated at between eight hundred and three thousand Parisians stormed the fortress of the Bastille in the Faubourg Saint-Antoine. The garrison, commanded by the Marquis de Launay, had been reinforced with Swiss Guards and mercenaries. At approximately 5 o'clock in the afternoon, after four hours of fighting and an exchange of cannon fire, de Launay capitulated.\n\nThe drawbridge was lowered. The crowd entered. De Launay was arrested; he was killed by the crowd before he could be brought to the Hôtel de Ville. His head and that of the prévôt des marchands, Jacques de Flesselles, have been paraded through the streets on pikes.\n\nThree prisoners were found inside: two petty criminals and one Irishman held for counterfeiting. The powder magazine was seized. The fortress, symbol of royal authority for 400 years, now belongs to the people of Paris.\n\nNational Guard units under the Marquis de Lafayette have been formed to maintain public order. The tricolor cockade — blue and red for Paris, white for the Bourbon crown — has been adopted throughout the city. The King has been informed.",
+      "sender": "Marquis de Lafayette, Commander, National Guard",
+      "source": "Archives nationales — July 1789",
+      "reliability": "verified"
+    },
+    {
+      "id": "rights-001",
+      "type": "proclamation",
+      "title": "Declaration of the Rights of Man and of the Citizen — August 26, 1789",
+      "date": "26 August 1789",
+      "content": "THE NATIONAL CONSTITUENT ASSEMBLY,\n\nConsidering that ignorance, forgetfulness, or contempt of the rights of man are the sole causes of public misfortunes and the corruption of governments, has resolved to set forth in a solemn declaration the natural, inalienable, and sacred rights of man —\n\nARTICLE 1: Men are born and remain free and equal in rights. Social distinctions may be based only on common utility.\nARTICLE 2: The purpose of all political association is the preservation of the natural and imprescriptible rights of man. These rights are liberty, property, security, and resistance to oppression.\nARTICLE 3: The principle of all sovereignty resides essentially in the nation. No body, no individual may exercise any authority that does not proceed directly from the nation.\nARTICLE 6: The law is the expression of the general will. All citizens have the right to contribute personally, or through their representatives, to its formation.\nARTICLE 11: The free communication of ideas and of opinions is one of the most precious rights of man. Every citizen may, accordingly, speak, write, and print with freedom.\n\n[Seventeen articles total. Adopted by the National Constituent Assembly 26 August 1789. Awaiting royal sanction.]",
+      "sender": "National Constituent Assembly",
+      "recipient": "King Louis XVI — for royal sanction",
+      "source": "Archives nationales — August 26, 1789",
+      "reliability": "verified"
+    },
+    {
+      "id": "letter-001",
+      "type": "letter",
+      "title": "Louis XVI's Circular to Foreign Courts — June 20, 1791",
+      "date": "20 June 1791",
+      "content": "To the Kings and Princes of Europe —\n\nI write to you on the day of my departure from Paris, which I have resolved upon after two years of humiliation before a National Assembly that has no legitimate claim to the authority it has assumed. I address you frankly: the constitution which has been forced upon me is not one I have accepted freely. It destroys the foundations of the monarchy and delivers France to factions whose violence I can no longer moderate from within the capital.\n\nI appeal to the European sovereigns to declare, through a congress, their united support for the King of France's liberty and the restoration of legitimate monarchical government — not the arbitrary government of the old regime, which I do not desire, but a constitutional order in which the king retains the executive authority proper to a sovereign.\n\nI go now to join the forces which have gathered to support this cause. I ask for your support. France cannot endure what it has become.\n\nLOUIS\n\n[Written by the King on the night of his departure. This letter was left in the Tuileries and discovered by the National Assembly after the flight became known.]",
+      "sender": "King Louis XVI",
+      "recipient": "European monarchs",
+      "source": "Archives nationales — discovered June 21, 1791",
+      "reliability": "verified"
+    }
+  ],
+  "nodes": {
+    "opening-brief": {
+      "id": "opening-brief",
+      "type": "consequence",
+      "name": "Versailles, May 1789",
+      "imageUrl": "/images/scenarios/french-revolution-1789/opening-versailles.png",
+      "description": "The Hall of Mirrors at Versailles has hosted the glory of France for a century. Today, it hosts a crisis.\n\nYou are Louis XVI, thirty-four years old, fifteen years on the throne. You inherited the largest kingdom in Europe — and its largest deficit. The American war has beggared the treasury. Two consecutive failed harvests have sent bread prices beyond what a labourer can earn in a day. Your finance minister Necker has delivered his verdict in writing: France cannot be saved without fiscal reform, and fiscal reform cannot happen without the consent of those who are taxed.\n\nSo you have called the Estates-General — the representative assembly of France, unused since 1614 — to legitimise new taxation. All three estates have gathered at Versailles: the clergy, the nobility, and the Third Estate representing the rest of France — the merchants, lawyers, and labourers who make up ninety-eight percent of the population.\n\nThe Third Estate has arrived with demands. Their pamphlets are everywhere in Paris. Abbé Sieyès has put the question plainly: 'What is the Third Estate? Everything. What has it been in the political order until now? Nothing. What is it asking for? To become something.'\n\nThe pivot point is the voting question. Under the ancient rules, each estate casts one vote — so the nobility and clergy can always outvote the Third Estate two to one, regardless of numbers. The Third Estate demands voting by head, where their six hundred deputies would outnumber the other two estates combined. The nobility and clergy are resisting. Your council is divided. Your kingdom is watching.",
+      "initialDocumentIds": [
+        "sieves-001",
+        "necker-001"
+      ],
+      "nextNodeId": "crisis-estates-general",
+      "autoAdvanceAfter": 10
+    },
+    "crisis-estates-general": {
+      "id": "crisis-estates-general",
+      "type": "crisis",
+      "name": "The Tennis Court Oath — June 1789",
+      "imageUrl": "/images/scenarios/french-revolution-1789/tennis-court.png",
+      "description": "The situation has escalated past the voting dispute.\n\nOn June 17th, the Third Estate declared itself the National Assembly — the sovereign representative body of France. On June 20th, they arrived at their meeting hall to find it locked by royal order. They moved to the royal tennis court nearby and took a collective oath: they would not disband until they had given France a constitution. One deputy refused to sign. Five hundred and seventy-six signed.\n\nOn June 23rd, you held a royal session — entering the hall in full ceremony, surrounded by your court, flanked by guards. You announced that you would grant voting by head on fiscal matters only. You declared that the orders would meet separately on matters of religion and the monarchy. Then you left. The nobles and most of the clergy rose to follow.\n\nThe Third Estate did not move. Their president, the astronomer Bailly, declared: 'The assembled nation cannot receive orders.' The Comte de Mirabeau, standing in the hall, told your master of ceremonies: 'Go and tell those who sent you that we are here by the will of the people, and we shall not leave except by the force of bayonets.'\n\n35,000 troops have been ordered to positions around Paris and Versailles. Your brothers — Artois, Provence — are urging you to act. Necker is urging compromise. The Third Estate has not left the hall. Paris is watching.",
+      "initialDocumentIds": [
+        "oath-001",
+        "artois-001",
+        "necker-001"
+      ],
+      "prompt": "The Third Estate has declared itself the sovereign National Assembly of France and refused to disperse. How do you respond?",
+      "timeLimit": 300,
+      "historicalChoice": "opt-1b",
+      "scoring": {
+        "nodeWeight": 1.0,
+        "accuracyWeight": 0.7,
+        "confidenceWeight": 0.3,
+        "outcomePoints": {
+          "correct": 100,
+          "plausible": 60,
+          "wrong": 0
+        }
+      },
+      "options": [
+        {
+          "id": "opt-1a",
+          "text": "Disperse the National Assembly by force. Order the military to clear the hall and arrest the assembly's leadership. The assembly has no legal standing — it is a rebellion against the Crown.",
+          "outcome": "wrong",
+          "nextNodeId": "conseq-military-crackdown",
+          "consequences": [
+            "35,000 troops are in position — but French regiments have been fraternising with the Parisian crowd for weeks",
+            "Paris has been arming itself for days; the bread shortage has made the population volatile"
+          ],
+          "debriefNote": "The military option was the advice of Artois and the court hardliners. What they did not account for: French line regiments had been mixing with Parisian crowds for weeks and were unreliable. The Swiss Guards were loyal but few. Any attempt at military dispersal would have required firing on French civilians. When Louis later tried to use troops against Paris in July — after dismissing Necker — the regiments wavered. The assumption that force was available was the assumption that ended the monarchy."
+        },
+        {
+          "id": "opt-1b",
+          "text": "Yield. Order the nobility and clergy to join the Third Estate in a single National Assembly. Accept that the Estates-General has become a constitutional convention.",
+          "outcome": "correct",
+          "nextNodeId": "conseq-assembly-recognized",
+          "consequences": [
+            "The National Assembly is legitimised by royal authority — Louis leads the transition rather than being swept aside by it",
+            "Court hardliners are furious; the emigration of noble families begins within weeks"
+          ],
+          "debriefNote": "Louis actually made this decision on June 27th — a week after the Tennis Court Oath. Necker had persuaded him that yielding was the only path that avoided a full confrontation. The decision was correct, but late: the week of hesitation had already damaged royal credibility and encouraged the Assembly to believe it could extract whatever it demanded. The question historians ask is whether earlier, more genuine capitulation might have created a different relationship between king and assembly."
+        },
+        {
+          "id": "opt-1c",
+          "text": "Offer substantive but limited reform: voting by head on all fiscal and administrative matters, but separate deliberation for constitutional questions. A constitutional monarchy on the English model, with the King's role preserved.",
+          "outcome": "plausible",
+          "nextNodeId": "conseq-limited-reform",
+          "consequences": [
+            "The moderate deputies may accept this as the basis for negotiation",
+            "The radical wing of the Third Estate — led by Mirabeau and Sieyès — will reject it as insufficient"
+          ],
+          "debriefNote": "This compromise was roughly what Louis announced in the royal session of June 23rd — and it was rejected by the Third Estate in the hall. By June 1789 the demand was not for voting reform but for constitutional sovereignty. Half-measures satisfied neither the reformers who needed a genuine concession nor the court nobles who wanted no concession at all."
+        }
+      ]
+    },
+    "conseq-military-crackdown": {
+      "id": "conseq-military-crackdown",
+      "type": "consequence",
+      "name": "The Troops Are Ordered",
+      "description": "The order goes out on the morning of June 24th. The Swiss Guards and the cavalry massed around Paris are directed to clear the tennis court and arrest the assembly's leadership.\n\nThe Swiss Guards obey. The Gardes Françaises do not.\n\nCaptains in three French infantry regiments report that their men refuse to fire on the crowd. The cavalry regiment at Versailles turns back at the edge of town. Within hours of the order being given, Paris has heard that the King has attempted to dissolve its assembly by force. The bread market in the Faubourg Saint-Antoine closes as the vendors join the crowd flowing toward the Bastille.\n\nNecker resigns by noon. By evening, the National Assembly has not been dispersed — it continues to meet, with the people of Paris massed in the streets around it, and your court advisors are no longer returning your messages.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-royal-absolutism",
+      "pressureDelta": 35
+    },
+    "resolution-royal-absolutism": {
+      "id": "resolution-royal-absolutism",
+      "type": "resolution",
+      "name": "The Force That Wasn't There",
+      "description": "The troops were ordered. The French regiments did not comply. The attempt to reassert royal authority by force revealed that the authority to use force had already dissolved — not in the assembly hall, but in the relationship between the Crown and the men who served it.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "catastrophic",
+        "title": "Military Force Without Military Loyalty",
+        "summary": "The order to disperse the National Assembly assumed the army was an instrument of royal will. In 1789, after fifteen years of fiscal mismanagement and decades of purchased commissions, the line between army and people was thin. The Gardes Françaises mutinied. The cavalry pulled back. The attempt to use force accelerated precisely the revolutionary dynamic it was meant to suppress.",
+        "historicalNote": "The Gardes Françaises — the regiment that garrisoned Paris — had been fraternising with Parisian crowds for months before the Bastille fell. On July 14th, they did not defend the Bastille; they helped storm it. Any royal attempt to use French regiments against the Paris crowd in June 1789 would have faced the same problem: the troops were of the people, and the people were hungry, angry, and reading Sieyès.",
+        "scoreMultiplier": 0.1,
+        "curriculumHighlights": [
+          "Military loyalty and its limits in revolutionary contexts",
+          "The relationship between popular legitimacy and coercive power",
+          "Why the French army did not suppress the 1789 revolution"
+        ]
+      }
+    },
+    "conseq-assembly-recognized": {
+      "id": "conseq-assembly-recognized",
+      "type": "consequence",
+      "name": "The King Yields — June 27, 1789",
+      "description": "On the morning of June 27th, you send word to the deputies of the clergy and nobility: they are to join the Third Estate in the National Assembly immediately.\n\nThe news reaches the assembly hall before the nobles arrive. Bailly, the president, announces it to the deputies. The hall erupts. Men weep. There is an embrace between a deputy of the nobility and one of the Third Estate that is sketched in a dozen different pamphlets before the week is out.\n\nYou watch it from a window at Versailles.\n\nThe hardliners in your court begin leaving that week. Your brother Artois — whose memorandum urged military crackdown — leaves for Turin within days. He will not return for twenty-three years. The emigration of the nobility has begun.\n\nThe National Assembly is now the legitimate constitutional body of France, sanctioned by the King. It begins drafting a constitution. Necker, for a month longer, manages to keep the treasury from collapse. The troops around Paris are still there.\n\nAnd the bread is still expensive.",
+      "initialDocumentIds": [],
+      "nextNodeId": "crisis-bastille",
+      "pressureDelta": -5
+    },
+    "conseq-limited-reform": {
+      "id": "conseq-limited-reform",
+      "type": "consequence",
+      "name": "Half a Compromise",
+      "description": "The deputies receive your announcement: voting by head on fiscal matters; separate deliberation on constitutional questions. You have given them a significant concession — but not the one they demanded.\n\nMirabeau and Sieyès reject it publicly within the hour. The Third Estate remains in the hall, refusing to adopt the two-chamber procedure. The moderate deputies waver — some are inclined to accept what is offered and negotiate further; others insist on full voting rights for all matters.\n\nFor two weeks, the impasse holds. Then, on July 11th, you dismiss Necker — the one figure trusted by both the Assembly and the streets of Paris. The news reaches Paris by evening.\n\nWhatever goodwill the moderate compromise had purchased is gone. Paris begins to arm.",
+      "initialDocumentIds": [],
+      "nextNodeId": "crisis-bastille",
+      "pressureDelta": 10
+    },
+    "crisis-bastille": {
+      "id": "crisis-bastille",
+      "type": "crisis",
+      "name": "The Bastille Falls — July 14, 1789",
+      "imageUrl": "/images/scenarios/french-revolution-1789/bastille-aftermath.png",
+      "description": "Yesterday afternoon, the people of Paris stormed the Bastille fortress in the Faubourg Saint-Antoine.\n\nThe garrison surrendered after four hours of fighting. The commander, the Marquis de Launay, was killed by the crowd before he could be brought to trial. His head was paraded through the streets on a pike. Three prisoners were found inside. The powder magazine was seized. The fortress that has stood for four centuries as the emblem of royal authority is gone.\n\nThe National Guard has been formed under the Marquis de Lafayette. Paris now has its own military force, loyal to the city, not the Crown.\n\nAt Versailles, your generals are in the council room. Marshal de Broglie and the Baron de Breteuil are insisting on action: 20,000 loyal troops — Swiss Guards, German cavalry, foreign regiments — can march on Paris and restore order. Broglie estimates the operation would take forty-eight hours. Your brother Artois is loading his carriages.\n\nAcross the council table, Necker — whom you recalled this morning — says nothing. He is looking at the dispatch from Paris. Lafayette's message: 'All Paris is in revolution. The people are arming. I will try to maintain order, but I cannot guarantee your safety at Versailles.'\n\nYou have perhaps 24 hours to decide what kind of king you intend to be.",
+      "initialDocumentIds": [
+        "bastille-001",
+        "rights-001"
+      ],
+      "prompt": "The Bastille has fallen. Paris is in revolution. The royal military option is available but untested. What do you do?",
+      "timeLimit": 300,
+      "historicalChoice": "opt-2b",
+      "scoring": {
+        "nodeWeight": 1.2,
+        "accuracyWeight": 0.65,
+        "confidenceWeight": 0.35,
+        "outcomePoints": {
+          "correct": 100,
+          "plausible": 55,
+          "wrong": 0
+        }
+      },
+      "options": [
+        {
+          "id": "opt-2a",
+          "text": "Order the foreign regiments to march on Paris and restore order. The Bastille's fall is a criminal act, not a political one. Firm action now prevents worse disorder later.",
+          "outcome": "wrong",
+          "nextNodeId": "conseq-suppression-fails",
+          "consequences": [
+            "Foreign regiments marching on Paris will be read as a declaration of war against the French people",
+            "The National Assembly will declare itself in permanent session and appeal directly to the army"
+          ],
+          "debriefNote": "The use of foreign troops — Swiss Guards, German cavalry — against a French civilian population would have transformed a political crisis into an ethnic and national one. Lafayette and the National Guard would have had no choice but to resist. Even if the initial assault succeeded, it would have created a war between the Crown and Paris that the monarchy had no sustainable path to win."
+        },
+        {
+          "id": "opt-2b",
+          "text": "Accept the revolution's first chapter. Go to Paris. Recognise the National Guard. Accept the tricolor cockade. Legitimise what has happened as constitutional progress, not rebellion.",
+          "outcome": "correct",
+          "nextNodeId": "conseq-paris-visit",
+          "consequences": [
+            "The crowd will receive you — this is what they are asking for, not the King's head",
+            "The National Assembly becomes the vehicle for reform, not a revolutionary committee"
+          ],
+          "debriefNote": "Louis actually went to Paris on July 17th. He accepted the tricolor from Mayor Bailly on the steps of the Hôtel de Ville. The crowd cheered. Talleyrand later wrote: 'Those who did not live before 1789 do not know the sweetness of living.' For a few months in 1789, a constitutional monarchy genuinely seemed possible — and it was Louis's willingness to appear in Paris that created that possibility."
+        },
+        {
+          "id": "opt-2c",
+          "text": "Withdraw to Metz. Rally the 20,000 loyal troops stationed there. Negotiate from a position of military strength rather than accepting terms in the shadow of Parisian mobs.",
+          "outcome": "plausible",
+          "nextNodeId": "conseq-flight-to-metz",
+          "consequences": [
+            "The loyal army exists and is available — withdrawal to Metz is genuinely possible",
+            "Once the King leaves Versailles, the National Assembly will govern France in his absence"
+          ],
+          "debriefNote": "The flight to Metz was seriously debated on the nights of July 14th and 15th. The generals wanted it. Several court factions urged it. Historians disagree about whether it would have produced a negotiated settlement or civil war. What is clear is that by the time Louis made his move — in June 1791, in disguise — the loyal troops were gone and the route was impassable. The moment for a strategic withdrawal was July 1789, not two years later."
+        }
+      ]
+    },
+    "conseq-suppression-fails": {
+      "id": "conseq-suppression-fails",
+      "type": "consequence",
+      "name": "The March on Versailles",
+      "description": "The foreign regiments enter Paris through the Faubourg Saint-Antoine. Their advance is met not by soldiers but by crowds — men, women, and children in the streets, the women from the markets, the artisans from their workshops.\n\nThe Swiss Guards fire. The crowd does not break. It builds.\n\nWithin four hours, units of the Gardes Françaises — the French royal troops — have sided with the Parisian National Guard. Marshal de Broglie's plan has collapsed. A foreign army fighting French citizens in the streets of Paris has done precisely what the generals promised it would not: united everyone against the Crown.\n\nA week later, 7,000 women march from Paris to Versailles. They bring the royal family back to the Tuileries palace in Paris under — it is not quite clear whether it is an escort or an arrest. The National Assembly follows.\n\nYou are no longer the king of France at Versailles. You are the king of France in the Tuileries, attended by a crowd that watches every window.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-suppression-fails",
+      "pressureDelta": 40
+    },
+    "resolution-suppression-fails": {
+      "id": "resolution-suppression-fails",
+      "type": "resolution",
+      "name": "The Foreign Troops Did Not Hold",
+      "description": "The attempt to suppress the Paris uprising by military force transformed a manageable political crisis into a national war between the Crown and the people. Foreign regiments firing on French citizens handed the National Assembly a legitimacy that no amount of constitutional debate could have produced.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "catastrophic",
+        "title": "Force Against the People",
+        "summary": "The generals promised that firm military action would restore order. What it restored was the revolution's moral clarity: the Crown was sending foreign soldiers against French citizens who were hungry and afraid. The moment the Swiss Guards fired, the moderate centre of French politics — the lawyers and merchants who had hoped for constitutional reform, not revolution — moved to the radical side.",
+        "historicalNote": "Louis eventually did bring foreign troops to bear — but only in the sense that Prussia and Austria invaded France in 1792, after his flight to Varennes destroyed the constitutional settlement. The foreign intervention the military option required did come, but as an invasion of France, not a pacification of Paris. It produced the radicalisation of the Revolution and the September Massacres — the opposite of what Broglie had promised.",
+        "scoreMultiplier": 0.1,
+        "curriculumHighlights": [
+          "Why military force failed to suppress the French Revolution",
+          "The role of foreign troops in revolutionary legitimacy debates",
+          "The women's march on Versailles — October 1789"
+        ]
+      }
+    },
+    "conseq-paris-visit": {
+      "id": "conseq-paris-visit",
+      "type": "consequence",
+      "name": "The King Goes to Paris — July 17, 1789",
+      "description": "You leave Versailles on the morning of July 17th with a small escort. No guards, no ceremony — or rather, the ceremony is the crowd itself, lining the road from Versailles to Paris three rows deep, watching in silence.\n\nAt the Hôtel de Ville, Mayor Bailly presents you with a red-and-blue cockade — the colours of Paris. You accept it, and add the white of the Bourbon crown, creating the tricolor that will become the emblem of France.\n\nYou say very little. You listen.\n\nThe crowd cheers. 'Vive le roi!' Not as a reflex, but with something that sounds, to those who were there, like genuine relief. The people do not want a republic. They want a king who listens.\n\nNecker is recalled. The troops are withdrawn. The National Assembly continues its work on the Constitution. For the first time in months, there is a sense in Paris — cautious, uncertain, but real — that France might navigate through this.\n\nYou return to Versailles that evening. The next morning, you read the Declaration of the Rights of Man, which the Assembly has drafted. They are asking for your sanction.",
+      "initialDocumentIds": [
+        "rights-001"
+      ],
+      "nextNodeId": "crisis-varennes",
+      "pressureDelta": -15
+    },
+    "conseq-flight-to-metz": {
+      "id": "conseq-flight-to-metz",
+      "type": "consequence",
+      "name": "The Road to Metz",
+      "description": "You leave Versailles in the night of July 16th, with the Dauphin and the Queen, under cavalry escort. The road to Metz is held by loyal troops.\n\nThe National Assembly declares itself in permanent session. Mirabeau addresses the chamber: 'The King is not free. France is without a sovereign. We are the people's representatives — the only constituted authority in the kingdom.' The Assembly suspends royal decrees and assumes control of the treasury.\n\nIn Paris, the crowd redirects itself. Without a king in Versailles to respond to, the anger turns toward the nobility who remained, the intendants, the tax collectors.\n\nAt Metz, you receive reports of what is happening in Paris. The generals tell you the roads are clear for a return march. But the army will not march against the Paris National Guard, which is French and armed. The longer you wait, the more clearly France has a government at the Tuileries that is not you.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-metz-exile",
+      "pressureDelta": 20
+    },
+    "resolution-metz-exile": {
+      "id": "resolution-metz-exile",
+      "type": "resolution",
+      "name": "The King in Exile",
+      "description": "You left Paris before being brought back to Paris. The order was reversed, but the destination was the same: a king under watch, a revolution that continued without him. The Metz withdrawal bought time but not power — and in 1789, time was what the National Assembly needed most.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "divergent",
+        "title": "Strategic Withdrawal",
+        "summary": "The flight to Metz preserved royal military capacity on paper. In practice, it transferred sovereignty to the National Assembly the moment the king left Paris, and the army that was supposed to restore order found itself unable to fire on French citizens. The withdrawal achieved the outcome of the Varennes flight — a king without legitimate authority — without the arrest at a relay station.",
+        "historicalNote": "The flight to Metz was discussed seriously in the council on July 15th and 16th. Historians have debated whether a successful withdrawal could have produced a negotiated settlement — a constitutional monarchy on the English model — or whether it would simply have produced civil war faster. The balance of evidence suggests that any settlement at Metz would have required Louis to accept terms at least as restrictive as the 1791 Constitution, since he had no military capacity to impose any other outcome.",
+        "scoreMultiplier": 0.35,
+        "curriculumHighlights": [
+          "The July 14–17 council debates — what Louis's advisors recommended",
+          "Why a Metz withdrawal would not have restored full royal authority",
+          "Comparing the Metz option to the actual Varennes flight of 1791"
+        ]
+      }
+    },
+    "crisis-varennes": {
+      "id": "crisis-varennes",
+      "type": "crisis",
+      "name": "The Flight Question — June 1791",
+      "imageUrl": "/images/scenarios/french-revolution-1789/tuileries-1791.png",
+      "description": "Two years have passed since the Bastille fell. The Constitution is nearly complete — France will be a constitutional monarchy, with you as a limited executive. The National Assembly controls legislation. You retain a suspensive veto, the right to appoint ministers, and nominal command of foreign affairs.\n\nYou have been living in the Tuileries palace in Paris since October 1789, when the women's march brought you from Versailles under an escort that was not quite an escort. Lafayette commands the National Guard. Guards are posted at every door. You have not left Paris without permission.\n\nThe Constitution you are about to sign was not negotiated with you. It was written around you. Mirabeau, the one radical who might have become a genuine ally, died in April. His last advice to you was the same as Necker's: work within the system you have. Build legitimacy through action, not resistance.\n\nBut there is a letter from your brother-in-law, Emperor Leopold II of Austria. He is willing to support a congress of European powers that would press France to restore the king's proper authority. Prussian and Austrian troops are available. Your aunts have fled to Rome. Your brother Artois is raising an emigré army in Koblenz.\n\nAnd there is a route. A berline carriage, a disguise, the road northeast toward the Austrian Netherlands, and a loyal cavalry regiment waiting at Montmédy. The Constitution must be signed within the month. The choice is: sign it and mean it, flee and hope for foreign rescue, or sign it and secretly undermine it.",
+      "initialDocumentIds": [
+        "letter-001",
+        "rights-001"
+      ],
+      "prompt": "The Constitution is ready for your signature. Foreign support is available if you can reach the border. What do you do?",
+      "timeLimit": 300,
+      "historicalChoice": "opt-3a",
+      "scoring": {
+        "nodeWeight": 1.5,
+        "accuracyWeight": 0.6,
+        "confidenceWeight": 0.4,
+        "outcomePoints": {
+          "correct": 100,
+          "plausible": 50,
+          "wrong": 0
+        }
+      },
+      "options": [
+        {
+          "id": "opt-3a",
+          "text": "Attempt to reach the Austrian Netherlands. Leave Paris in disguise and join the cavalry regiment at Montmédy. With foreign backing, negotiate the Constitution's revision from a position of strength.",
+          "outcome": "wrong",
+          "nextNodeId": "conseq-varennes-capture",
+          "consequences": [
+            "The royal family will travel in a large, conspicuous berline carriage — the Queen will accept nothing smaller",
+            "The postmaster Drouet, who keeps a portrait of the King on the new assignat banknote, will recognise you at Sainte-Menehould"
+          ],
+          "debriefNote": "Louis was recognised at Sainte-Menehould on June 21st, 1791, because his face appeared on the paper currency. He was arrested at Varennes — 30 miles from safety — and returned to Paris under National Guard escort. The journey back took three days; the crowd lining the road was silent. Within a year, the monarchy had been abolished. Within two years, Louis was dead."
+        },
+        {
+          "id": "opt-3b",
+          "text": "Sign the Constitution and commit to it genuinely. Dissolve your correspondence with the emigrés. Govern as a constitutional monarch — not strategically, but actually.",
+          "outcome": "correct",
+          "nextNodeId": "conseq-genuine-reform",
+          "consequences": [
+            "The moderate majority of the Assembly — the constitutional monarchists — have been waiting for this signal from the Crown",
+            "The emigré army in Koblenz loses its political justification if the King openly endorses the constitution"
+          ],
+          "debriefNote": "The constitutional monarchists — Bailly, Lafayette, Barnave, the Feuillant faction — genuinely believed a stable constitutional monarchy was possible, but only if the King made it credible. What they needed was not another signature under duress, but evidence that Louis had made peace with 1789. Every letter to Austria, every secret memorandum protesting his captivity, was evidence he had not. A king who genuinely embraced the constitution in 1791 had a realistic chance of maintaining the throne."
+        },
+        {
+          "id": "opt-3c",
+          "text": "Sign the Constitution publicly but work privately with the emigrés and the Austrians to build the conditions for restoration. Buy time while maintaining the capacity to renegotiate.",
+          "outcome": "plausible",
+          "nextNodeId": "conseq-emigre-conspiracy",
+          "consequences": [
+            "The Feuillant faction will support a king who signs — but they are not naive about the dual strategy",
+            "Austrian diplomatic correspondence passes through multiple hands; interception by Assembly investigators is a serious risk"
+          ],
+          "debriefNote": "This is roughly what Louis actually did for the year following the constitutional monarchy's ratification — he signed in September 1791 and corresponded secretly with Vienna throughout. The dual strategy satisfied neither the Assembly moderates, who needed to believe in the king's commitment, nor the emigrés, who needed a clear signal to act. The half-measure produced the worst of both worlds."
+        }
+      ]
+    },
+    "conseq-varennes-capture": {
+      "id": "conseq-varennes-capture",
+      "type": "consequence",
+      "name": "Arrested at Varennes — June 21, 1791",
+      "description": "The berline is recognised at Sainte-Menehould at dusk. The postmaster Jean-Baptiste Drouet rides ahead on horseback. At Varennes, he alerts the local National Guard.\n\nYou are stopped at a relay station. The commander asks to see your papers. Your valet presents a passport in false names. The commander looks at it, then at you. He has a fifty-livre assignat in his pocket; your face is on it.\n\nYou are arrested at Varennes, thirty miles from Montmédy and the loyal cavalry. The cavalry does not come for you — they have not received word, and a rescue attempt through a National Guard cordon would require firing on French citizens.\n\nThe journey back to Paris takes three days. The road is lined with people standing in silence. No cheers. No shouts. Silence, broken occasionally by women walking alongside the carriage.\n\nAt the Tuileries, you are met by Barnave and the Assembly delegation. He looks at you with an expression you have not seen before. Not anger. Not contempt. Something worse.\n\nPity.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-guillotine",
+      "pressureDelta": 40
+    },
+    "resolution-guillotine": {
+      "id": "resolution-guillotine",
+      "type": "resolution",
+      "name": "The Temple Tower, January 1793",
+      "description": "The constitutional monarchy lasted thirteen months after Varennes. The Assembly maintained the fiction of Louis's willing participation long enough to ratify the Constitution in September 1791 — but no one, including the Assembly, believed it.\n\nAustria and Prussia invaded in April 1792. Their commander issued the Brunswick Manifesto, threatening Paris with total destruction if the royal family was harmed — which had the effect of confirming that Louis was in correspondence with the enemy. On August 10th, the Tuileries was stormed by the Paris sections. Louis was suspended and imprisoned in the Temple.\n\nThe Republic was declared in September. The trial began in December. The King was guillotined on January 21st, 1793, in the Place de la Révolution.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "catastrophic",
+        "title": "Citizen Capet",
+        "summary": "The flight to Varennes destroyed the one thing the constitutional monarchy required: the belief, however fragile, that the King had accepted 1789. Every reform the Assembly had forced through had been accepted under duress; the flight confirmed it. The moderate constitutional monarchists — Barnave, the Feuillants, Lafayette — had no credible position after Varennes. The radical Jacobins did.",
+        "historicalNote": "Louis was rechristened 'Citizen Louis Capet' for his trial — the name stripped of its royal title. He was convicted of conspiracy against liberty and criminal acts against the state. He died on the guillotine on January 21st, 1793, reportedly saying: 'I die innocent of all the crimes laid to my charge. I pardon those who have occasioned my death; and I pray to God that the blood you are going to shed may never be visited on France.'",
+        "scoreMultiplier": 0.1,
+        "curriculumHighlights": [
+          "How the Varennes flight radicalised the French Revolution",
+          "The Brunswick Manifesto and foreign intervention's effect on domestic politics",
+          "The logic of the Terror — why moderation collapsed after 1791",
+          "Louis XVI's trial — constitutional and political dimensions"
+        ]
+      }
+    },
+    "conseq-genuine-reform": {
+      "id": "conseq-genuine-reform",
+      "type": "consequence",
+      "name": "The King Signs — September 1791",
+      "description": "You write to Artois directly, in your own hand. You will not be joining the emigrés. You are a constitutional king of France, and you intend to govern as one. The Koblenz correspondence stops.\n\nIn Paris, Barnave reads the intelligence reports and allows himself, for the first time since the summer, something approaching cautious hope. He drafts a speech for the Assembly. The Feuillant faction — the constitutional monarchists — present themselves as the centre of French politics: the King is committed, the Constitution is stable, the war party has no pretext.\n\nYou sign the Constitution on September 14th, 1791, in a ceremony before the National Assembly. The deputies stand as you enter. Sieyès — who wrote 'What is the Third Estate?' — looks at you with an expression that is not quite approval but is not contempt either.\n\nYou say the words. You mean them.\n\nThe emigrés in Koblenz are furious. Austria waits. The war is postponed, not avoided — but postponed is a beginning.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-constitutional-monarchy",
+      "pressureDelta": -20
+    },
+    "resolution-constitutional-monarchy": {
+      "id": "resolution-constitutional-monarchy",
+      "type": "resolution",
+      "name": "The Constitutional King",
+      "description": "The constitutional monarchy of 1791 was fragile, contested, and dependent on a dozen contingencies. But it was real. A king who genuinely committed to it — who closed his Austrian correspondence, worked with Barnave and the Feuillants, and governed within the Constitution's constraints — had a viable path through the decade.\n\nNot certainty. Viability.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "historical",
+        "title": "The Road Not Taken",
+        "summary": "You navigated as no Louis XVI ever did — by recognising that legitimacy in 1791 came not from the divine right that had sustained your predecessors, but from the consent of a people who had already demonstrated they could act without you. The constitutional monarchists needed a king who believed in constitutional monarchy. You gave them one.",
+        "historicalNote": "Historians of the French Revolution continue to debate whether a genuine constitutional monarchy was achievable after 1789. The revisionist school — Furet, Schama — tends to see the Terror as an inherent product of 1789's ideological premises, not contingent on Louis's specific choices. The counter-argument: the Varennes flight, the Brunswick Manifesto, and the foreign invasion were specific decisions made by specific people at specific moments. Remove Varennes and the sequence does not follow. The game asks you to test the contingency.",
+        "scoreMultiplier": 1.0,
+        "curriculumHighlights": [
+          "The Feuillants and constitutional monarchy in 1791",
+          "Barnave's attempt to stabilise the revolution — and why it failed",
+          "Historiographical debate: was the Terror inevitable?",
+          "Comparing the French and American revolutionary outcomes",
+          "The role of foreign war in radicalising the French Revolution"
+        ]
+      }
+    },
+    "conseq-emigre-conspiracy": {
+      "id": "conseq-emigre-conspiracy",
+      "type": "consequence",
+      "name": "Two Faces",
+      "description": "You sign the Constitution in September 1791 before the Assembly in full ceremony. The deputies applaud. Barnave believes you. Lafayette believes you.\n\nBut the letters to Vienna continue — coded, routed through the Swedish ambassador, consistent. You are telling Leopold II that the Constitution was signed under constraint and that you expect his support. You are asking for a congress of powers, for the threat of armed intervention, for something that restores the prerogatives the Assembly has stripped from you.\n\nFor six months, the dual strategy holds. The Assembly moderates govern. The Assembly Committee of General Security investigates rumours of royal correspondence with Austria but cannot confirm the content.\n\nThen a packet of letters is intercepted at the Belgian border. The cipher is broken in three days.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-conspiracy-failed",
+      "pressureDelta": 25
+    },
+    "resolution-conspiracy-failed": {
+      "id": "resolution-conspiracy-failed",
+      "type": "resolution",
+      "name": "The Intercepted Letters",
+      "description": "The letters confirmed what the Jacobins had always argued: Louis was playing a double game. The moderate constitutional monarchists — Barnave, the Feuillants — who had staked their political credibility on the King's sincerity found themselves unable to defend him. The centre of French politics collapsed.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "divergent",
+        "title": "The Double King",
+        "summary": "The dual strategy — sign publicly, conspire privately — required perfect operational security over an extended period, with multiple correspondents, across international borders, during a revolution that had enthusiastic amateur intelligence operatives at every post stage. The moderate wing of the Assembly needed to believe in the king's commitment because their political position depended on it. Once the letters were public, they had nothing to defend.",
+        "historicalNote": "Louis's actual strategy in 1791–1792 was roughly this dual track: sign the Constitution while maintaining secret Austrian correspondence. The letters were not intercepted — the 'armoire de fer' (iron safe) where they were kept was only discovered after the Tuileries was stormed in August 1792. But the political effect was identical to interception: the radical argument that Louis was insincere turned out to be correct, and the moderates who had defended him were discredited.",
+        "scoreMultiplier": 0.4,
+        "curriculumHighlights": [
+          "Louis's secret correspondence with Austria",
+          "The Feuillant faction — constitutional monarchism in revolutionary France",
+          "Why deception failed as a political strategy in 1791–1792",
+          "The Committee of General Security and revolutionary surveillance"
+        ]
+      }
+    }
+  }
+}

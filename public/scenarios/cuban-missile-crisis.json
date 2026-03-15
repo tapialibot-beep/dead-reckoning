@@ -1,0 +1,498 @@
+{
+  "id": "cuban-missile-crisis",
+  "title": "Thirteen Days",
+  "period": "October 1962",
+  "location": "Washington D.C., The White House",
+  "role": "President of the United States",
+  "description": "Aerial photographs have confirmed what intelligence analysts feared: Soviet nuclear missiles are being installed ninety miles off the coast of Florida. You have thirteen days to resolve the most dangerous nuclear standoff in history — without triggering the war that would end it.",
+  "schemaVersion": "2.0",
+  "authoredDate": "2026-03-15",
+  "author": "Dead Reckoning Team",
+  "difficulty": "advanced",
+  "tags": [
+    "Cold War",
+    "Cuban Missile Crisis",
+    "nuclear deterrence",
+    "Kennedy",
+    "Khrushchev",
+    "1962",
+    "US foreign policy"
+  ],
+  "curriculumAlignments": [
+    {
+      "framework": "AP US History",
+      "standardCode": "KC-8.1.I",
+      "description": "Cold War ideology, strategy, and foreign policy — containment and confrontation"
+    },
+    {
+      "framework": "AP World History",
+      "standardCode": "KC-6.2.II",
+      "description": "Cold War rivalries and nuclear deterrence — superpower competition"
+    },
+    {
+      "framework": "IB History",
+      "description": "Cold War — superpower rivalries 1947–1991, crises and confrontation"
+    }
+  ],
+  "initialPressure": 60,
+  "confidenceMechanicEnabled": true,
+  "defaultConfidencePrompt": "How confident are you in this assessment?",
+  "startNodeId": "opening-brief",
+  "documentLibrary": [
+    {
+      "id": "intel-001",
+      "type": "report",
+      "title": "CIA PHOTOGRAPHIC INTELLIGENCE ASSESSMENT — CUBA",
+      "date": "15 October 1962",
+      "content": "SUBJECT: SOVIET MEDIUM-RANGE BALLISTIC MISSILE SITES — SAN CRISTÓBAL, CUBA\n\nU-2 overflight conducted 14 October 1962 has yielded photographic evidence confirming construction of at least two MRBM (medium-range ballistic missile) launch sites near San Cristóbal, western Cuba. Site construction is consistent with SS-4 Sandal missile installations previously observed at Soviet strategic rocket forces bases.\n\nSS-4 SANDAL specifications: range approximately 1,100 nautical miles; capable of delivering 1-megaton warhead. Cities within range include Washington D.C., New York, Miami, Dallas, and St. Louis. Estimated time to operational status: ten to fourteen days for initial sites.\n\nAdditional sites may be under construction elsewhere on the island. Further overflights are requested urgently.\n\nThis assessment is classified EYES ONLY. Present threat to continental United States: EXTREME.",
+      "sender": "Central Intelligence Agency",
+      "recipient": "McGeorge Bundy, National Security Advisor",
+      "source": "National Security Archive — DECLASSIFIED 1997",
+      "reliability": "verified"
+    },
+    {
+      "id": "intel-002",
+      "type": "report",
+      "title": "EXCOMM OPTIONS PAPER — PRELIMINARY ASSESSMENT",
+      "date": "18 October 1962",
+      "content": "EXECUTIVE COMMITTEE OF THE NATIONAL SECURITY COUNCIL\nOptions Paper — Cuban Situation\n\nSIX DAYS INTO DELIBERATIONS. The following courses of action have been considered:\n\n1. DIPLOMACY ONLY: Approach Khrushchev privately; approach UN Security Council publicly. Advantage: avoids military risk. Disadvantage: likely to be read as weakness; no guarantee missiles are removed; public disclosure may come before resolution.\n\n2. LIMITED AIR STRIKE: Targeted strike against known missile sites. Advantage: destroys operational capability before sites go live. Disadvantage: cannot guarantee all sites eliminated (intelligence likely incomplete); Soviet personnel will be killed; escalation risk severe. General LeMay advocates this option.\n\n3. NAVAL QUARANTINE ('BLOCKADE'): Establish naval perimeter preventing further Soviet military shipments. Address President to the nation. Advantage: demonstrates resolve without immediate military action; preserves escalation options; gives Khrushchev time to respond. Disadvantage: missiles already in Cuba remain; Soviet ships may challenge the line.\n\n4. FULL INVASION: Combined air-ground assault to eliminate missiles and Castro government. Advantage: removes problem comprehensively. Disadvantage: estimated 18,500 American casualties; probable Soviet military response; potential global war.\n\nThe Joint Chiefs favour Option 2 or 4. State and the civilian advisors are divided between Options 2 and 3.",
+      "sender": "ExComm Secretariat",
+      "recipient": "President Kennedy",
+      "source": "CONFIDENTIAL",
+      "reliability": "verified"
+    },
+    {
+      "id": "tel-001",
+      "type": "telegram",
+      "title": "Khrushchev's First Letter — Personal Communication",
+      "date": "26 October 1962",
+      "content": "MR. PRESIDENT — I PROPOSE WE, FOR OUR PART, WILL DECLARE THAT OUR SHIPS, BOUND FOR CUBA, WILL NOT CARRY ANY KIND OF ARMAMENTS. YOU WOULD DECLARE THAT THE UNITED STATES WILL NOT INVADE CUBA WITH ITS FORCES AND WILL NOT SUPPORT ANY SORT OF FORCES WHICH MIGHT INTEND TO CARRY OUT AN INVASION OF CUBA. THEN THE NECESSITY FOR THE PRESENCE OF OUR MILITARY SPECIALISTS IN CUBA WOULD DISAPPEAR.\n\nIF YOU HAVE NOT LOST YOUR SELF-CONTROL AND SENSIBLY CONCEIVE WHAT THIS MIGHT LEAD TO, THEN MR. PRESIDENT, WE AND YOU OUGHT NOT NOW TO PULL ON THE ENDS OF THE ROPE IN WHICH YOU HAVE TIED THE KNOT OF WAR, BECAUSE THE MORE THE TWO OF US PULL, THE TIGHTER THAT KNOT WILL BE TIED. AND A MOMENT MAY COME WHEN THAT KNOT WILL BE TIED SO TIGHT THAT EVEN HE WHO TIED IT WILL NOT HAVE THE STRENGTH TO UNTIE IT.\n\nN. KHRUSHCHEV",
+      "sender": "Premier Nikita Khrushchev",
+      "recipient": "President John F. Kennedy",
+      "source": "National Security Archive",
+      "reliability": "verified"
+    },
+    {
+      "id": "tel-002",
+      "type": "telegram",
+      "title": "Khrushchev's Second Letter — Public Broadcast",
+      "date": "27 October 1962",
+      "content": "YOU ARE TROUBLED BY CUBA. YOU SAY THAT IT WORRIES YOU BECAUSE IT LIES 90 MILES BY SEA FROM THE SHORES OF THE UNITED STATES. BUT TURKEY LIES NEXT TO US. OUR SENTINELS ARE PACING UP AND DOWN AND WATCHING EACH OTHER. DO YOU BELIEVE THAT YOU HAVE THE RIGHT TO DEMAND SECURITY FOR YOUR COUNTRY AND THE REMOVAL OF SUCH WEAPONS THAT YOU QUALIFY AS OFFENSIVE, WHILE NOT RECOGNISING THIS RIGHT FOR US?\n\nYOU HAVE STATIONED DEVASTATING ROCKET WEAPONS IN TURKEY AGAINST US. IN CONNECTION WITH THIS, I MAKE A PROPOSAL: WE AGREE TO REMOVE THOSE WEAPONS FROM CUBA WHICH YOU REGARD AS OFFENSIVE. WE AGREE TO DO THIS AND TO STATE THIS COMMITMENT IN THE UNITED NATIONS. YOUR REPRESENTATIVES WILL MAKE A STATEMENT TO THE EFFECT THAT THE UNITED STATES, ON ITS PART, BEARING IN MIND THE ANXIETY AND CONCERN OF THE SOVIET UNION, WILL EVACUATE ITS ANALOGOUS WEAPONS FROM TURKEY.\n\nN. KHRUSHCHEV",
+      "sender": "Premier Nikita Khrushchev",
+      "recipient": "President Kennedy / Public",
+      "source": "Radio Moscow broadcast, 27 October 1962",
+      "reliability": "verified"
+    },
+    {
+      "id": "news-001",
+      "type": "newspaper",
+      "title": "KENNEDY TELLS SOVIETS TO REMOVE CUBAN MISSILES — NAVAL BLOCKADE ORDERED",
+      "date": "23 October 1962",
+      "content": "President Kennedy disclosed last night that the Soviet Union is constructing nuclear missile bases in Cuba capable of hitting major American cities, and he ordered a naval blockade of the island to prevent further armaments from reaching the Castro government.\n\nIn a 17-minute televised address from the Oval Office, the President called the Soviet move 'a deliberately provocative and unjustified change in the status quo which cannot be accepted by this country' and demanded the immediate removal of all offensive weapons.\n\nThe President ordered a strict quarantine on all offensive military equipment under shipment to Cuba and called for surveillance of Cuba and the Soviet build-up. He warned that any nuclear missile launched from Cuba against any nation in the Western Hemisphere would be regarded as an attack on the United States requiring full retaliatory response against the Soviet Union.\n\nIn Moscow, the Kremlin denounced the naval blockade as 'an unprecedented violation of international law' and warned that the Soviet Union would not observe it. Twenty-five Soviet ships are currently en route to Cuba.",
+      "source": "The New York Times, 23 October 1962",
+      "reliability": "verified"
+    },
+    {
+      "id": "map-001",
+      "type": "map",
+      "title": "CUBAN MISSILE THREAT ASSESSMENT — OCTOBER 1962",
+      "date": "22 October 1962",
+      "content": "CONFIRMED SOVIET MISSILE SITES IN CUBA:\n— San Cristóbal: 2 MRBM (SS-4) sites, range 1,100 nm. OPERATIONAL WITHIN DAYS.\n— Sagua la Grande: 2 MRBM sites, construction ongoing.\n— Guanajay: 2 IRBM (SS-5) sites, range 2,200 nm. Operational in 6–8 weeks.\n— Remedios: 2 IRBM sites under construction.\n\nCITIES WITHIN MRBM RANGE (1,100 nm): Washington D.C., New York, Philadelphia, Miami, Atlanta, Dallas, St. Louis, Kansas City, Chicago.\n\nCITIES WITHIN IRBM RANGE (2,200 nm): Seattle, Los Angeles, Denver, Minneapolis. Effectively all of continental United States.\n\nSOVIET NAVAL VESSELS EN ROUTE TO CUBA: 25 ships, including Alexandrovsk (carrying nuclear warheads), Poltava (carrying MRBM components).\n\nQUARANTINE LINE: 500 nautical miles from eastern tip of Cuba. Soviet ships projected to reach quarantine line: October 24.",
+      "sender": "Defense Intelligence Agency",
+      "source": "National Security Archive — DECLASSIFIED 1992",
+      "reliability": "verified"
+    },
+    {
+      "id": "let-001",
+      "type": "letter",
+      "title": "Robert Kennedy's Back-Channel Note",
+      "date": "27 October 1962",
+      "content": "PERSONAL — FOR THE PRESIDENT ONLY\n\nJack —\n\nI met with Dobrynin at the Justice Department at 7:45 this evening. I told him we were accepting the terms of Khrushchev's Friday letter: no invasion pledge in exchange for missile removal. I made clear this was the basis for any resolution.\n\nOn Turkey: I told Dobrynin that the Jupiters will come out within four to five months. But this cannot be made part of any public deal. If Khrushchev makes it public, the arrangement is void. If he accepts this on a private basis, we can make it work. Dobrynin said he would relay this to the Premier tonight.\n\nTime is short. Dean Rusk estimates we have 24 hours before military pressure becomes impossible to manage. The Chiefs want to move on Monday.\n\nBob",
+      "sender": "Robert F. Kennedy, Attorney General",
+      "recipient": "President Kennedy",
+      "source": "Kennedy Presidential Library — DECLASSIFIED 1992",
+      "reliability": "verified"
+    }
+  ],
+  "nodes": {
+    "opening-brief": {
+      "id": "opening-brief",
+      "type": "consequence",
+      "name": "Monday Morning, 15 October 1962",
+      "imageUrl": "/images/scenarios/cuban-missile-crisis/node1-oval-office.png",
+      "description": "Your National Security Advisor, McGeorge Bundy, arrives at the White House residence at 8:45 AM with a folder of photographs. He sets them on your breakfast table without a word. Then he points.\n\nU-2 reconnaissance images. Cuba. Soviet missile launch sites under construction near San Cristóbal. The CIA analysts worked through the night. The assessment is unambiguous: medium-range ballistic missiles, SS-4 Sandals, capable of striking Washington, New York, and every major American city east of the Mississippi. Operational in ten to fourteen days.\n\nYou are President John F. Kennedy. The Soviet Union has installed nuclear weapons capable of killing tens of millions of Americans ninety miles from the Florida coast — and told you nothing. The world does not yet know. You have a narrow window to act before it does.",
+      "initialDocumentIds": [
+        "intel-001",
+        "map-001"
+      ],
+      "nextNodeId": "crisis-initial-response",
+      "autoAdvanceAfter": 10
+    },
+    "crisis-initial-response": {
+      "id": "crisis-initial-response",
+      "type": "crisis",
+      "name": "The Discovery — 15 October 1962",
+      "imageUrl": "/images/scenarios/cuban-missile-crisis/node2-excomm.png",
+      "description": "The photographs are on the table. Your senior advisors will not be assembled until tomorrow. You have today to decide how to approach the first critical question: how does the United States respond to the discovery — and how much time do you take before acting?\n\nThe Joint Chiefs are pressing for immediate military action before the sites go operational. Dean Rusk, your Secretary of State, is urging diplomatic contact. Your brother Bobby, who knows you best, says nothing and waits for you to think it through.\n\nThe Soviet ships carrying additional equipment are at sea. The launch sites are building toward operational status. And not a single foreign government yet knows what the U-2 has found.",
+      "initialDocumentIds": [
+        "intel-001",
+        "map-001"
+      ],
+      "prompt": "The United States has photographic confirmation of Soviet nuclear missiles in Cuba. What is your initial posture?",
+      "timeLimit": 300,
+      "historicalChoice": "opt-1b",
+      "scoring": {
+        "nodeWeight": 1.0,
+        "accuracyWeight": 0.7,
+        "confidenceWeight": 0.3,
+        "outcomePoints": {
+          "correct": 100,
+          "plausible": 60,
+          "wrong": 0
+        }
+      },
+      "options": [
+        {
+          "id": "opt-1a",
+          "text": "Order immediate air strikes on the missile sites before they become operational. Speed is essential — every day of delay increases the threat.",
+          "outcome": "wrong",
+          "nextNodeId": "conseq-air-strike-ordered",
+          "consequences": [
+            "Soviet personnel at the sites will be killed — the first US–Soviet combat deaths of the Cold War",
+            "No diplomatic preparation, no allied consultation, no warning to Khrushchev"
+          ],
+          "debriefNote": "General Curtis LeMay and the Joint Chiefs advocated precisely this. Kennedy's rejection of their position — despite enormous pressure — was one of the defining decisions of the crisis. Post-crisis intelligence later revealed that Soviet tactical nuclear weapons in Cuba were already operational, and local commanders were pre-authorised to use them if Cuba was invaded."
+        },
+        {
+          "id": "opt-1b",
+          "text": "Convene a secret advisory group. Take several days to assess options fully before committing to any course of action.",
+          "outcome": "correct",
+          "nextNodeId": "conseq-excomm-convened",
+          "consequences": [
+            "A week of intensive deliberation — military, diplomatic, and political options fully explored",
+            "Kennedy retains strategic surprise and the initiative"
+          ],
+          "debriefNote": "Kennedy's actual response: he convened ExComm (the Executive Committee of the NSC) secretly on 16 October, maintaining his normal public schedule to avoid alerting Soviet intelligence. Six days of debate produced the quarantine strategy. The time taken was not weakness — it was the decision that made the difference."
+        },
+        {
+          "id": "opt-1c",
+          "text": "Contact Khrushchev directly and privately through back channels. A secret diplomatic ultimatum may achieve missile removal without public confrontation.",
+          "outcome": "plausible",
+          "nextNodeId": "conseq-private-ultimatum",
+          "consequences": [
+            "Khrushchev receives early warning of American awareness",
+            "No domestic or allied preparation for potential public confrontation"
+          ],
+          "debriefNote": "A private approach was discussed and rejected. The concern: without public commitment, Khrushchev had less reason to respond decisively, and a secret deal would create severe domestic and allied problems if it leaked. Kennedy needed leverage that only public commitment could provide."
+        }
+      ]
+    },
+    "conseq-air-strike-ordered": {
+      "id": "conseq-air-strike-ordered",
+      "type": "consequence",
+      "name": "First Strike",
+      "description": "US aircraft hit the San Cristóbal sites at 0600 local time. The strikes destroy two launch pads and damage a third. Eighty-four Soviet military personnel are killed.\n\nBy midday, the Kremlin has confirmed Soviet deaths. Khrushchev convenes an emergency session of the Presidium. Soviet strategic forces go to elevated alert worldwide. In Cuba, General Issa Pliyev — commander of Soviet forces — requests authorisation to deploy tactical nuclear weapons in defence against expected US invasion.\n\nThe missiles were not all destroyed. Intelligence, as always, was incomplete. Three sites remain, and at least one is believed to carry an operational warhead. The United States has fired the first shot of a nuclear crisis without a plan for what comes next.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-preemptive-war",
+      "pressureDelta": 45
+    },
+    "conseq-private-ultimatum": {
+      "id": "conseq-private-ultimatum",
+      "type": "consequence",
+      "name": "The Back Channel",
+      "description": "Your message reaches Khrushchev through Ambassador Dobrynin within twelve hours. The tone is deliberate: the United States knows. The missiles must be removed. The United States is prepared to act if they are not.\n\nKhrushchev's response arrives after forty-eight hours: denial. The Soviet Union has no offensive weapons in Cuba. Construction is defensive. There is no basis for American demands.\n\nYou are back where you started — but now Khrushchev knows you know, Soviet intelligence is on alert, and the clock is still running on the missile sites. The private channel has gained you nothing. You will need public leverage after all.",
+      "initialDocumentIds": [],
+      "nextNodeId": "crisis-response-strategy",
+      "pressureDelta": 10
+    },
+    "conseq-excomm-convened": {
+      "id": "conseq-excomm-convened",
+      "type": "consequence",
+      "name": "Six Days of Deliberation",
+      "description": "ExComm meets in the Cabinet Room under strict secrecy. Kennedy maintains his public schedule — attending a campaign rally in Connecticut, hosting the astronaut Walter Schirra at the White House — while his most senior advisors debate nuclear strategy in the room below.\n\nThe debate is fierce. General LeMay calls the blockade option 'appeasement' and demands an air strike. Dean Rusk argues for diplomacy. Robert Kennedy, circling the table, gradually builds consensus around a third option: a naval quarantine that demonstrates resolve without firing the first shot.\n\nAfter six days, Kennedy has an option, a plan, and a Cabinet behind it. On the evening of 22 October, he goes on national television.",
+      "initialDocumentIds": [
+        "intel-002"
+      ],
+      "nextNodeId": "crisis-response-strategy",
+      "pressureDelta": -5
+    },
+    "crisis-response-strategy": {
+      "id": "crisis-response-strategy",
+      "type": "crisis",
+      "name": "The Response Strategy — 22 October 1962",
+      "imageUrl": "/images/scenarios/cuban-missile-crisis/node3-strategy.png",
+      "description": "The decision can no longer be delayed. The missile sites approach operational status. Tonight you will address the nation — and the world — on live television. Whatever you say, you must be prepared to back it up.\n\nYour military advisors are divided. The Joint Chiefs want air strikes, possibly followed by invasion. State prefers diplomacy through the UN. A third option has emerged from the ExComm debates: a naval 'quarantine' — legally cleaner than a blockade, operationally clear, and designed to stop further Soviet shipments while preserving options.\n\nFifty thousand American troops are already deploying to Florida. The decision you make tonight will be transmitted to every capital on earth within hours of your speech.",
+      "initialDocumentIds": [
+        "intel-002",
+        "news-001",
+        "map-001"
+      ],
+      "prompt": "The United States must respond publicly and decisively. What course of action do you announce to the nation?",
+      "timeLimit": 300,
+      "historicalChoice": "opt-2b",
+      "scoring": {
+        "nodeWeight": 1.2,
+        "accuracyWeight": 0.65,
+        "confidenceWeight": 0.35,
+        "outcomePoints": {
+          "correct": 100,
+          "plausible": 55,
+          "wrong": 0
+        }
+      },
+      "options": [
+        {
+          "id": "opt-2a",
+          "text": "Announce targeted air strikes on all known Cuban missile sites. Destroy the threat before it becomes operational.",
+          "outcome": "wrong",
+          "nextNodeId": "conseq-full-military",
+          "consequences": [
+            "Soviet personnel killed — immediate escalation to open US-Soviet conflict",
+            "Missiles already operational may be launched before all strikes complete"
+          ],
+          "debriefNote": "Post-crisis disclosures revealed that US intelligence had not identified all Soviet nuclear assets in Cuba. An air strike would have been incomplete — and it would have killed Soviet soldiers, triggering a response Khrushchev would have been politically unable to avoid. The assumption that an air campaign would be 'clean' was one of the most dangerous myths of the crisis."
+        },
+        {
+          "id": "opt-2b",
+          "text": "Announce a naval quarantine: no further Soviet military shipments to Cuba. Demand the removal of missiles already there. Prepare but do not launch military strikes.",
+          "outcome": "correct",
+          "nextNodeId": "conseq-quarantine-declared",
+          "consequences": [
+            "Demonstrates US resolve without firing the first shot",
+            "Preserves escalation options — the quarantine can be tightened or relaxed as the situation develops"
+          ],
+          "debriefNote": "Kennedy's actual strategy — and, in hindsight, the one that preserved the option for resolution without nuclear war. The quarantine was a message: the US was serious, but was not yet in a shooting war. It gave Khrushchev the space to respond without immediate humiliation."
+        },
+        {
+          "id": "opt-2c",
+          "text": "Bring the matter to the UN Security Council. Seek international condemnation of Soviet actions before taking unilateral military measures.",
+          "outcome": "plausible",
+          "nextNodeId": "conseq-un-approach",
+          "consequences": [
+            "International forum builds the diplomatic record — but Soviet veto in the Security Council is certain",
+            "The diplomatic case is strong; military options remain open but are delayed"
+          ],
+          "debriefNote": "The UN track was pursued in parallel — Adlai Stevenson's Security Council presentation became one of the defining moments of the crisis. But as a substitute for military leverage rather than a complement to it, a purely diplomatic approach would have removed the pressure that ultimately brought Khrushchev to the table."
+        }
+      ]
+    },
+    "conseq-full-military": {
+      "id": "conseq-full-military",
+      "type": "consequence",
+      "name": "The First Shots",
+      "description": "US aircraft strike all identified missile sites on the morning of 22 October. The strikes are incomplete — Soviet antiaircraft batteries destroy three US aircraft, and at least two missile sites are not hit.\n\nBy nightfall, Khrushchev has authorised Soviet forces in Cuba to use tactical nuclear weapons if the island is invaded. General Pliyev in Havana is placing his Luna rockets on alert. In Washington, the Pentagon receives reports that Soviet strategic bombers are airborne.\n\nThe line between crisis and catastrophe has been crossed.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-escalation",
+      "pressureDelta": 50
+    },
+    "conseq-un-approach": {
+      "id": "conseq-un-approach",
+      "type": "consequence",
+      "name": "Stevenson at the United Nations",
+      "description": "Ambassador Adlai Stevenson delivers one of the defining diplomatic performances of the Cold War. He presents the U-2 photographs to the Security Council and demands a response from Soviet Ambassador Zorin. 'Do you, Ambassador Zorin, deny that the USSR has placed and is placing medium and intermediate range missiles in Cuba? Don't wait for the translation — yes or no?' Zorin's refusal to answer becomes the story.\n\nBut the Security Council produces no resolution. The Soviet veto is applied. The missiles remain. The sites are still building. You have demonstrated your case to the world — now you must back it with something other than photographs.",
+      "initialDocumentIds": [
+        "news-001"
+      ],
+      "nextNodeId": "crisis-black-saturday",
+      "pressureDelta": 5
+    },
+    "conseq-quarantine-declared": {
+      "id": "conseq-quarantine-declared",
+      "type": "consequence",
+      "name": "The Quarantine Line",
+      "description": "Kennedy's address to the nation on 22 October triggers seventy-two hours of the most intense nuclear diplomacy the world has ever seen.\n\nOn the morning of 24 October, twenty-five Soviet ships are en route to Cuba, the nearest within hours of the quarantine line. The world watches. At 10:25 AM, a message arrives from Naval intelligence: the Soviet ships are stopping. Some are turning around. The ships carrying missile equipment have reversed course.\n\nSecretary of State Dean Rusk turns to McGeorge Bundy and says: 'We're eyeball to eyeball, and I think the other fellow just blinked.'\n\nBut the missiles already in Cuba remain. And in Moscow, Khrushchev is composing his reply.",
+      "initialDocumentIds": [
+        "news-001"
+      ],
+      "nextNodeId": "crisis-black-saturday",
+      "pressureDelta": -10
+    },
+    "crisis-black-saturday": {
+      "id": "crisis-black-saturday",
+      "type": "crisis",
+      "name": "Black Saturday — 27 October 1962",
+      "imageUrl": "/images/scenarios/cuban-missile-crisis/node4-black-saturday.png",
+      "description": "Saturday, 27 October. The crisis has been running for twelve days. This morning, a US U-2 was shot down over Cuba — the pilot, Major Rudolf Anderson, is dead, killed by a Soviet SA-2 missile. The Joint Chiefs are demanding an immediate military response. Under established rules of engagement, the shoot-down is an act that should trigger US air strikes within 24 hours.\n\nAnd there are two letters on your desk from Khrushchev.\n\nThe first, which arrived last night, offers a way out: remove missiles from Cuba in exchange for a US pledge not to invade. Personal. Emotional. Written as if Khrushchev himself could feel the cliff edge.\n\nThe second, broadcast on Radio Moscow this morning, is different. It adds a new condition: the US must also remove its Jupiter nuclear missiles from Turkey. A public, symmetrical trade.\n\nExComm is divided. The Joint Chiefs want military action. Robert Kennedy has an idea. And the clock is running.",
+      "initialDocumentIds": [
+        "tel-001",
+        "tel-002",
+        "let-001"
+      ],
+      "prompt": "Two letters. A downed pilot. Military pressure mounting. How do you resolve the Cuban Missile Crisis?",
+      "timeLimit": 300,
+      "historicalChoice": "opt-3b",
+      "scoring": {
+        "nodeWeight": 1.5,
+        "accuracyWeight": 0.6,
+        "confidenceWeight": 0.4,
+        "outcomePoints": {
+          "correct": 100,
+          "plausible": 50,
+          "wrong": 0
+        }
+      },
+      "options": [
+        {
+          "id": "opt-3a",
+          "text": "Accept both letters publicly. Remove Jupiter missiles from Turkey in exchange for Soviet withdrawal from Cuba. A symmetric, transparent agreement.",
+          "outcome": "plausible",
+          "nextNodeId": "conseq-public-turkey-deal",
+          "consequences": [
+            "Crisis resolved without military action",
+            "NATO allies face a public US commitment to remove their missiles — without consultation"
+          ],
+          "debriefNote": "This was the obvious solution and the one Khrushchev was signalling publicly. Kennedy rejected it because of NATO: accepting publicly would signal to all allies that the US would trade their security under pressure, and set a precedent that nuclear brinkmanship produced concessions. The deal was made — but it had to be secret."
+        },
+        {
+          "id": "opt-3b",
+          "text": "Accept the first letter, ignore the second. Reply publicly to the private Khrushchev — no-invasion pledge for missile removal. Send Robert Kennedy to Dobrynin with a secret commitment on the Turkish missiles.",
+          "outcome": "correct",
+          "nextNodeId": "conseq-secret-deal",
+          "consequences": [
+            "Crisis resolved on terms that preserve US credibility in NATO",
+            "Khrushchev receives what he needs to justify withdrawal to the Presidium — privately"
+          ],
+          "debriefNote": "Robert Kennedy's proposal in ExComm — later called the 'Trolley Car' solution. Publicly accept letter one; secretly commit on Turkey via back channel. Khrushchev could tell his colleagues he'd extracted the Turkey concession; Kennedy could claim publicly that no deal had been made. The deception held for decades. Historians only confirmed the full terms in the 1990s."
+        },
+        {
+          "id": "opt-3c",
+          "text": "Reject both letters. The downing of a US aircraft changes the calculus. Authorise air strikes on Cuban SAM sites and prepare an invasion force.",
+          "outcome": "wrong",
+          "nextNodeId": "conseq-military-escalation",
+          "consequences": [
+            "US military action begins against Soviet-manned installations",
+            "Khrushchev faces domestic pressure to respond — his moderating influence over the Presidium collapses"
+          ],
+          "debriefNote": "On that same day, Soviet submarine B-59 — running out of air and communications, unaware that war had not yet begun — was preparing to launch a nuclear torpedo. The submarine's executive officer, Vasili Arkhipov, refused to authorise the launch. Kennedy did not know this. Had he authorised military action on Black Saturday, Arkhipov might not have been able to hold the line."
+        }
+      ]
+    },
+    "conseq-public-turkey-deal": {
+      "id": "conseq-public-turkey-deal",
+      "type": "consequence",
+      "name": "A Public Settlement",
+      "description": "The deal is announced. Soviet missiles leave Cuba. American Jupiter missiles leave Turkey. The statement is careful, symmetric, factual.\n\nIn Ankara, Bonn, and London, your allies read it with alarm. The US has made a public commitment to trade allied security guarantees under Soviet pressure — without consultation. The West German foreign minister calls it 'a precedent we cannot afford.'\n\nThe crisis is over. The missiles are removed. The cost — to NATO credibility and alliance management — will take years to fully calculate.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-public-deal",
+      "pressureDelta": 5
+    },
+    "conseq-secret-deal": {
+      "id": "conseq-secret-deal",
+      "type": "consequence",
+      "name": "The Kennedy Formula",
+      "description": "Robert Kennedy meets Dobrynin at the Soviet Embassy at 7:45 PM. He carries two messages: a formal acceptance of the first letter's terms, and a private commitment — not a formal agreement — that the Jupiter missiles in Turkey will be removed within four to five months. If Khrushchev reveals the Turkey arrangement, the deal is void.\n\nDobrynin cables Moscow overnight. On the morning of 28 October, Khrushchev broadcasts his acceptance over Radio Moscow: Soviet missiles will be dismantled and returned to the Soviet Union. The crisis is over.\n\nThe world exhales. Most people will never know what was agreed in that embassy meeting. The Jupiter missiles quietly leave Turkey the following spring.",
+      "initialDocumentIds": [
+        "let-001"
+      ],
+      "nextNodeId": "resolution-missiles-removed",
+      "pressureDelta": -15
+    },
+    "conseq-military-escalation": {
+      "id": "conseq-military-escalation",
+      "type": "consequence",
+      "name": "The Point of No Return",
+      "description": "US aircraft strike SAM installations in Cuba at first light on 28 October. Two Soviet officers are killed at an antiaircraft battery near Banes.\n\nIn a bunker beneath the Atlantic, Soviet submarine B-59 has been out of radio contact for three days. Without communications, without air, running on emergency power, the captain concludes from the depth charges falling around his hull that war has already begun. He orders the nuclear torpedo made ready.\n\nExecutive Officer Vasili Arkhipov refuses to countersign the authorisation. The two men argue. Arkhipov holds.\n\nBut the Presidium in Moscow knows nothing about B-59. They know about the dead Soviet officers in Cuba. The hawks in the room are gaining the argument.",
+      "initialDocumentIds": [],
+      "nextNodeId": "resolution-nuclear-brinkmanship",
+      "pressureDelta": 40
+    },
+    "resolution-preemptive-war": {
+      "id": "resolution-preemptive-war",
+      "type": "resolution",
+      "name": "First Strike",
+      "description": "The United States struck first — before ExComm had fully assessed the situation, before diplomacy was attempted, before allies were consulted. The strikes were incomplete. Soviet tactical nuclear weapons in Cuba remained. The crisis did not end. It accelerated.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "catastrophic",
+        "title": "The First Strike",
+        "summary": "By ordering immediate air strikes without a period of deliberation, you removed every option except escalation. The Soviet personnel killed in Cuba gave Khrushchev no political room to step back. US intelligence underestimated what was already in Cuba — and the first strike did not eliminate the threat. It ended diplomacy.",
+        "historicalNote": "Post-crisis disclosures confirmed that Soviet tactical nuclear weapons — Luna short-range rockets — were already deployed in Cuba when the crisis began, and local commanders were pre-authorised to use them if Cuba was invaded. American intelligence did not know this. An air strike in the first days of the crisis would almost certainly have triggered their use.",
+        "scoreMultiplier": 0.1,
+        "curriculumHighlights": [
+          "Limits of intelligence in nuclear crises",
+          "Pre-delegation of nuclear authority to local commanders",
+          "Role of civilian vs military leadership in crisis management"
+        ]
+      }
+    },
+    "resolution-escalation": {
+      "id": "resolution-escalation",
+      "type": "resolution",
+      "name": "Escalation Without Exit",
+      "description": "The air strikes began a process neither side fully controlled. Soviet forces in Cuba had tactical nuclear weapons and the authority to use them. The chain of events triggered by the first American bombs produced outcomes no one in ExComm had fully modelled.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "catastrophic",
+        "title": "No Exit",
+        "summary": "Military action before diplomacy removed the space in which the crisis could have been resolved. Soviet forces in Cuba were not only more numerous than US intelligence believed — they were better armed. The strikes that were meant to end the crisis became its opening act.",
+        "historicalNote": "Robert McNamara later wrote that the Cuban Missile Crisis taught him that nuclear crises could not be managed through military logic alone. The civilian leadership's decision to override the Joint Chiefs — repeatedly, over thirteen days — was not timidity. It was the recognition that the military's assessment of acceptable risk was catastrophically wrong.",
+        "scoreMultiplier": 0.15,
+        "curriculumHighlights": [
+          "Civil-military relations in nuclear crises",
+          "McNamara's lessons from the Cuban Missile Crisis",
+          "Escalation dynamics and the limits of deterrence theory"
+        ]
+      }
+    },
+    "resolution-public-deal": {
+      "id": "resolution-public-deal",
+      "type": "resolution",
+      "name": "A Transparent Settlement",
+      "description": "The missiles left. The deal was public, symmetric, and unambiguous. The problem was everything that came after: a NATO alliance shaken by the discovery that the US would trade allied security guarantees without consultation, and a precedent — however reluctantly set — that nuclear brinkmanship could extract concessions from the United States.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "divergent",
+        "title": "The Visible Deal",
+        "summary": "Crisis resolved, alliance damaged. A public Turkey-for-Cuba exchange ended the nuclear standoff but signalled to every adversary and ally that American security commitments could be traded under nuclear pressure. NATO allies, unaware of the depth of the crisis, experienced the resolution as a unilateral American decision made without their consent.",
+        "historicalNote": "Kennedy's rejection of a public Turkey deal was not about the missiles themselves — the Jupiters were already scheduled for removal as obsolete. It was about signalling: a public deal would have told every adversary that American security commitments could be negotiated away under pressure. The secret arrangement achieved the same result without the precedent.",
+        "scoreMultiplier": 0.55,
+        "curriculumHighlights": [
+          "NATO alliance management during the Cold War",
+          "Deterrence credibility and extended deterrence",
+          "Kennedy's management of alliance relationships under pressure"
+        ]
+      }
+    },
+    "resolution-missiles-removed": {
+      "id": "resolution-missiles-removed",
+      "type": "resolution",
+      "name": "Sunday Morning, 28 October",
+      "description": "Radio Moscow broadcasts at 9 AM Moscow time. Khrushchev has accepted. Soviet missiles will be dismantled and returned to the Soviet Union under UN verification. The quarantine will remain until the removal is complete.\n\nAt the White House, people gather in the corridors. Kennedy does not celebrate. He knows what had to be promised in that embassy meeting. He knows how close it came — and that only two or three decisions stood between the world that exists and the world that almost wasn't.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "historical",
+        "title": "Thirteen Days",
+        "summary": "You navigated as Kennedy did — deliberate, measured, willing to resist military pressure, and clear-eyed enough to offer Khrushchev the private exit he needed without the public humiliation that would have made the deal impossible. The missiles were removed. The world survived. Most of the cost was never made public.",
+        "historicalNote": "The full terms of the resolution — including the secret Turkish missile commitment — were not publicly confirmed until the 1990s, when Soviet archives and participants' memoirs filled in the gaps. Kennedy's public position had been that no deal was made on Turkey. Khrushchev's public position was that he had extracted a genuine concession. Both were partially true. The historian's challenge is that both sides were, in different senses, right.",
+        "scoreMultiplier": 1.0,
+        "curriculumHighlights": [
+          "The role of back-channel diplomacy in crisis resolution",
+          "Khrushchev's political constraints and the Soviet Presidium",
+          "Kennedy's civil-military tensions with the Joint Chiefs",
+          "Nuclear deterrence theory vs crisis practice",
+          "The secret Turkey deal and its long-term revelation"
+        ]
+      }
+    },
+    "resolution-nuclear-brinkmanship": {
+      "id": "resolution-nuclear-brinkmanship",
+      "type": "resolution",
+      "name": "The Edge",
+      "description": "Military action on Black Saturday meant firing at Soviet personnel at the moment Khrushchev was already preparing to accept a deal. The combination of dead Soviet soldiers and the hawks gaining ground in the Presidium produced decisions no one at the White House had anticipated.",
+      "initialDocumentIds": [],
+      "outcome": {
+        "category": "catastrophic",
+        "title": "Black Saturday",
+        "summary": "Authorising military action on 27 October, when Khrushchev was hours from accepting your terms, converted a crisis at the edge of resolution into one at the edge of war. The Soviet concessions that would have arrived on Sunday morning instead never came. What came instead was the question of whether Vasili Arkhipov in submarine B-59 would hold his nerve — and whether he could keep holding it.",
+        "historicalNote": "Vasili Arkhipov is not well known outside specialist circles. He should be. On 27 October 1962, with B-59 out of communications, out of air, and under US depth-charge attack, Captain Savitsky ordered the launch of a nuclear torpedo. Arkhipov refused. The submarine surfaced. The world continued. His decision is as consequential as any made by Kennedy or Khrushchev during those thirteen days.",
+        "scoreMultiplier": 0.2,
+        "curriculumHighlights": [
+          "Vasili Arkhipov and submarine B-59",
+          "The role of individuals in averting nuclear war",
+          "Inadvertent escalation in nuclear crises",
+          "Information asymmetry and crisis management"
+        ]
+      }
+    }
+  }
+}

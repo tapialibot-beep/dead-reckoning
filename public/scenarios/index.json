@@ -6,5 +6,21 @@
     "difficulty": "standard",
     "file": "july-crisis-1914.json",
     "tags": ["WWI", "July Crisis", "British diplomacy", "1914", "European history", "balance of power"]
+  },
+  {
+    "id": "cuban-missile-crisis",
+    "title": "Thirteen Days",
+    "period": "October 1962",
+    "difficulty": "advanced",
+    "file": "cuban-missile-crisis.json",
+    "tags": ["Cold War", "Cuban Missile Crisis", "nuclear deterrence", "Kennedy", "Khrushchev", "1962", "US foreign policy"]
+  },
+  {
+    "id": "french-revolution-1789",
+    "title": "The Last King",
+    "period": "1789–1791",
+    "difficulty": "standard",
+    "file": "french-revolution-1789.json",
+    "tags": ["French Revolution", "Louis XVI", "constitutional monarchy", "1789", "European history", "Tennis Court Oath", "Bastille", "Varennes", "Enlightenment"]
   }
 ]
