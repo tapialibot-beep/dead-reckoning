@@ -2978,3 +2978,350 @@ body {
   font-family: 'Courier New', Courier, monospace;
   letter-spacing: 0.05em;
 }
+
+/* ============================================
+   KAR-44 — CLASSROOM DASHBOARD (cd-)
+   ============================================ */
+
+.cd-container {
+  padding: 0;
+}
+
+/* --- Room code form --- */
+
+.cd-room-form-wrap {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background: rgba(139, 115, 85, 0.05);
+  border: 1px solid #3a2f1e;
+}
+
+.cd-room-form {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.cd-code-input {
+  flex: 0 0 auto;
+  width: 12rem;
+  letter-spacing: 0.3em;
+  text-align: center;
+}
+
+.cd-view-btn {
+  flex: 1 1 auto;
+  margin-top: 0;
+  min-width: 10rem;
+}
+
+.cd-active-code-hint {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  letter-spacing: 0.05em;
+}
+
+.cd-active-code-hint strong {
+  color: var(--paper);
+  letter-spacing: 0.3em;
+}
+
+.cd-last-refresh {
+  opacity: 0.6;
+  font-size: 0.65rem;
+}
+
+/* --- Stats bar --- */
+
+.cd-stats {
+  margin-bottom: 1.5rem;
+}
+
+/* --- Panel tabs --- */
+
+.cd-panel-tabs {
+  margin-bottom: 0;
+}
+
+/* --- Panel body --- */
+
+.cd-panel-body {
+  min-height: 8rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid #2a2010;
+  margin-bottom: 1.25rem;
+}
+
+/* --- Empty hint --- */
+
+.cd-empty-hint {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--sepia);
+  font-style: italic;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  opacity: 0.7;
+}
+
+/* --- Teams grid --- */
+
+.cd-teams-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.cd-team-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid #3a2f1e;
+  font-size: 0.75rem;
+  font-family: Georgia, serif;
+}
+
+.cd-team-done {
+  border-color: #2d6a2d;
+  background: rgba(45, 106, 45, 0.08);
+}
+
+.cd-team-active {
+  border-color: var(--sepia);
+  background: rgba(139, 115, 85, 0.08);
+}
+
+.cd-team-waiting {
+  opacity: 0.5;
+}
+
+.cd-team-chip-name {
+  color: var(--paper);
+}
+
+.cd-team-chip-status {
+  font-size: 0.5rem;
+  letter-spacing: 0.15em;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--sepia);
+}
+
+.cd-team-done .cd-team-chip-status {
+  color: #4a8a4a;
+}
+
+/* --- Decision splits --- */
+
+.cd-splits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.cd-split-block {
+  border: 1px solid #2a2010;
+  padding: 0.75rem 1rem;
+}
+
+.cd-split-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.75rem;
+}
+
+.cd-split-node {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--paper);
+  text-transform: uppercase;
+}
+
+.cd-split-count {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0.7;
+}
+
+.cd-split-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cd-split-bar-row {
+  display: grid;
+  grid-template-columns: 10rem 1fr 7rem;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .cd-split-bar-row {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}
+
+.cd-split-option-id {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  color: var(--paper-dark);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+}
+
+.cd-split-bar-track {
+  height: 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid #2a2010;
+  overflow: hidden;
+  position: relative;
+}
+
+.cd-split-bar-fill {
+  height: 100%;
+  transition: width 0.4s ease;
+  min-width: 2px;
+}
+
+.cd-split-bar-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cd-split-outcome-tag {
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  font-family: 'Courier New', Courier, monospace;
+  border: 1px solid;
+  padding: 0.1rem 0.3rem;
+  white-space: nowrap;
+}
+
+.cd-split-pct {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.7rem;
+  font-weight: bold;
+  color: var(--paper);
+  min-width: 2.5rem;
+  text-align: right;
+}
+
+.cd-split-raw {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.6rem;
+  color: var(--sepia);
+  opacity: 0.7;
+}
+
+/* --- Leaderboard --- */
+
+.cd-leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cd-lb-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #2a2010;
+}
+
+.cd-lb-row:first-child {
+  border-top: 1px solid #2a2010;
+}
+
+.cd-lb-row:first-child .cd-lb-rank {
+  color: #c8a84b; /* gold for #1 */
+  font-weight: bold;
+}
+
+.cd-lb-rank {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.65rem;
+  color: var(--sepia);
+  min-width: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.cd-lb-team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cd-lb-name {
+  font-size: 0.85rem;
+  color: var(--paper);
+  font-family: Georgia, serif;
+}
+
+.cd-lb-outcome {
+  font-size: 0.55rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0.7;
+}
+
+.cd-lb-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cd-lb-score {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--paper);
+  min-width: 3rem;
+  text-align: right;
+}
+
+.cd-lb-emoji {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* --- Action bar --- */
+
+.cd-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cd-export-btn {
+  margin-top: 0;
+  flex: 0 0 auto;
+  width: auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.cd-poll-note {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--sepia);
+  font-family: 'Courier New', Courier, monospace;
+  opacity: 0.5;
+  font-style: italic;
+}

@@ -4,11 +4,12 @@ import { useState, useRef, useCallback } from 'react'
 import { validateScenario, hardErrors, warnings } from '@/app/lib/scenarioLoader'
 import type { ValidationError } from '@/app/lib/scenarioLoader'
 import type { Scenario, ScenarioIndexEntry } from '@/app/types/scenario'
+import ClassroomDashboard from './components/ClassroomDashboard'
 
 // ─── Types ─────────────────────────────────────────────────
 
 type InputMode = 'paste' | 'upload'
-type TeacherTab = 'classroom' | 'validator'
+type TeacherTab = 'classroom' | 'dashboard' | 'validator'
 
 interface ValidationResult {
   errors: ValidationError[]
@@ -337,13 +338,19 @@ export default function ValidatorClient({
         </p>
       </div>
 
-      {/* Main tabs: Classroom | Validator */}
+      {/* Main tabs: Classroom | Dashboard | Validator */}
       <div className="tv-tab-strip">
         <button
           className={`tv-tab ${activeTab === 'classroom' ? 'tv-tab-active' : ''}`}
           onClick={() => setActiveTab('classroom')}
         >
           CLASSROOM
+        </button>
+        <button
+          className={`tv-tab ${activeTab === 'dashboard' ? 'tv-tab-active' : ''}`}
+          onClick={() => setActiveTab('dashboard')}
+        >
+          CLASSROOM DASHBOARD
         </button>
         <button
           className={`tv-tab ${activeTab === 'validator' ? 'tv-tab-active' : ''}`}
@@ -356,6 +363,11 @@ export default function ValidatorClient({
       {/* ─── Classroom Tab ─── */}
       {activeTab === 'classroom' && (
         <RoomCreator scenarios={scenarios} />
+      )}
+
+      {/* ─── Classroom Dashboard Tab ─── */}
+      {activeTab === 'dashboard' && (
+        <ClassroomDashboard />
       )}
 
       {/* ─── Validator Tab ─── */}
