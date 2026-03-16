@@ -367,7 +367,9 @@ export default function ValidatorClient({
 
       {/* ─── Classroom Dashboard Tab ─── */}
       {activeTab === 'dashboard' && (
-        <ClassroomDashboard />
+        <AccessGate>
+          <ClassroomDashboard />
+        </AccessGate>
       )}
 
       {/* ─── Validator Tab ─── */}
