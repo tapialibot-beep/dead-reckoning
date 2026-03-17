@@ -49,8 +49,8 @@ export default function GamePage() {
           })
           .catch(err => console.error('Room scenario load error:', err))
       } else {
-        // No room code — redirect to team setup
-        router.replace('/team-setup')
+        // No room code and no pre-loaded scenario — redirect to landing
+        router.replace('/')
       }
     }
   }, [scenario, startGame, roomCode, router])

@@ -13,12 +13,20 @@ export default function Home() {
         <p className="text-lg mb-12 max-w-md mx-auto text-paper-dark">
           Navigate pivotal moments in history armed only with the information available at the time.
         </p>
-        <Link
-          href="/team-setup"
-          className="inline-block px-8 py-3 text-sm tracking-widest uppercase font-semibold transition-all hover:opacity-80 btn-begin"
-        >
-          Begin
-        </Link>
+        <div className="flex flex-col items-center gap-4">
+          <Link
+            href="/team-setup"
+            className="inline-block px-8 py-3 text-sm tracking-widest uppercase font-semibold transition-all hover:opacity-80 btn-begin"
+          >
+            Join Classroom
+          </Link>
+          <Link
+            href="/play"
+            className="text-sm tracking-widest uppercase text-sepia hover:text-paper transition-colors"
+          >
+            Explore History Solo →
+          </Link>
+        </div>
       </main>
     </div>
   );
