@@ -1,14 +1,16 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { DeskLayout } from '@/app/components/desk'
 import { DecisionPointModal } from '@/app/components/decision'
+import { OnboardingModal } from '@/app/components/OnboardingModal'
 import { useGameStore } from '@/app/store/gameStore'
 import { loadScenario } from '@/app/lib/scenarioLoader'
 import { buildSessionRecord, persistSession } from '@/app/lib/sessionStorage'
 
 export default function GamePage() {
+  const [showOnboarding, setShowOnboarding] = useState(true)
   const scenario = useGameStore((s) => s.scenario)
   const startGame = useGameStore((s) => s.startGame)
   const sessionStatus = useGameStore((s) => s.sessionStatus)
@@ -93,6 +95,9 @@ export default function GamePage() {
     <>
       <DeskLayout />
       <DecisionPointModal />
+      {showOnboarding && (
+        <OnboardingModal onComplete={() => setShowOnboarding(false)} />
+      )}
     </>
   )
 }
