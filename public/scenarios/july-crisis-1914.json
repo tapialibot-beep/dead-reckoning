@@ -34,6 +34,7 @@
     }
   ],
   "initialPressure": 50,
+  "hasOnboarding": true,
   "confidenceMechanicEnabled": true,
   "defaultConfidencePrompt": "How confident are you in this assessment?",
   "startNodeId": "opening-brief",

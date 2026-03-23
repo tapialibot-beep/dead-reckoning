@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useGameStore } from '@/app/store/gameStore'
 import { loadScenarioIndex, loadScenario } from '@/app/lib/scenarioLoader'
 import type { ScenarioIndexEntry } from '@/app/types/scenario'
+import { OnboardingModal } from '@/app/components/OnboardingModal'
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   standard: 'Standard',
@@ -18,6 +19,7 @@ export default function PlayPage() {
   const [playerName, setPlayerName] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [showOnboarding, setShowOnboarding] = useState(false)
 
   const startGame = useGameStore((s) => s.startGame)
   const setTeamName = useGameStore((s) => s.setTeamName)
@@ -49,12 +51,28 @@ export default function PlayPage() {
     setTeamName(name)
     setHistoricalMode(true)
     startGame(result.scenario, crypto.randomUUID(), name)
+
+    // Show onboarding briefing if this scenario has one
+    if (result.scenario.hasOnboarding) {
+      setLoading(false)
+      setShowOnboarding(true)
+    } else {
+      router.push('/game')
+    }
+  }
+
+  function handleOnboardingComplete() {
+    setShowOnboarding(false)
     router.push('/game')
   }
 
   const selectedEntry = index.find((s) => s.id === selected)
 
   return (
+    <>
+    {showOnboarding && (
+      <OnboardingModal onComplete={handleOnboardingComplete} />
+    )}
     <div className="flex min-h-screen items-center justify-center landing-bg">
       <main className="px-8 max-w-xl w-full py-16">
         <p className="text-sm tracking-[0.3em] uppercase mb-4 text-sepia text-center">
@@ -128,5 +146,6 @@ export default function PlayPage() {
         </form>
       </main>
     </div>
+    </>
   )
 }

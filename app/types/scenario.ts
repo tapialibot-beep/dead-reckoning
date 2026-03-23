@@ -112,6 +112,7 @@ export interface Scenario {
   defaultConfidencePrompt?: string
   initialPressure?: number      // default 50
   maxScore?: number             // computed at load, not authored
+  hasOnboarding?: boolean       // true = show briefing screens before game start
 }
 
 // --- Scenario index (for /public/scenarios/index.json) ---
