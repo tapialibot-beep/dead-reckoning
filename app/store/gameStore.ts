@@ -221,7 +221,12 @@ export const useGameStore = create<GameState>((set, get) => ({
       selectedDocument: null,
       timeRemaining: node.timeLimit ?? 0,
       ...(isComplete
-        ? { sessionStatus: 'completed', completedAt: new Date().toISOString() }
+        ? {
+            sessionStatus: 'completed',
+            completedAt: new Date().toISOString(),
+            // Show the resolution outcome in the debrief panel
+            decisionModalPhase: 'debrief',
+          }
         : {}),
     })
   },
